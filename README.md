@@ -95,4 +95,5 @@ Copy `.env.example` to `.env` for local development. Do not commit local env
 files, database passwords, provider keys, client data, or private operational
 material.
 
-More setup detail is in [QUICKSTART.md](QUICKSTART.md).
+More setup detail is in [QUICKSTART.md](QUICKSTART.md). Environment variables
+are documented in [docs/CONFIGURATION.md](docs/CONFIGURATION.md).

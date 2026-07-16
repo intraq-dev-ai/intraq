@@ -63,6 +63,8 @@ DATABASE_URL=postgresql://user:password@localhost:5432/intraq
 AUTH_TOKEN_SECRET=replace-with-at-least-32-random-characters
 ```
 
+Full environment-variable reference: [docs/CONFIGURATION.md](docs/CONFIGURATION.md).
+
 Prepare the database:
 
 ```bash

@@ -15,6 +15,8 @@ Use this checklist before making the repository public.
 
 - [ ] `README.md` explains the product, license boundary, quickstart, and demo
       login.
+- [ ] `docs/CONFIGURATION.md` explains the required and optional environment
+      variables.
 - [ ] `LICENSE.md` and `COMMERCIAL.md` reflect the intended source-available
       terms.
 - [ ] `CONTRIBUTING.md`, `SECURITY.md`, `SUPPORT.md`, `CODE_OF_CONDUCT.md`, and
