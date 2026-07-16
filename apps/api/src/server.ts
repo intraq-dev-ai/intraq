@@ -276,7 +276,7 @@ function isClientAbortError(error: unknown): boolean {
 const entryPoint = process.argv[1] ? pathToFileURL(process.argv[1]).href : '';
 if (import.meta.url === entryPoint) {
   const config = loadApiConfig();
-  createApiServer(config).listen(config.port, () => {
-    console.log(`intraQ API listening on http://127.0.0.1:${config.port}`);
+  createApiServer(config).listen(config.port, config.host, () => {
+    console.log(`intraQ API listening on http://${config.host}:${config.port}`);
   });
 }

@@ -8,6 +8,7 @@ export interface ApiConfig {
   dashboardPersistence?: 'memory' | 'prisma';
   enableRuntimeDiagnostics?: boolean;
   enforceApiAuth?: boolean;
+  host: string;
   port: number;
   seedDemoRuntime?: boolean;
   serveWebFromApi?: boolean;
@@ -23,6 +24,7 @@ export function loadApiConfig(env: NodeJS.ProcessEnv = process.env): ApiConfig {
     dashboardPersistence: env.DASHBOARD_PERSISTENCE === 'memory' ? 'memory' : 'prisma',
     enableRuntimeDiagnostics: parseBoolean(env.ENABLE_RUNTIME_DIAGNOSTICS) ?? false,
     enforceApiAuth: parseBoolean(env.API_ENFORCE_AUTH) ?? env.NODE_ENV === 'production',
+    host: env.API_HOST?.trim() || '127.0.0.1',
     port: parsePort(env.API_PORT ?? env.PORT),
     seedDemoRuntime: env.SEED_DEMO_RUNTIME !== 'false',
     serveWebFromApi: parseBoolean(env.SERVE_WEB_FROM_API) ?? true,

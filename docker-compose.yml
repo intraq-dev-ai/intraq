@@ -22,8 +22,9 @@ services:
         condition: service_healthy
     environment:
       NODE_ENV: production
+      API_HOST: 0.0.0.0
       API_PORT: 4100
-      WEB_ORIGIN: http://localhost:4100
+      WEB_ORIGIN: http://localhost:${INTRAQ_PORT:-4100}
       DATABASE_URL: postgresql://intraq:intraq@db:5432/intraq?schema=public
       AUTH_TOKEN_SECRET: ${AUTH_TOKEN_SECRET:-replace-this-compose-secret-with-32-plus-random-chars}
       SERVE_WEB_FROM_API: "true"
