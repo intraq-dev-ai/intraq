@@ -1,6 +1,11 @@
 {
   "name": "intraq",
   "version": "0.8.2",
+  "homepage": "https://intraq.dev",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/intraq-dev-ai/intraq.git"
+  },
   "private": true,
   "type": "module",
   "packageManager": "npm@11.13.0",

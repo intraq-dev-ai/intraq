@@ -1,5 +1,7 @@
 # intraQ
 
+[Website](https://intraq.dev)
+
 intraQ is a source-available AI reporting and dashboard platform for
 self-hosted operational analytics.
 
