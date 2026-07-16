@@ -34,7 +34,8 @@ Use this checklist before making the repository public.
 ## GitHub settings
 
 - [ ] Disable blank issues or direct them to the issue templates.
-- [ ] Require CI before merging.
+- [ ] Require CI before merging. After the first pull request runs, select the
+      `Validate source` status check in the branch protection rule.
 - [ ] Protect the default branch.
 - [ ] Add repository topics such as `analytics`, `dashboard`, `ai`, `postgres`,
       `self-hosted`, and `source-available`.
