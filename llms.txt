@@ -1,0 +1,9 @@
+# intraQ Agent Entry
+
+This is the public intraQ source tree.
+
+- Read `README.md` for local development.
+- Read `COMMERCIAL.md` before adding AI, governance, or managed-service logic.
+- Read `AGENTS.md` for repository safety rules.
+- Do not add credentials, client data, generated artifacts, private operational docs,
+  or private operational code.

@@ -1,0 +1,846 @@
+
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model DataSource {
+  id          String         @id @default(cuid())
+  name        String
+  description String?
+  type        String
+  config      Json
+  isActive    Boolean       @default(true) @map("is_active")
+  isGlobal    Boolean       @default(false) @map("is_global")
+  isSample    Boolean       @default(false) @map("is_sample")
+  settings    Json          @default("{}")
+  isGloballyVisible Boolean @default(true) @map("is_globally_visible")
+  tenantId    String?       @map("tenant_id")
+  createdBy   String?       @map("created_by")
+  createdAt   DateTime      @default(now()) @map("created_at")
+  updatedAt   DateTime      @updatedAt @map("updated_at")
+  sourceType  String         @default("source") @map("source_type")
+
+  cacheEnabled  Boolean?  @map("cache_enabled")
+  cacheTTL      Int?      @map("cache_ttl")
+  cacheSettings Json?     @map("cache_settings")
+
+  dictionary         Json    @default("{}")
+
+  tables    DataSourceTable[]
+  elements  DashboardElement[]
+  tenant    Tenant?          @relation("TenantDataSources", fields: [tenantId], references: [id], onDelete: SetNull)
+  creator   User?            @relation("UserDataSources", fields: [createdBy], references: [id], onDelete: SetNull)
+
+  @@map("data_sources")
+}
+
+model DataSourceTable {
+  id              String     @id @default(cuid())
+  name            String
+  dataSourceId    String     @map("data_source_id")
+  description     String?
+  fields          Json
+  sqlQuery        String?    @map("sql_query")
+  settings        Json       @default("{}")
+  defaultFilters  Json?
+  additionalFilters Json?
+  isSelected      Boolean    @default(true) @map("is_selected")
+  lastSynced      DateTime?  @map("last_synced")
+  dataSource      DataSource @relation(fields: [dataSourceId], references: [id], onDelete: Cascade)
+  createdAt       DateTime   @default(now()) @map("created_at")
+  updatedAt       DateTime   @updatedAt @map("updated_at")
+
+  dictionary          Json    @default("{}")
+
+  sampleDataRows      SampleDataRow[]
+
+  @@unique([dataSourceId, name])
+  @@map("data_source_tables")
+}
+
+model ApiGroup {
+  id          String   @id @default(cuid())
+  tenantId    String?  @map("tenant_id")
+  slug        String
+  name        String
+  description String?
+  visibility  String   @default("private")
+  status      String   @default("draft")
+  settings    Json     @default("{}")
+  createdBy   String?  @map("created_by")
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+
+  endpoints    ApiEndpoint[]
+  grants       ApiGroupGrant[]
+  clientGrants ApiClientApiGroupGrant[]
+  snapshots    ApiGroupSnapshot[]
+
+  @@unique([tenantId, slug])
+  @@index([tenantId])
+  @@index([slug])
+  @@index([visibility, status])
+  @@map("api_groups")
+}
+
+model ApiGroupSnapshot {
+  id             String   @id @default(cuid())
+  apiGroupId     String   @map("api_group_id")
+  snapshotNumber Int      @map("snapshot_number")
+  name           String
+  comment        String?
+  snapshot       Json
+  createdBy      String?  @map("created_by")
+  createdAt      DateTime @default(now()) @map("created_at")
+
+  group ApiGroup @relation(fields: [apiGroupId], references: [id], onDelete: Cascade)
+
+  @@unique([apiGroupId, snapshotNumber])
+  @@index([apiGroupId])
+  @@index([createdAt])
+  @@map("api_group_snapshots")
+}
+
+model ApiEndpoint {
+  id                String   @id @default(cuid())
+  groupId           String   @map("group_id")
+  slug              String
+  method            String   @default("GET")
+  name              String
+  description       String?
+  status            String   @default("active")
+  executionType     String   @default("data_model") @map("execution_type")
+  dataSourceId      String?  @map("data_source_id")
+  dataSourceTableId String?  @map("data_source_table_id")
+  pipelineId        String?  @map("pipeline_id")
+  parameters        Json     @default("[]")
+  requestSchema     Json     @default("{}") @map("request_schema")
+  responseSchema    Json     @default("{}") @map("response_schema")
+  responseContract  Json     @default("{}") @map("response_contract")
+  security          Json     @default("{}")
+  settings          Json     @default("{}")
+  createdAt         DateTime @default(now()) @map("created_at")
+  updatedAt         DateTime @updatedAt @map("updated_at")
+
+  group ApiGroup @relation(fields: [groupId], references: [id], onDelete: Cascade)
+
+  @@unique([groupId, slug, method])
+  @@index([groupId])
+  @@index([dataSourceId])
+  @@index([dataSourceTableId])
+  @@index([pipelineId])
+  @@index([status])
+  @@map("api_endpoints")
+}
+
+model ApiGroupGrant {
+  id          String   @id @default(cuid())
+  apiGroupId  String   @map("api_group_id")
+  targetType  String   @map("target_type")
+  targetId    String?  @map("target_id")
+  permission  String   @default("read")
+  settings    Json     @default("{}")
+  createdAt   DateTime @default(now()) @map("created_at")
+
+  group ApiGroup @relation(fields: [apiGroupId], references: [id], onDelete: Cascade)
+
+  @@unique([apiGroupId, targetType, targetId, permission])
+  @@index([targetType, targetId])
+  @@map("api_group_grants")
+}
+
+model ApiClientApiGroupGrant {
+  id          String   @id @default(cuid())
+  clientId    String   @map("client_id")
+  apiGroupId  String   @map("api_group_id")
+  scopes      Json     @default("[]")
+  createdAt   DateTime @default(now()) @map("created_at")
+
+  group ApiGroup @relation(fields: [apiGroupId], references: [id], onDelete: Cascade)
+
+  @@unique([clientId, apiGroupId])
+  @@index([clientId])
+  @@index([apiGroupId])
+  @@map("api_client_api_group_grants")
+}
+
+model AIAnalyzerConversation {
+  id            String   @id @default(cuid())
+  tenantId      String   @map("tenant_id")
+  userId        String   @map("user_id")
+  dataSourceId  String?  @map("data_source_id")
+  title         String?
+  metadata      Json     @default("{}")
+  lastMessageAt DateTime? @map("last_message_at")
+  isArchived    Boolean  @default(false) @map("is_archived")
+  createdAt     DateTime @default(now()) @map("created_at")
+  updatedAt     DateTime @updatedAt @map("updated_at")
+
+  messages      AIAnalyzerMessage[]
+
+  @@index([tenantId, userId, dataSourceId, lastMessageAt])
+  @@map("ai_analyzer_conversations")
+}
+
+model AIAnalyzerMessage {
+  id             String   @id @default(cuid())
+  conversationId String   @map("conversation_id")
+  role           String
+  content        String
+  metadata       Json?    @map("metadata")
+  createdAt      DateTime @default(now()) @map("created_at")
+
+  conversation   AIAnalyzerConversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+
+  @@index([conversationId, createdAt])
+  @@map("ai_analyzer_messages")
+}
+
+model AIAnalyzerUnmappedConceptEvent {
+  id                  String   @id @default(cuid())
+  tenantId            String?  @map("tenant_id")
+  userId              String?  @map("user_id")
+  conversationId      String?  @map("conversation_id")
+  dataSourceId        String   @map("data_source_id")
+  tableId             String?  @map("table_id")
+  tableName           String?  @map("table_name")
+  question            String
+  reason              String
+  unsupportedConcepts Json     @default("[]") @map("unsupported_concepts")
+  invalidFields       Json?    @map("invalid_fields")
+  meaningfulTokens    Json?    @map("meaningful_tokens")
+  coverageRatio       Float?   @map("coverage_ratio")
+  metadata            Json     @default("{}")
+  createdAt           DateTime @default(now()) @map("created_at")
+
+  @@index([tenantId, dataSourceId, createdAt])
+  @@index([dataSourceId, tableName, createdAt])
+  @@map("ai_analyzer_unmapped_concept_events")
+}
+
+model Dashboard {
+  id          String   @id @default(cuid())
+  name        String
+  description String?
+  config      Json?
+  settings    Json     @default("{}")
+  isPublic    Boolean  @default(false) @map("is_public")
+  isGlobal    Boolean  @default(false) @map("is_global")
+  isSample    Boolean  @default(false) @map("is_sample")
+  section     String?
+  tenantId    String?  @map("tenant_id")
+  createdBy   String?  @map("created_by")
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+
+  status              String    @default("draft")
+  publishedVersionId  String?   @map("published_version_id")
+  draftLayout         Json?     @map("draft_layout")
+  draftFilters        Json?     @map("draft_filters")
+  publishedAt         DateTime? @map("published_at")
+  publishedBy         String?   @map("published_by")
+  categoryId          String?   @map("category_id")
+
+  tenant    Tenant? @relation("TenantDashboards", fields: [tenantId], references: [id], onDelete: SetNull)
+  creator   User?   @relation("DashboardCreator", fields: [createdBy], references: [id], onDelete: SetNull)
+  publisher User?   @relation("DashboardPublisher", fields: [publishedBy], references: [id], onDelete: SetNull)
+  users     User[]  @relation("UserDashboards")
+  filters   DashboardFilter[]
+  elements  DashboardElement[]
+  subscriptions DashboardSubscription[]
+  versions  DashboardVersion[] @relation("DashboardVersions")
+  publishedVersion DashboardVersion? @relation("PublishedVersion", fields: [publishedVersionId], references: [id], onDelete: SetNull)
+  category  DashboardCategory? @relation("DashboardCategory", fields: [categoryId], references: [id], onDelete: SetNull)
+
+  @@map("dashboards")
+}
+
+model DashboardCategory {
+  id          String    @id @default(cuid())
+  name        String
+  description String?
+  color       String    @default("#3b82f6")
+  icon        String?
+  sortOrder   Int       @default(0) @map("sort_order")
+  isActive    Boolean   @default(true) @map("is_active")
+  tenantId    String?   @map("tenant_id")
+  createdBy   String?   @map("created_by")
+  createdAt   DateTime  @default(now()) @map("created_at")
+  updatedAt   DateTime  @updatedAt @map("updated_at")
+
+  tenant      Tenant?     @relation("TenantDashboardCategories", fields: [tenantId], references: [id], onDelete: SetNull)
+  creator     User?       @relation("DashboardCategoryCreator", fields: [createdBy], references: [id], onDelete: SetNull)
+  dashboards  Dashboard[] @relation("DashboardCategory")
+
+  @@map("dashboard_categories")
+}
+
+model DashboardFilter {
+  id          String   @id @default(cuid())
+  dashboardId String   @map("dashboard_id")
+  name        String
+  field       String
+  operator    String
+  value       Json
+  config      Json?
+  type        String   @default("interactive")
+  isActive    Boolean  @default(true) @map("is_active")
+  order       Int      @default(0)
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+
+  dashboard Dashboard @relation(fields: [dashboardId], references: [id], onDelete: Cascade)
+
+  @@map("dashboard_filters")
+}
+
+model DashboardElement {
+  id           String   @id @default(cuid())
+  dashboardId  String   @map("dashboard_id")
+  dataSourceId String?  @map("data_source_id")
+  name         String
+  type         String
+  chartType    String?  @map("chart_type")
+  layout       Json
+  config       Json?
+  query        Json?
+  isVisible    Boolean  @default(true) @map("is_visible")
+  order        Int      @default(0)
+  createdAt    DateTime @default(now()) @map("created_at")
+  updatedAt    DateTime @updatedAt @map("updated_at")
+
+  dashboard  Dashboard  @relation(fields: [dashboardId], references: [id], onDelete: Cascade)
+  dataSource DataSource? @relation(fields: [dataSourceId], references: [id], onDelete: SetNull)
+
+  @@map("dashboard_elements")
+}
+
+model Pipeline {
+  id              String   @id @default(cuid())
+  name            String
+  description     String?
+  status          String   @default("draft")
+  isActive        Boolean  @default(true) @map("is_active")
+  isGlobal        Boolean  @default(false) @map("is_global")
+  isSample        Boolean  @default(false) @map("is_sample")
+  config          Json?
+  schedule        String?
+  databricksJobId String?  @map("databricks_job_id")
+  tenantId        String?  @map("tenant_id")
+  createdBy       String?  @map("created_by")
+  createdAt       DateTime @default(now()) @map("created_at")
+  updatedAt       DateTime @updatedAt @map("updated_at")
+
+  nodes       PipelineNode[]
+  connections PipelineConnection[]
+  runs        PipelineRun[]
+  tenant      Tenant? @relation("TenantPipelines", fields: [tenantId], references: [id], onDelete: SetNull)
+  creator     User?   @relation("PipelineCreator", fields: [createdBy], references: [id], onDelete: SetNull)
+  users       User[]  @relation("UserPipelines")
+
+  @@map("pipelines")
+}
+
+model PipelineNode {
+  id         String   @id @default(cuid())
+  pipelineId String   @map("pipeline_id")
+  nodeType   String   @map("node_type")
+  label      String
+  icon       String?
+  color      String?
+  position   Json
+  config     Json
+  createdAt  DateTime @default(now()) @map("created_at")
+  updatedAt  DateTime @updatedAt @map("updated_at")
+
+  pipeline        Pipeline @relation(fields: [pipelineId], references: [id], onDelete: Cascade)
+  outgoingConnections PipelineConnection[] @relation("FromNode")
+  incomingConnections PipelineConnection[] @relation("ToNode")
+
+  @@map("pipeline_nodes")
+}
+
+model PipelineConnection {
+  id         String   @id @default(cuid())
+  pipelineId String   @map("pipeline_id")
+  fromNodeId String   @map("from_node_id")
+  toNodeId   String   @map("to_node_id")
+  config     Json?
+  createdAt  DateTime @default(now()) @map("created_at")
+
+  pipeline Pipeline @relation(fields: [pipelineId], references: [id], onDelete: Cascade)
+  fromNode PipelineNode @relation("FromNode", fields: [fromNodeId], references: [id], onDelete: Cascade)
+  toNode   PipelineNode @relation("ToNode", fields: [toNodeId], references: [id], onDelete: Cascade)
+
+  @@unique([fromNodeId, toNodeId])
+  @@map("pipeline_connections")
+}
+
+model PipelineRun {
+  id         String   @id @default(cuid())
+  pipelineId String   @map("pipeline_id")
+  jobId      String?  @map("job_id")
+  status     String   @default("queued")
+  startedAt  DateTime? @map("started_at")
+  completedAt DateTime? @map("completed_at")
+  logs       Json?
+  metrics    Json?
+  errors     Json?
+  parameters Json?
+  createdBy  String?  @map("created_by")
+  createdAt  DateTime @default(now()) @map("created_at")
+
+  pipeline Pipeline @relation(fields: [pipelineId], references: [id], onDelete: Cascade)
+
+  @@map("pipeline_runs")
+}
+
+model User {
+  id            String    @id @default(cuid())
+  firstName     String    @map("first_name")
+  lastName      String    @map("last_name")
+  email         String    @unique
+  password      String
+  role          String    @default("SINGLE_TENANT_VIEWER")
+  isActive      Boolean   @default(true) @map("is_active")
+  emailVerified Boolean   @default(false) @map("email_verified")
+  lastLoginAt      DateTime? @map("last_login_at")
+  tenantId         String?   @map("tenant_id")
+  companyName      String?   @map("company_name")
+  createdAt        DateTime  @default(now()) @map("created_at")
+  updatedAt        DateTime  @updatedAt @map("updated_at")
+
+  tenant                Tenant?               @relation(fields: [tenantId], references: [id], onDelete: SetNull)
+  dashboards           Dashboard[]           @relation("UserDashboards")
+  createdDashboards    Dashboard[]           @relation("DashboardCreator")
+  publishedDashboards  Dashboard[]           @relation("DashboardPublisher")
+  dashboardVersions    DashboardVersion[]    @relation("UserVersions")
+  dataSources          DataSource[]          @relation("UserDataSources")
+  pipelines            Pipeline[]            @relation("UserPipelines")
+  createdPipelines     Pipeline[]            @relation("PipelineCreator")
+  dashboardSubscriptions DashboardSubscription[]
+  refreshTokens        RefreshToken[]
+  emailVerifications   EmailVerification[]
+  passwordResets       PasswordReset[]
+  notifications        Notification[]        @relation("UserNotifications")
+  outboundEmails       OutboundEmail[]       @relation("OutboundEmailUser")
+  auditLogs            AuditLog[]
+  createdDashboardCategories DashboardCategory[] @relation("DashboardCategoryCreator")
+  mcpAccessTokens      McpAccessToken[] @relation("UserMcpAccessTokens")
+
+  @@map("users")
+}
+
+model Tenant {
+  id                String    @id @default(cuid())
+  name              String
+  domain            String?   @unique
+  contactEmail      String    @map("contact_email")
+  contactName       String?   @map("contact_name")
+  status            String    @default("active")
+  tenantType        String    @default("single") @map("tenant_type")
+  type              String    @default("REGULAR")
+  maxUsers          Int       @default(10) @map("max_users")
+  maxDashboards     Int       @default(10) @map("max_dashboards")
+  maxDataSources    Int       @default(5) @map("max_data_sources")
+  hostType          String    @default("self-hosted") @map("host_type")
+  settings          Json?
+  suspensionReason  String?   @map("suspension_reason")
+  suspendedAt       DateTime? @map("suspended_at")
+
+  cacheEnabled  Boolean?  @map("cache_enabled")
+  cacheTTL      Int?      @map("cache_ttl")
+
+  createdAt         DateTime  @default(now()) @map("created_at")
+  updatedAt         DateTime  @updatedAt @map("updated_at")
+
+  users              User[]
+  dashboards         Dashboard[]         @relation("TenantDashboards")
+  dataSources        DataSource[]        @relation("TenantDataSources")
+  pipelines          Pipeline[]          @relation("TenantPipelines")
+  dashboardSubscriptions DashboardSubscription[]
+  emailTemplates     EmailTemplate[]
+  pipelineConfig     PipelineConfiguration?
+  settings_rel       Setting[]           @relation("TenantSettings")
+  notifications      Notification[]      @relation("TenantNotifications")
+  outboundEmails     OutboundEmail[]     @relation("OutboundEmailTenant")
+  smtpConfigurations SmtpConfiguration[]
+  dashboardCategories DashboardCategory[] @relation("TenantDashboardCategories")
+
+  @@map("tenants")
+}
+
+model RefreshToken {
+  id        String   @id @default(cuid())
+  token     String   @unique
+  userId    String   @map("user_id")
+  expiresAt DateTime @map("expires_at")
+  createdAt DateTime @default(now()) @map("created_at")
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("refresh_tokens")
+}
+
+model EmailVerification {
+  id        String   @id @default(cuid())
+  token     String   @unique
+  userId    String   @map("user_id")
+  expiresAt DateTime @map("expires_at")
+  used      Boolean  @default(false)
+  createdAt DateTime @default(now()) @map("created_at")
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("email_verifications")
+}
+
+model PasswordReset {
+  id        String   @id @default(cuid())
+  token     String   @unique
+  userId    String   @map("user_id")
+  expiresAt DateTime @map("expires_at")
+  used      Boolean  @default(false)
+  createdAt DateTime @default(now()) @map("created_at")
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("password_resets")
+}
+
+model Setting {
+  id       String  @id @default(cuid())
+  key      String
+  value    Json
+  tenantId String? @map("tenant_id")
+
+  tenant Tenant? @relation("TenantSettings", fields: [tenantId], references: [id], onDelete: Cascade)
+
+  @@unique([key, tenantId])
+  @@map("settings")
+}
+
+model SystemSetting {
+  id          String   @id @default(cuid())
+  key         String   @unique
+  value       String
+  category    String   @default("general")
+  description String?
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+
+  @@map("system_settings")
+}
+
+model SmtpConfiguration {
+  id          String   @id @default(cuid())
+  host        String
+  port        Int      @default(587)
+  secure      Boolean  @default(false)
+  username    String
+  password    String
+  fromName    String   @default("IntraQ Support") @map("from_name")
+  fromEmail   String   @map("from_email")
+  replyToEmail String? @map("reply_to_email")
+  bccEmail    String?  @map("bcc_email")
+  isActive    Boolean  @default(true) @map("is_active")
+  isDefault   Boolean  @default(false) @map("is_default")
+  testStatus  String?  @map("test_status")
+  testError   String?  @map("test_error")
+  lastTested  DateTime? @map("last_tested")
+
+  tenantId    String?  @map("tenant_id")
+  scope       String   @default("TENANT")
+  isGlobal    Boolean  @default(false) @map("is_global")
+
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+
+  tenant      Tenant?  @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+
+  @@map("smtp_configurations")
+}
+
+model Notification {
+  id          String    @id @default(cuid())
+  title       String
+  message     String
+  type        String    @default("info")
+  status      String    @default("draft")
+  priority    String    @default("normal")
+  targetType  String    @map("target_type")
+  userId      String?   @map("user_id")
+  tenantId    String?   @map("tenant_id")
+  scheduledAt DateTime? @map("scheduled_at")
+  sentAt      DateTime? @map("sent_at")
+  readAt      DateTime? @map("read_at")
+  metadata    Json?
+  createdBy   String?   @map("created_by")
+  createdAt   DateTime  @default(now()) @map("created_at")
+  updatedAt   DateTime  @updatedAt @map("updated_at")
+
+  user   User?   @relation("UserNotifications", fields: [userId], references: [id], onDelete: Cascade)
+  tenant Tenant? @relation("TenantNotifications", fields: [tenantId], references: [id], onDelete: Cascade)
+
+  @@map("notifications")
+}
+
+model OutboundEmail {
+  id            String    @id @default(cuid())
+  tenantId      String?   @map("tenant_id")
+  userId        String    @map("user_id")
+  to            Json
+  subject       String
+  htmlContent   String    @map("html_content")
+  textContent   String?   @map("text_content")
+  fromName      String    @map("from_name")
+  fromEmail     String    @map("from_email")
+  replyToEmail  String?   @map("reply_to_email")
+  bccEmail      String?   @map("bcc_email")
+  status        String    @default("sent")
+  errorMessage  String?   @map("error_message")
+  attachmentMeta Json?   @map("attachment_meta")
+  sentAt        DateTime? @map("sent_at")
+  createdAt     DateTime  @default(now()) @map("created_at")
+
+  user   User   @relation("OutboundEmailUser", fields: [userId], references: [id], onDelete: Cascade)
+  tenant Tenant? @relation("OutboundEmailTenant", fields: [tenantId], references: [id], onDelete: Cascade)
+
+  @@index([tenantId])
+  @@index([userId])
+  @@map("outbound_emails")
+}
+
+model AuditLog {
+  id          String   @id @default(cuid())
+  action      String
+  resource    String
+  resourceId  String?  @map("resource_id")
+  userId      String?  @map("user_id")
+  tenantId    String?  @map("tenant_id")
+  ipAddress   String?  @map("ip_address")
+  userAgent   String?  @map("user_agent")
+  metadata    Json?
+  createdAt   DateTime @default(now()) @map("created_at")
+
+  user User? @relation(fields: [userId], references: [id], onDelete: SetNull)
+
+  @@map("audit_logs")
+}
+
+model SampleDataset {
+  id          String   @id @default(cuid())
+  name        String
+  description String?
+  sector      String
+  region      String
+  isActive    Boolean  @default(true) @map("is_active")
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+
+  tables      SampleTable[]
+
+  @@map("sample_datasets")
+}
+
+model SampleTable {
+  id          String   @id @default(cuid())
+  name        String
+  description String?
+  datasetId   String   @map("dataset_id")
+  schema      Json
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+
+  dataset     SampleDataset @relation(fields: [datasetId], references: [id], onDelete: Cascade)
+
+  @@unique([datasetId, name])
+  @@map("sample_tables")
+}
+
+model SampleDataRow {
+  id        String   @id @default(cuid())
+  tableId   String   @map("table_id")
+  data      Json
+  createdAt DateTime @default(now()) @map("created_at")
+
+  dataSourceTable DataSourceTable @relation(fields: [tableId], references: [id], onDelete: Cascade)
+
+  @@map("sample_data_rows")
+}
+
+model PipelineConfiguration {
+  id            String    @id @default(cuid())
+  tenantId      String    @unique @map("tenant_id")
+  runtime       String
+  configuration Json
+  status        String?   @default("unknown")
+  lastTested    DateTime? @map("last_tested")
+  createdAt     DateTime  @default(now()) @map("created_at")
+  updatedAt     DateTime  @updatedAt @map("updated_at")
+
+  tenant Tenant @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+
+  @@map("pipeline_configurations")
+}
+
+model DashboardSubscription {
+  id            String   @id @default(cuid())
+  dashboardId   String   @map("dashboard_id")
+  name          String
+  description   String?
+
+  recipients    Json
+  subject       String
+  message       String?
+
+  frequency     String
+  scheduleTime  String   @map("schedule_time")
+  timezone      String   @default("UTC")
+  dayOfWeek     Int?     @map("day_of_week")
+  dayOfMonth    Int?     @map("day_of_month")
+  cronExpression String? @map("cron_expression")
+
+  exportFormats Json     @default("[\"pdf\"]") @map("export_formats")
+  pdfFormat     String   @default("A4") @map("pdf_format")
+  pdfOrientation String  @default("portrait") @map("pdf_orientation")
+  includeFilters Boolean @default(true) @map("include_filters")
+  includeRawData Boolean @default(true) @map("include_raw_data")
+  separateSheets Boolean @default(true) @map("separate_sheets")
+  includeIntraqInsights Boolean @default(false) @map("include_intraq_insights")
+
+  isActive      Boolean  @default(true) @map("is_active")
+  lastSent      DateTime? @map("last_sent")
+  nextScheduled DateTime? @map("next_scheduled")
+  totalSent     Int      @default(0) @map("total_sent")
+
+  tenantId      String   @map("tenant_id")
+  createdBy     String   @map("created_by")
+  createdAt     DateTime @default(now()) @map("created_at")
+  updatedAt     DateTime @updatedAt @map("updated_at")
+
+  dashboard     Dashboard @relation(fields: [dashboardId], references: [id], onDelete: Cascade)
+  tenant        Tenant    @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  creator       User      @relation(fields: [createdBy], references: [id], onDelete: Cascade)
+  deliveries    SubscriptionDelivery[]
+
+  @@map("dashboard_subscriptions")
+}
+
+model SubscriptionDelivery {
+  id             String   @id @default(cuid())
+  subscriptionId String   @map("subscription_id")
+
+  recipients     Json
+  subject        String
+  status         String
+  errorMessage   String?  @map("error_message")
+
+  pdfPath        String?  @map("pdf_path")
+  pdfSize        Int?     @map("pdf_size")
+
+  scheduledAt    DateTime @map("scheduled_at")
+  sentAt         DateTime? @map("sent_at")
+  createdAt      DateTime @default(now()) @map("created_at")
+
+  subscription   DashboardSubscription @relation(fields: [subscriptionId], references: [id], onDelete: Cascade)
+
+  @@map("subscription_deliveries")
+}
+
+model EmailTemplate {
+  id          String   @id @default(cuid())
+  name        String
+  type        String
+  subject     String
+  htmlContent String   @map("html_content")
+  textContent String?  @map("text_content")
+
+  variables   Json
+
+  tenantId    String?  @map("tenant_id")
+  isDefault   Boolean  @default(false) @map("is_default")
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+
+  tenant      Tenant?  @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+
+  @@map("email_templates")
+}
+
+model DashboardVersion {
+  id              String   @id @default(cuid())
+  dashboardId     String   @map("dashboard_id")
+  versionNumber   Int      @map("version_number")
+
+  userId          String   @map("user_id")
+  userName        String   @map("user_name")
+
+  changes         Json
+  comment         String?
+  isAutoSave      Boolean  @default(false) @map("is_auto_save")
+
+  isPublished     Boolean  @default(false) @map("is_published")
+  publishedAt     DateTime? @map("published_at")
+
+  dashboardSnapshot Json   @map("dashboard_snapshot")
+
+  createdAt       DateTime @default(now()) @map("created_at")
+
+  dashboard       Dashboard @relation("DashboardVersions", fields: [dashboardId], references: [id], onDelete: Cascade)
+  user            User      @relation("UserVersions", fields: [userId], references: [id], onDelete: Cascade)
+  publishedDashboards Dashboard[] @relation("PublishedVersion")
+
+  @@unique([dashboardId, versionNumber])
+  @@map("dashboard_versions")
+}
+
+model McpAccessToken {
+  id          String    @id @default(cuid())
+  userId      String    @map("user_id")
+  name        String
+  tokenHash   String    @unique @map("token_hash")
+  tokenPrefix String    @map("token_prefix")
+  scopes      Json      @default("[]") @map("scopes_json")
+  expiresAt   DateTime? @map("expires_at")
+  lastUsedAt  DateTime? @map("last_used_at")
+  revokedAt   DateTime? @map("revoked_at")
+  createdAt   DateTime  @default(now()) @map("created_at")
+  updatedAt   DateTime  @updatedAt @map("updated_at")
+
+  user User @relation("UserMcpAccessTokens", fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([tokenPrefix])
+  @@index([revokedAt])
+  @@map("mcp_access_tokens")
+}
+
+model ActivityLog {
+  id        String   @id @default(cuid())
+  tenantId  String   @map("tenant_id")
+
+  source    String
+  event     String
+  status    String
+
+  sessionId String?  @map("session_id")
+  refId     String?  @map("ref_id")
+
+  data      Json?
+
+  createdAt DateTime @default(now()) @map("created_at")
+
+  @@index([tenantId])
+  @@index([source])
+  @@index([sessionId])
+  @@index([refId])
+  @@index([createdAt])
+  @@map("activity_logs")
+}

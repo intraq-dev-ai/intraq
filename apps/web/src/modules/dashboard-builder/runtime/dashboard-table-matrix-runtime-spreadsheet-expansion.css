@@ -1,0 +1,352 @@
+
+.dashboard-table-component[data-table-format="spreadsheet"] {
+  --dashboard-table-border: #d9d9d9;
+  --dashboard-table-header-bg: #f3f3f3;
+  --dashboard-table-header-text: #333;
+  --dashboard-table-row-bg: #fff;
+  --dashboard-table-alt-row-bg: #fff;
+  --dashboard-table-cell-padding-y: 8px;
+  --dashboard-table-cell-padding-x: 10px;
+  background: #fff;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  color: #333;
+  font-family: Arial, sans-serif;
+  overflow: auto;
+}
+
+.dashboard-table-spreadsheet-toolbar {
+  border: 1px solid #d9d9d9;
+  border-bottom: 0;
+  background: #f7f7f7;
+  color: #444;
+  font-family: Arial, sans-serif;
+  font-size: 13px;
+}
+
+.dashboard-table-spreadsheet-toolbar-main {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  min-height: 50px;
+  background: #076715;
+  color: #fff;
+  padding: 0 14px;
+}
+
+.dashboard-table-spreadsheet-icon {
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.dashboard-table-spreadsheet-tab {
+  display: inline-flex;
+  align-items: center;
+  min-height: 50px;
+  border-bottom: 3px solid transparent;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0;
+}
+
+.dashboard-table-spreadsheet-tab:first-of-type {
+  border-bottom-color: #41a5ff;
+}
+
+.dashboard-table-spreadsheet-tools {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  min-height: 46px;
+  border-bottom: 1px solid #ddd;
+  background: #f5f5f5;
+  color: #555;
+  padding: 0 14px;
+}
+
+.dashboard-table-spreadsheet-tools span {
+  min-width: 18px;
+  text-align: center;
+}
+
+.dashboard-table-spreadsheet-formula {
+  display: grid;
+  grid-template-columns: 104px 36px 1fr;
+  min-height: 34px;
+  border-bottom: 1px solid #ddd;
+  background: #fff;
+  color: #777;
+}
+
+.dashboard-table-spreadsheet-formula span {
+  display: flex;
+  align-items: center;
+  border-right: 1px solid #ddd;
+  padding: 0 10px;
+}
+
+.dashboard-table-spreadsheet-formula span:nth-child(2) {
+  justify-content: center;
+  color: #666;
+  font-style: italic;
+}
+
+.dashboard-table-component[data-table-format="spreadsheet"] table {
+  min-width: 100%;
+  border-collapse: collapse;
+  border-spacing: 0;
+  border: 1px solid #d9d9d9;
+  table-layout: fixed;
+}
+
+.dashboard-table-component[data-table-format="spreadsheet"] th,
+.dashboard-table-component[data-table-format="spreadsheet"] td {
+  max-width: none;
+  min-width: 132px;
+  height: 31px;
+  border-right: 1px solid #e4e4e4;
+  border-bottom: 1px solid #e4e4e4;
+  background: #fff;
+  color: #333;
+  font-size: 12px;
+  line-height: 1.2;
+  padding: 6px 8px;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.dashboard-table-component[data-table-format="spreadsheet"] thead th {
+  background: #f3f3f3;
+  color: #333;
+  font-weight: 600;
+}
+
+.dashboard-table-component[data-table-format="spreadsheet"] .dashboard-table-spreadsheet-column-row th,
+.dashboard-table-component[data-table-format="spreadsheet"] .dashboard-table-control-cell {
+  min-width: 32px;
+  width: 32px;
+  max-width: 32px;
+  background: #f3f3f3;
+  color: #333;
+  font-weight: 400;
+  padding: 0;
+  text-align: center;
+}
+
+.dashboard-table-component[data-table-format="spreadsheet"] .dashboard-table-spreadsheet-column-letter {
+  height: 22px;
+  font-weight: 400;
+  padding: 2px 8px;
+}
+
+.dashboard-table-component[data-table-format="spreadsheet"] .dashboard-table-header-content {
+  justify-content: center;
+}
+
+.dashboard-table-component[data-table-format="spreadsheet"] .dashboard-table-sort-button,
+.dashboard-table-component[data-table-format="spreadsheet"] .dashboard-table-header-label {
+  justify-content: center;
+  width: 100%;
+  color: #444;
+  font-size: 12px;
+  font-weight: 700;
+  text-align: center;
+}
+
+.dashboard-table-component[data-table-format="spreadsheet"] .dashboard-table-sort-icon,
+.dashboard-table-component[data-table-format="spreadsheet"] .dashboard-table-column-filter-button {
+  display: none;
+}
+
+.dashboard-table-component[data-table-format="spreadsheet"] tbody tr:nth-child(even):not(.is-group):not(.is-group-total):not(.is-total) td {
+  background: #fff;
+}
+
+.dashboard-table-component[data-table-format="spreadsheet"] tfoot td,
+.dashboard-table-component[data-table-format="spreadsheet"] tr.is-total td {
+  background: #fff;
+  color: #444;
+  font-weight: 700;
+}
+
+.dashboard-table-group-label,
+.dashboard-table-group-total {
+  display: block;
+}
+
+.dashboard-table-group-total {
+  margin-top: 2px;
+  color: var(--text-secondary);
+  font-size: 11px;
+  font-weight: 700;
+  padding-inline-start: calc(var(--dashboard-table-group-depth, 0) * 14px);
+  white-space: normal;
+}
+
+.dashboard-table-component tbody tr.is-group .dashboard-table-control-cell button {
+  min-width: 24px;
+  min-height: 24px;
+  border: 1px solid var(--dashboard-table-border, var(--border));
+  border-radius: 6px;
+  background: var(--dashboard-table-group-button-bg);
+  color: var(--dashboard-table-row-text);
+  cursor: pointer;
+  font: inherit;
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.dashboard-table-expansion-toggle {
+  min-width: 22px;
+  min-height: 22px;
+  border: 1px solid var(--dashboard-table-border, var(--border));
+  border-radius: 4px;
+  background: var(--surface);
+  color: var(--text-primary);
+  cursor: pointer;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.dashboard-table-expansion-toggle:hover {
+  background: color-mix(in srgb, var(--surface) 82%, var(--text-primary) 8%);
+}
+
+.dashboard-table-cell--expansion-trigger {
+  cursor: pointer;
+  color: var(--dashboard-table-expansion-trigger-color, inherit);
+  text-decoration: var(--dashboard-table-expansion-trigger-decoration, none);
+}
+
+.dashboard-table-cell--expansion-trigger:focus {
+  outline: 2px solid color-mix(in srgb, var(--color-primary, #2563eb) 52%, transparent);
+  outline-offset: -2px;
+}
+
+.dashboard-table-cell--expansion-trigger:hover {
+  color: var(--dashboard-table-expansion-trigger-hover-color, var(--dashboard-table-expansion-trigger-color, inherit));
+  text-decoration: var(--dashboard-table-expansion-trigger-hover-decoration, var(--dashboard-table-expansion-trigger-decoration, none));
+}
+
+.dashboard-table-component tbody td.dashboard-table-cell--expansion-trigger {
+  color: var(--dashboard-table-expansion-trigger-color, var(--dashboard-table-row-text));
+  font-weight: 400;
+}
+
+.dashboard-table-component tbody td.dashboard-table-cell--expansion-trigger:hover span {
+  color: var(--dashboard-table-expansion-trigger-hover-color, var(--dashboard-table-expansion-trigger-color, var(--dashboard-table-row-text)));
+  text-decoration: var(--dashboard-table-expansion-trigger-hover-decoration, var(--dashboard-table-expansion-trigger-decoration, none));
+}
+
+.dashboard-table-component tbody tr.is-group-child td:first-child {
+  padding-left: calc(var(--dashboard-table-cell-padding-x, 10px) + var(--dashboard-table-group-child-indent, 25px));
+}
+
+.dashboard-table-expanded-row > td {
+  padding: 0;
+  background: color-mix(in srgb, var(--surface) 96%, var(--border) 4%);
+}
+
+.dashboard-table-expansion {
+  padding: 8px 8px 8px 40px;
+}
+
+.dashboard-table-expansion-tabs {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin: 0 0 8px;
+}
+
+.dashboard-table-expansion-tabs button {
+  border: 1px solid var(--dashboard-table-border, var(--border));
+  border-radius: 0;
+  background: var(--surface);
+  color: var(--text-primary);
+  cursor: pointer;
+  font: inherit;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 4px 10px;
+}
+
+.dashboard-table-expansion-tabs button:hover,
+.dashboard-table-expansion-tabs button.active {
+  background: color-mix(in srgb, var(--surface) 88%, var(--text-primary) 8%);
+}
+
+.dashboard-table-expansion-tabs--links {
+  flex-wrap: nowrap;
+  gap: 4px;
+  margin-left: var(--dashboard-table-expansion-tab-indent, 10px);
+}
+
+.dashboard-table-expansion-tabs--links button {
+  min-height: 0;
+  border: 0;
+  background: transparent;
+  color: var(--dashboard-table-expansion-tab-color, #337ab7);
+  font-size: 12px;
+  font-weight: var(--dashboard-table-expansion-tab-font-weight, 400);
+  padding: 0;
+  white-space: nowrap;
+}
+
+.dashboard-table-expansion-tabs--links button:hover {
+  background: transparent;
+  color: var(--dashboard-table-expansion-tab-hover-color, #23527c);
+  text-decoration: underline;
+}
+
+.dashboard-table-expansion-tabs--links button.active {
+  background: transparent;
+  color: var(--dashboard-table-expansion-tab-active-color, var(--dashboard-table-expansion-tab-color, #337ab7));
+  font-weight: var(--dashboard-table-expansion-tab-active-font-weight, var(--dashboard-table-expansion-tab-font-weight, 400));
+}
+
+.dashboard-table-expansion-tab-separator {
+  color: var(--dashboard-table-row-text);
+  font-size: 12px;
+}
+
+.dashboard-table-expansion-content {
+  margin-left: var(--dashboard-table-expansion-content-indent, 0);
+}
+
+.dashboard-table-expansion table {
+  width: 100%;
+}
+
+.dashboard-table-expansion-empty-row td {
+  height: 34px;
+  background: var(--dashboard-table-expansion-empty-bg, var(--dashboard-table-row-bg));
+}
+
+.dashboard-table-expansion-state {
+  padding: 10px 12px;
+  color: var(--text-secondary);
+  font-size: 12px;
+}
+
+.dashboard-table-component tbody tr.is-group-total td {
+  border-top: var(--dashboard-table-group-total-border-width) solid var(--dashboard-table-group-total-border);
+  border-bottom: var(--dashboard-table-group-total-border-width) solid var(--dashboard-table-group-total-border);
+  background: var(--dashboard-table-group-total-bg);
+  color: var(--dashboard-table-group-total-text);
+  font-size: var(--dashboard-table-group-total-font-size);
+  font-weight: var(--dashboard-table-group-total-font-weight);
+}
+
+.dashboard-table-component tbody tr.is-group-total td:first-child {
+  color: var(--text-secondary);
+  padding-inline-start: calc(12px + (var(--dashboard-table-group-depth, 0) * 14px));
+}
+
+.dashboard-table-component tbody tr.is-group-total td.dashboard-table-control-cell + td {
+  padding-inline-start: calc(12px + (var(--dashboard-table-group-depth, 0) * 14px));
+}

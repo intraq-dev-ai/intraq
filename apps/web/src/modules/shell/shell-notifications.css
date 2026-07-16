@@ -1,0 +1,183 @@
+.shell-notifications {
+  position: relative;
+  display: inline-flex;
+  flex: 0 0 auto;
+}
+
+.shell-notification-button {
+  position: relative;
+  display: grid;
+  width: 42px;
+  height: 42px;
+  place-items: center;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--surface);
+  color: var(--text-primary);
+  cursor: pointer;
+  padding: 0;
+}
+
+.shell-notification-button:hover,
+.shell-notification-button[aria-expanded="true"] {
+  border-color: color-mix(in srgb, var(--color-primary) 42%, var(--border));
+  background: color-mix(in srgb, var(--color-primary) 8%, var(--surface));
+}
+
+.shell-notifications--dark .shell-notification-button {
+  border-color: rgba(255, 255, 255, 0.22);
+  background: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+}
+
+.shell-notifications--dark .shell-notification-button:hover,
+.shell-notifications--dark .shell-notification-button[aria-expanded="true"] {
+  border-color: rgba(255, 255, 255, 0.42);
+  background: rgba(255, 255, 255, 0.18);
+}
+
+.shell-notification-button svg {
+  width: 20px;
+  height: 20px;
+}
+
+.shell-notification-badge {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  display: grid;
+  min-width: 18px;
+  height: 18px;
+  place-items: center;
+  border: 2px solid var(--surface);
+  border-radius: 999px;
+  background: #dc2626;
+  color: #ffffff;
+  font-size: 10px;
+  font-weight: 900;
+  line-height: 1;
+  padding: 0 4px;
+}
+
+.shell-notification-popover {
+  position: absolute;
+  right: 0;
+  z-index: 80;
+  display: grid;
+  width: min(360px, calc(100vw - 28px));
+  max-height: min(520px, calc(100vh - 32px));
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--surface);
+  box-shadow: 0 24px 70px rgba(15, 23, 42, 0.22);
+  color: var(--text-primary);
+}
+
+.shell-notifications--bottom .shell-notification-popover {
+  top: calc(100% + 8px);
+}
+
+.shell-notifications--top .shell-notification-popover {
+  bottom: calc(100% + 8px);
+}
+
+.shell-notification-popover header,
+.shell-notification-popover footer {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  border-bottom: 1px solid var(--border);
+  padding: 12px 14px;
+}
+
+.shell-notification-popover footer {
+  align-items: center;
+  border-top: 1px solid var(--border);
+  border-bottom: 0;
+}
+
+.shell-notification-popover h2,
+.shell-notification-popover p {
+  margin: 0;
+}
+
+.shell-notification-popover h2 {
+  font-size: 15px;
+  font-weight: 900;
+}
+
+.shell-notification-popover header p {
+  margin-top: 3px;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.shell-notification-list {
+  display: grid;
+  max-height: 360px;
+  overflow: auto;
+}
+
+.shell-notification-item {
+  display: grid;
+  gap: 5px;
+  border-bottom: 1px solid color-mix(in srgb, var(--border) 72%, transparent);
+  padding: 12px 14px;
+}
+
+.shell-notification-item.is-unread {
+  border-left: 3px solid var(--color-primary);
+  background: color-mix(in srgb, var(--color-primary) 7%, var(--surface));
+  padding-left: 11px;
+}
+
+.shell-notification-item strong {
+  font-size: 13px;
+  font-weight: 900;
+}
+
+.shell-notification-item p {
+  color: var(--text-secondary);
+  font-size: 12px;
+  line-height: 1.35;
+}
+
+.shell-notification-item small,
+.shell-notification-empty {
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.shell-notification-empty {
+  margin: 0;
+  padding: 20px 14px;
+}
+
+.shell-notification-text-btn,
+.shell-notification-link {
+  border: 0;
+  background: transparent;
+  color: color-mix(in srgb, var(--color-primary) 78%, var(--text-primary));
+  cursor: pointer;
+  font: inherit;
+  font-size: 12px;
+  font-weight: 800;
+  padding: 0;
+  text-decoration: none;
+}
+
+.shell-notification-text-btn:disabled {
+  cursor: not-allowed;
+  opacity: 0.52;
+}
+
+.app-navbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-left: 1rem;
+}

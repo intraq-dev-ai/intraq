@@ -1,0 +1,287 @@
+.admin-dashboard-categories-page {
+  gap: 24px;
+}
+
+.admin-dashboard-categories-header {
+  align-items: flex-start;
+  display: flex;
+  gap: 18px;
+  justify-content: space-between;
+}
+
+.admin-dashboard-categories-create {
+  gap: 8px;
+  min-height: 44px;
+  padding: 0 18px;
+  white-space: nowrap;
+}
+
+.admin-dashboard-categories-create span {
+  font-size: 22px;
+  line-height: 1;
+}
+
+.admin-dashboard-categories-panel {
+  background: var(--admin-panel);
+  border: 1px solid var(--admin-border);
+  border-radius: 8px;
+  box-shadow: var(--admin-shadow);
+  overflow: hidden;
+}
+
+.admin-dashboard-categories-filters {
+  align-items: center;
+  border-bottom: 1px solid var(--admin-border);
+  display: flex;
+  gap: 16px;
+  justify-content: space-between;
+  padding: 18px;
+}
+
+.admin-dashboard-categories-filters h2 {
+  color: var(--admin-text);
+  font-size: 20px;
+  margin: 0;
+}
+
+.admin-dashboard-categories-filters label {
+  flex: 0 1 320px;
+}
+
+.admin-dashboard-categories-filters input {
+  background: var(--admin-band);
+  border: 1px solid var(--admin-border);
+  border-radius: 8px;
+  color: var(--text-primary);
+  font: inherit;
+  min-height: 42px;
+  padding: 0 12px;
+  width: 100%;
+}
+
+.admin-dashboard-categories-filters input:focus {
+  background: var(--admin-panel);
+  border-color: var(--admin-primary);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--admin-primary) 16%, transparent);
+  outline: none;
+}
+
+.admin-dashboard-categories-state {
+  align-items: center;
+  color: var(--admin-text-soft);
+  display: grid;
+  gap: 12px;
+  justify-items: center;
+  min-height: 280px;
+  padding: 48px 24px;
+  text-align: center;
+}
+
+.admin-dashboard-categories-state strong {
+  color: var(--admin-text);
+  font-size: 18px;
+}
+
+.admin-dashboard-categories-state p {
+  margin: 0;
+}
+
+.admin-dashboard-categories-grid {
+  display: grid;
+  gap: 18px;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  padding: 18px;
+}
+
+.admin-dashboard-categories-card {
+  background: var(--admin-panel);
+  border: 1px solid var(--admin-border);
+  border-radius: 8px;
+  box-shadow: var(--admin-shadow);
+  display: grid;
+  gap: 16px;
+  padding: 18px;
+}
+
+.admin-dashboard-categories-card.inactive {
+  opacity: 0.72;
+}
+
+.admin-dashboard-categories-card-header {
+  align-items: flex-start;
+  display: flex;
+  gap: 16px;
+  justify-content: space-between;
+}
+
+.admin-dashboard-categories-name-cell,
+.admin-dashboard-categories-actions,
+.admin-dashboard-categories-meta {
+  align-items: center;
+  display: flex;
+  gap: 10px;
+}
+
+.admin-dashboard-categories-name-cell {
+  align-items: flex-start;
+}
+
+.admin-dashboard-categories-name-cell h3 {
+  color: var(--admin-text);
+  font-size: 18px;
+  margin: 0;
+}
+
+.admin-dashboard-categories-name-cell p {
+  color: var(--admin-text-soft);
+  font-size: 13px;
+  margin: 4px 0 0;
+}
+
+.admin-dashboard-categories-meta {
+  color: var(--admin-text-soft);
+  flex-wrap: wrap;
+  font-size: 12px;
+  font-weight: 800;
+  margin-top: 8px;
+}
+
+.category-icon {
+  border-radius: 8px;
+  color: #ffffff;
+  display: grid;
+  flex: 0 0 auto;
+  font-size: 14px;
+  font-weight: 900;
+  height: 42px;
+  overflow: hidden;
+  place-items: center;
+  text-transform: uppercase;
+  width: 42px;
+}
+
+.admin-dashboard-categories-status {
+  border-radius: 999px;
+  display: inline-flex;
+  font-size: 12px;
+  font-weight: 800;
+  line-height: 1;
+  padding: 6px 10px;
+}
+
+.admin-dashboard-categories-status.active {
+  background: color-mix(in srgb, var(--ai-success-500) 14%, var(--admin-panel));
+  color: color-mix(in srgb, var(--ai-success-600) 88%, var(--admin-text));
+}
+
+.admin-dashboard-categories-status.inactive {
+  background: color-mix(in srgb, var(--brand-gold) 18%, var(--admin-panel));
+  color: color-mix(in srgb, var(--admin-primary-strong) 86%, var(--admin-text));
+}
+
+.admin-dashboard-categories-actions {
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.admin-dashboard-categories-dashboard-list {
+  border-top: 1px solid var(--admin-border);
+  padding-top: 14px;
+}
+
+.admin-dashboard-categories-dashboard-list h4 {
+  color: var(--admin-text);
+  font-size: 13px;
+  margin: 0 0 10px;
+}
+
+.admin-dashboard-categories-dashboard-list ul {
+  display: grid;
+  gap: 8px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.admin-dashboard-categories-dashboard-list li {
+  align-items: center;
+  background: var(--admin-band);
+  border: 1px solid var(--admin-border);
+  border-radius: 8px;
+  display: flex;
+  gap: 12px;
+  justify-content: space-between;
+  min-height: 38px;
+  padding: 8px 10px;
+}
+
+.admin-dashboard-categories-dashboard-list strong {
+  color: var(--admin-text-soft);
+  font-size: 12px;
+  text-transform: capitalize;
+}
+
+.admin-dashboard-categories-more {
+  color: var(--admin-text-soft);
+  font-size: 13px;
+  margin: 8px 0 0;
+}
+
+.admin-dashboard-category-dialog .admin-form {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.admin-dashboard-category-form-grid {
+  display: grid;
+  gap: 14px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.admin-dashboard-category-color-field {
+  align-items: center;
+  display: flex;
+  gap: 10px;
+}
+
+.admin-dashboard-category-color-field input[type="color"] {
+  min-height: 42px;
+  padding: 4px;
+  width: 64px;
+}
+
+.admin-dashboard-category-color-field span,
+.admin-dashboard-category-hint,
+.admin-dashboard-category-warning {
+  color: var(--admin-text-soft);
+  font-size: 13px;
+}
+
+.admin-dashboard-category-active-field {
+  align-self: end;
+  min-height: 42px;
+}
+
+.admin-dashboard-category-warning {
+  margin-top: -4px;
+}
+
+@media (max-width: 760px) {
+  .admin-dashboard-categories-header,
+  .admin-dashboard-categories-filters {
+    align-items: stretch;
+    display: grid;
+  }
+
+  .admin-dashboard-categories-create {
+    width: 100%;
+  }
+
+  .admin-dashboard-category-form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .admin-dashboard-categories-filters label {
+    flex-basis: auto;
+  }
+}

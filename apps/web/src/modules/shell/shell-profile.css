@@ -1,0 +1,77 @@
+.shared-profile-dropdown {
+  position: relative;
+}
+
+.shared-profile-dropdown--dark .profile-button {
+  width: 100%;
+  border-color: rgba(255, 255, 255, 0.24);
+  background: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+  justify-content: space-between;
+}
+
+.shared-profile-dropdown--dark .profile-name,
+.shared-profile-dropdown--dark .profile-role,
+.shared-profile-dropdown--dark .profile-caret {
+  color: #ffffff;
+}
+
+.shared-profile-dropdown--dark .profile-role {
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.shared-profile-dropdown--dark .profile-avatar {
+  background: linear-gradient(135deg, #ffffff, rgba(255, 255, 255, 0.68));
+  color: var(--color-primary);
+}
+
+.admin-header .shared-profile-dropdown {
+  width: 100%;
+  min-width: 0;
+}
+
+.admin-header .shared-profile-dropdown .profile-menu {
+  left: 0;
+  right: auto;
+  width: 100%;
+  max-width: calc(100vw - 2rem);
+}
+
+.customer-sidebar-footer .shared-profile-dropdown {
+  width: 100%;
+  min-width: 0;
+}
+
+.customer-sidebar-footer .shared-profile-dropdown .profile-menu {
+  top: auto;
+  bottom: 100%;
+  left: 0;
+  right: auto;
+  width: 100%;
+  max-width: calc(100vw - 2rem);
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+}
+
+.customer-sidebar-footer .shared-profile-dropdown .profile-button {
+  max-width: 100%;
+  overflow: hidden;
+}
+
+.profile-menu-divider {
+  height: 1px;
+  background: var(--border);
+  margin: 4px 0;
+}
+
+.floating-profile-menu {
+  position: fixed;
+  top: 16px;
+  left: 20px;
+  z-index: 60;
+}
+
+.floating-profile-menu .profile-menu {
+  left: 0;
+  right: auto;
+}

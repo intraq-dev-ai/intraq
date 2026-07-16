@@ -1,0 +1,39 @@
+name: intraq
+
+services:
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: intraq
+      POSTGRES_USER: intraq
+      POSTGRES_PASSWORD: intraq
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U intraq -d intraq"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+    ports:
+      - "5432:5432"
+    volumes:
+      - intraq-postgres-data:/var/lib/postgresql/data
+
+  app:
+    build: .
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      NODE_ENV: production
+      API_PORT: 4100
+      WEB_ORIGIN: http://localhost:4100
+      DATABASE_URL: postgresql://intraq:intraq@db:5432/intraq?schema=public
+      AUTH_TOKEN_SECRET: ${AUTH_TOKEN_SECRET:-replace-this-compose-secret-with-32-plus-random-chars}
+      SERVE_WEB_FROM_API: "true"
+      WEB_DIST_DIR: /app/apps/web/dist
+    command: >
+      sh -c "npm run db:migrate && node packages/db/dist/seed/run.js && npm start"
+    ports:
+      - "4100:4100"
+
+volumes:
+  intraq-postgres-data:

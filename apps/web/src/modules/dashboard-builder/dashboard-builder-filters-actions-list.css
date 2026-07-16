@@ -1,0 +1,229 @@
+
+.filter-menu-trigger,
+.nav-btn {
+  min-height: 24px;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  cursor: pointer;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 0 6px;
+}
+
+.date-range-filter .nav-btn,
+.period-picker .nav-btn {
+  align-items: center;
+  border-radius: 6px;
+  display: inline-flex;
+  font-size: 14px;
+  height: 28px;
+  justify-content: center;
+  line-height: 1;
+  min-height: 28px;
+  padding: 0;
+  width: 28px;
+}
+
+.date-range-filter .nav-btn span,
+.period-picker .nav-btn span {
+  display: block;
+  line-height: 1;
+}
+
+.filter-menu-trigger {
+  align-items: center;
+  background: transparent;
+  border-color: transparent;
+  border-radius: 50%;
+  color: var(--muted);
+  display: inline-flex;
+  font-size: 14px;
+  height: 24px;
+  justify-content: center;
+  letter-spacing: 1px;
+  min-height: 24px;
+  padding: 0;
+  width: 24px;
+}
+
+.filter-menu-trigger:hover,
+.filter-menu-trigger[aria-expanded="true"] {
+  background: var(--surface);
+  border-color: var(--border);
+  color: var(--text-primary);
+}
+
+.filter-actions-menu {
+  background: var(--bg-primary);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  box-shadow: 0 12px 28px rgba(15, 23, 42, 0.16);
+  display: grid;
+  min-width: 112px;
+  padding: 4px;
+  position: absolute;
+  top: calc(100% + 4px);
+  right: 0;
+  z-index: 9999;
+}
+
+.filter-actions-menu button {
+  background: transparent;
+  border: 0;
+  border-radius: 4px;
+  color: var(--text-primary);
+  cursor: pointer;
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 7px 9px;
+  text-align: left;
+}
+
+.filter-actions-menu button:hover {
+  background: var(--surface);
+}
+
+.filter-actions-menu button.danger {
+  color: color-mix(in srgb, #dc2626 86%, var(--text-primary));
+}
+
+.filter-actions-menu button.danger:hover {
+  background: color-mix(in srgb, #dc2626 9%, var(--surface));
+}
+
+.empty-filters {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 40px;
+  color: var(--muted);
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.dashboard-filter-bar .filter-badge-row,
+.dashboard-filter-bar .filter-meta {
+  display: none;
+}
+
+.filter-buttons-wrapper {
+  display: flex;
+  align-items: stretch;
+  gap: 4px;
+  min-height: 0;
+  flex: 1 1 0;
+  overflow: hidden;
+}
+
+.filter-buttons-group {
+  display: grid;
+  gap: 6px;
+  min-height: 0;
+  flex: 1 1 0;
+  overflow: hidden;
+}
+
+.filter-btn-nav {
+  flex: 0 0 20px;
+  background: none;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  color: var(--text-primary);
+  cursor: pointer;
+  font-size: 18px;
+  line-height: 1;
+  padding: 0;
+}
+
+.filter-btn-nav:disabled {
+  opacity: 0.3;
+  cursor: default;
+}
+
+.filter-btn-option {
+  min-height: 28px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  cursor: pointer;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 700;
+  overflow: hidden;
+  padding: 0 10px;
+  text-align: center;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 100%;
+  height: 100%;
+  transition: border-color 0.12s, background 0.12s, color 0.12s;
+}
+
+.filter-btn-option:hover,
+.filter-btn-option.active {
+  border-color: var(--accent, #2563eb);
+  background: color-mix(in srgb, var(--accent, #2563eb) 12%, var(--surface));
+  color: var(--accent, #2563eb);
+}
+
+.filter-list-group {
+  display: grid;
+  min-height: 0;
+  overflow: auto;
+}
+
+.filter-list-options {
+  display: grid;
+  gap: 1px;
+  min-height: 0;
+  overflow: auto;
+}
+
+.filter-list-option {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  min-height: 30px;
+  border: 0;
+  border-radius: 4px;
+  background: transparent;
+  color: var(--text-primary);
+  cursor: pointer;
+  font: inherit;
+  font-size: 13px;
+  padding: 0 8px;
+  text-align: left;
+  transition: background 0.1s;
+}
+
+.filter-list-option:hover {
+  background: var(--bg-secondary);
+}
+
+.filter-list-option.active {
+  background: color-mix(in srgb, var(--accent, #2563eb) 10%, var(--surface));
+  color: var(--accent, #2563eb);
+  font-weight: 700;
+}
+
+.filter-no-options {
+  margin: 0;
+  color: var(--muted);
+  font-size: 12px;
+  padding: 8px;
+}
+
+.dashboard-filter-strip {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--border, #e2e8f0);
+  background: var(--surface, #fff);
+}

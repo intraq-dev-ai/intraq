@@ -1,0 +1,342 @@
+.templates-page {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.templates-page .sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+}
+
+.templates-hero {
+  border: 1px solid var(--border-primary);
+  border-radius: 16px;
+  background: var(--bg-primary);
+  box-shadow: var(--shadow-sm);
+  padding: 24px;
+}
+
+.templates-hero h1 {
+  font-size: 1.8rem;
+  margin: 0 0 8px;
+}
+
+.templates-hero h1,
+.templates-hero p,
+.template-card h2,
+.template-card p,
+.template-preview-header h2,
+.template-preview-header p {
+  margin: 0;
+}
+
+.templates-hero p,
+.template-card p,
+.template-preview-header p {
+  color: var(--text-secondary);
+}
+
+.template-grid {
+  display: grid;
+  gap: 24px;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+}
+
+.template-card {
+  display: grid;
+  align-content: start;
+  overflow: hidden;
+  border: 0;
+  border-radius: 16px;
+  background: var(--bg-primary);
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.1);
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.template-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.15);
+}
+
+.template-thumbnail {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 180px;
+  border: 0;
+  background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+  cursor: pointer;
+  overflow: hidden;
+  padding: 0;
+}
+
+.template-preview-mini {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+
+.template-badge {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  border-radius: 12px;
+  background: var(--tenant-gradient-start);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 4px 12px;
+  backdrop-filter: blur(4px);
+}
+
+.template-info {
+  display: grid;
+  gap: 8px;
+  padding: 20px;
+}
+
+.template-info h2,
+.template-title {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.template-description {
+  font-size: 14px;
+  line-height: 1.5;
+  margin: 0 0 8px;
+}
+
+.template-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.template-use-btn {
+  flex: 1;
+  border: none;
+  border-radius: 10px;
+  background: linear-gradient(135deg, var(--tenant-gradient-start) 0%, var(--tenant-gradient-end) 100%);
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.template-use-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(108, 142, 238, 0.4);
+}
+
+.template-preview-overlay {
+  position: fixed;
+  z-index: 1200;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(15, 23, 42, 0.55);
+  padding: 24px;
+}
+
+.template-preview-modal {
+  width: min(720px, 86vw);
+  max-height: 72vh;
+  overflow: hidden;
+  border-radius: 16px;
+  background: #fff;
+  box-shadow: 0 20px 40px rgba(15, 23, 42, 0.2);
+}
+
+.template-preview-modal--wide {
+  width: min(960px, 94vw);
+}
+
+.template-preview-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  border-bottom: 1px solid #e2e8f0;
+  background: #f8fafc;
+  padding: 18px 20px;
+}
+
+.template-preview-title {
+  color: #0f172a;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.template-preview-subtitle {
+  font-size: 13px;
+  margin: 4px 0 0;
+}
+
+.template-preview-close {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: #64748b;
+  cursor: pointer;
+}
+
+.template-preview-close:hover {
+  background: #eef2f7;
+  color: #334155;
+}
+
+.template-preview-body {
+  overflow: auto;
+  max-height: calc(72vh - 64px);
+  background: #f3f4f6;
+  padding: 16px 18px 18px;
+}
+
+.template-preview-inline {
+  width: 100%;
+  height: 100%;
+}
+
+.template-preview-inline-frame {
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  border-radius: 0;
+  padding: 0;
+}
+
+.template-preview-inline .template-preview-body {
+  max-height: none;
+  overflow: hidden;
+  background: transparent;
+  padding: 0;
+}
+
+.template-preview-inline .template-preview-grid {
+  transform: scale(0.34);
+  transform-origin: top left;
+  width: 300%;
+}
+
+.template-preview-grid {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.template-preview-grid--compact {
+  grid-auto-rows: 128px;
+}
+
+.template-preview-inline .template-preview-grid--compact {
+  grid-auto-rows: 96px;
+}
+
+.template-preview-item {
+  min-height: 200px;
+}
+
+.template-preview-item--card {
+  min-height: 75px;
+}
+
+.template-preview-grid--compact .template-preview-item {
+  min-height: 0;
+}
+
+.template-preview-grid--compact .template-preview-item--card,
+.template-preview-grid--compact .template-chart-panel,
+.template-preview-grid--compact .template-table-panel {
+  height: 100%;
+}
+
+.template-preview-card,
+.template-chart-panel,
+.template-table-panel,
+.template-preview-stack-item {
+  height: 100%;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  background: #fff;
+  color: #0f172a;
+  padding: 12px;
+}
+
+.template-chart-panel,
+.template-table-panel {
+  min-height: 220px;
+}
+
+.template-preview-card {
+  display: grid;
+  align-content: center;
+  gap: 6px;
+  min-height: 74px;
+}
+
+.template-preview-card span,
+.template-chart-panel strong,
+.template-preview-matrix strong,
+.template-table-panel strong {
+  color: #475569;
+  font-size: 12px;
+}
+
+.template-preview-card strong {
+  font-size: 24px;
+}
+
+.template-preview-matrix strong {
+  grid-column: 1 / -1;
+}
+
+.template-preview-matrix.variant-professional span {
+  background: #cbd5e1;
+}
+
+.template-preview-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  height: 100%;
+}
+
+.template-preview-stack-item {
+  min-height: 0;
+}
+
+.template-preview-stack-matrix {
+  flex: 4 1 0;
+}
+
+.template-preview-stack-area {
+  flex: 1 1 0;
+}
+
+@media (max-width: 760px) {
+  .template-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .template-preview-item {
+    min-height: 140px;
+  }
+}

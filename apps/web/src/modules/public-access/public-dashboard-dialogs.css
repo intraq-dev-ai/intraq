@@ -1,0 +1,160 @@
+.public-chart-modal-overlay {
+  align-items: center;
+  background: rgb(15 23 42 / 72%);
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  left: 0;
+  padding: 18px;
+  position: fixed;
+  right: 0;
+  top: 0;
+  z-index: 1000;
+}
+
+.public-chart-modal {
+  background: var(--embed-surface, var(--surface));
+  border-radius: var(--embed-radius, 8px);
+  box-shadow: 0 25px 50px rgb(15 23 42 / 28%);
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
+  max-height: 90vh;
+  max-width: 920px;
+  min-height: 520px;
+  overflow: hidden;
+  width: min(100%, 920px);
+}
+
+.public-chart-modal header {
+  align-items: center;
+  background: color-mix(in srgb, var(--embed-background, var(--bg-secondary)) 82%, var(--embed-surface, var(--surface)));
+  border-bottom: var(--embed-border-width, 1px) solid var(--embed-border, var(--border));
+  display: flex;
+  justify-content: space-between;
+  padding: 16px 18px;
+}
+
+.public-chart-modal-content {
+  padding: 18px;
+}
+
+.public-dashboard-card-modal {
+  min-height: 240px;
+}
+
+.public-component-download-dialog {
+  background: var(--embed-surface, var(--surface));
+  border-radius: var(--embed-radius, 8px);
+  box-shadow: 0 25px 50px rgb(15 23 42 / 28%);
+  display: grid;
+  gap: 16px;
+  max-width: 560px;
+  padding: 18px;
+  width: min(100%, 560px);
+}
+
+.public-component-download-header {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+}
+
+.public-component-download-summary {
+  background: color-mix(in srgb, var(--embed-background, var(--bg-secondary)) 82%, var(--embed-surface, var(--surface)));
+  border: var(--embed-border-width, 1px) solid var(--embed-border, var(--border));
+  border-radius: var(--embed-radius, 8px);
+  color: var(--embed-text, var(--text-primary));
+  display: grid;
+  gap: 4px;
+  padding: 12px;
+}
+
+.public-component-download-summary span {
+  color: var(--embed-secondary, var(--text-secondary));
+  font-size: 13px;
+}
+
+.public-component-download-formats {
+  border: 0;
+  display: grid;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+}
+
+.public-component-download-formats legend {
+  color: var(--embed-secondary, var(--text-secondary));
+  font-size: 12px;
+  font-weight: 800;
+  margin-bottom: 8px;
+}
+
+.public-component-download-option {
+  align-items: start;
+  border: var(--embed-border-width, 1px) solid var(--embed-border, var(--border));
+  border-radius: var(--embed-radius, 8px);
+  color: var(--embed-text, var(--text-primary));
+  cursor: pointer;
+  display: flex;
+  gap: 10px;
+  padding: 12px;
+}
+
+.public-component-download-option input {
+  margin-top: 3px;
+}
+
+.public-component-download-option span {
+  display: grid;
+  gap: 3px;
+}
+
+.public-component-download-option small {
+  color: var(--embed-secondary, var(--text-secondary));
+}
+
+.public-component-download-info {
+  align-items: start;
+  background: color-mix(in srgb, var(--embed-primary, var(--brand-blue)) 8%, var(--embed-surface, var(--surface)));
+  border: var(--embed-border-width, 1px) solid color-mix(in srgb, var(--embed-primary, var(--brand-blue)) 20%, var(--embed-border, var(--border)));
+  border-radius: var(--embed-radius, 8px);
+  color: var(--embed-secondary, var(--text-secondary));
+  display: flex;
+  gap: 10px;
+  padding: 12px;
+}
+
+.public-component-download-info svg {
+  fill: none;
+  flex: 0 0 auto;
+  height: 18px;
+  stroke: var(--embed-primary, var(--brand-blue));
+  width: 18px;
+}
+
+.public-component-download-note {
+  color: var(--embed-secondary, var(--text-secondary));
+  font-size: 13px;
+  margin: 0;
+}
+
+.public-component-download-error {
+  background: color-mix(in srgb, #dc2626 10%, var(--embed-surface, var(--surface)));
+  border: var(--embed-border-width, 1px) solid color-mix(in srgb, #dc2626 44%, var(--embed-border, var(--border)));
+  border-radius: var(--embed-radius, 8px);
+  color: color-mix(in srgb, #dc2626 86%, var(--embed-text, var(--text-primary)));
+  margin: 0;
+  padding: 10px 12px;
+}
+
+.public-component-download-actions {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+}
+
+@media (max-width: 560px) {
+  .public-component-download-actions {
+    flex-direction: column-reverse;
+  }
+}

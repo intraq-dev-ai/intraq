@@ -1,0 +1,102 @@
+.admin-custom-sources .modal-overlay {
+  align-items: center;
+  background: rgba(15, 23, 42, 0.5);
+  display: flex;
+  inset: 0;
+  justify-content: center;
+  padding: 24px;
+  position: fixed;
+  z-index: 70;
+}
+
+.admin-custom-sources .modal-container {
+  background: var(--surface);
+  border-radius: 8px;
+  box-shadow: 0 24px 80px rgba(15, 23, 42, 0.25);
+  max-height: min(860px, calc(100vh - 48px));
+  max-width: 860px;
+  overflow: auto;
+  width: 100%;
+}
+
+.admin-custom-sources .modal-header,
+.admin-custom-sources .modal-footer {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  padding: 20px 24px;
+}
+
+.admin-custom-sources .modal-header {
+  border-bottom: 1px solid var(--border);
+}
+
+.admin-custom-sources .modal-footer {
+  border-top: 1px solid var(--border);
+  gap: 12px;
+  justify-content: flex-end;
+}
+
+.admin-custom-sources .modal-title {
+  color: var(--text-primary);
+  font-size: 20px;
+  font-weight: 700;
+  margin: 0;
+}
+
+.admin-custom-sources .modal-close {
+  background: transparent;
+  border: 0;
+  color: var(--text-secondary);
+  cursor: pointer;
+  font-size: 24px;
+  line-height: 1;
+}
+
+.admin-custom-sources .modal-body {
+  display: grid;
+  gap: 24px;
+  padding: 24px;
+}
+
+.admin-custom-sources .form-label {
+  color: var(--text-primary);
+  display: block;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.admin-custom-sources .query-display {
+  background: #0f172a;
+  border-radius: 8px;
+  color: #e2e8f0;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 13px;
+  margin: 0;
+  overflow-x: auto;
+  padding: 16px;
+  white-space: pre-wrap;
+}
+
+.admin-custom-sources .detail-grid,
+.admin-custom-sources .columns-grid {
+  display: grid;
+  gap: 12px;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+}
+
+.admin-custom-sources .detail-item,
+.admin-custom-sources .column-item {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  display: grid;
+  gap: 4px;
+  padding: 12px;
+}
+
+.admin-custom-sources .detail-item span,
+.admin-custom-sources .column-item strong {
+  color: var(--text-secondary);
+  font-size: 12px;
+}

@@ -1,0 +1,413 @@
+@import './manual-sidebar-palette.css';
+
+/* ---- Editor ---- */
+.manual-sidebar-editor {
+  display: flex;
+  flex-direction: column;
+  padding: 0.75rem 1rem 1.5rem;
+  gap: 0;
+}
+
+.editor-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--manual-sidebar-border);
+}
+
+.editor-heading h3 {
+  flex: 1 1 auto;
+  font-size: 0.9375rem;
+  font-weight: 700;
+  color: var(--manual-sidebar-text);
+  margin: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.editor-heading-actions {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-width: 0;
+}
+
+.editor-clear-button {
+  flex-shrink: 0;
+  border: 1px solid color-mix(in srgb, #dc2626 42%, var(--manual-sidebar-border));
+  border-radius: 0.375rem;
+  background: color-mix(in srgb, #dc2626 12%, var(--manual-sidebar-surface));
+  color: color-mix(in srgb, #dc2626 84%, var(--manual-sidebar-text));
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.35rem 0.55rem;
+  cursor: pointer;
+  box-shadow: 0 0 0 1px color-mix(in srgb, #dc2626 8%, transparent);
+  transition: background-color 0.18s ease, border-color 0.18s ease, color 0.18s ease, box-shadow 0.18s ease;
+}
+
+.editor-clear-button:hover {
+  background: color-mix(in srgb, #dc2626 18%, var(--manual-sidebar-surface));
+  border-color: color-mix(in srgb, #dc2626 58%, var(--manual-sidebar-border));
+  color: color-mix(in srgb, #dc2626 92%, var(--manual-sidebar-text));
+  box-shadow: 0 0 0 1px color-mix(in srgb, #dc2626 18%, transparent);
+}
+
+.editor-clear-button:focus-visible {
+  outline: 2px solid color-mix(in srgb, #dc2626 55%, transparent);
+  outline-offset: 2px;
+}
+
+/* ---- Section container ---- */
+.editor-section {
+  margin-bottom: 1rem;
+  padding-bottom: 0.875rem;
+  border-bottom: 1px solid color-mix(in srgb, var(--manual-sidebar-border) 72%, transparent);
+}
+
+.editor-section:last-of-type {
+  border-bottom: none;
+}
+
+/* ---- Section header ---- */
+.section-header {
+  font-size: 0.6875rem;
+  font-weight: 700;
+  color: var(--manual-sidebar-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 0.5rem;
+  padding-bottom: 0.25rem;
+  border-bottom: 1px solid var(--manual-sidebar-border);
+}
+
+/* ---- Section summary row ---- */
+.section-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-top: 0.375rem;
+}
+
+.section-summary {
+  font-size: 0.75rem;
+  color: var(--manual-sidebar-faint);
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.section-list {
+  margin-top: 0.25rem;
+}
+
+.section-list-item {
+  font-size: 0.75rem;
+  color: var(--manual-sidebar-muted);
+  line-height: 1.6;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.manual-field {
+  display: grid;
+  gap: 0.25rem;
+}
+
+.manual-field-label {
+  color: var(--manual-sidebar-muted);
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.section-help {
+  margin: 0.375rem 0 0;
+  color: var(--manual-sidebar-faint);
+  font-size: 0.72rem;
+  line-height: 1.35;
+}
+
+/* ---- Manage button ---- */
+.manage-btn {
+  flex-shrink: 0;
+  padding: 0.3125rem 0.625rem;
+  border: 1px solid var(--manual-sidebar-border-soft);
+  border-radius: 0.25rem;
+  background: var(--manual-sidebar-surface);
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--manual-sidebar-text);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.12s, border-color 0.12s;
+}
+
+.manage-btn:hover {
+  background: var(--manual-sidebar-soft);
+  border-color: var(--manual-sidebar-muted);
+}
+
+/* Data / field buttons — green */
+.manage-btn--data {
+  border-color: color-mix(in srgb, #16a34a 38%, var(--manual-sidebar-border));
+  background: color-mix(in srgb, #16a34a 12%, var(--manual-sidebar-surface));
+  color: color-mix(in srgb, #16a34a 84%, var(--manual-sidebar-text));
+}
+.manage-btn--data:hover {
+  background: color-mix(in srgb, #16a34a 20%, var(--manual-sidebar-surface));
+  border-color: color-mix(in srgb, #16a34a 55%, var(--manual-sidebar-border));
+}
+
+/* Styling buttons — violet */
+.manage-btn--style {
+  border-color: color-mix(in srgb, #7c3aed 36%, var(--manual-sidebar-border));
+  background: color-mix(in srgb, #7c3aed 12%, var(--manual-sidebar-surface));
+  color: color-mix(in srgb, #7c3aed 84%, var(--manual-sidebar-text));
+}
+.manage-btn--style:hover {
+  background: color-mix(in srgb, #7c3aed 20%, var(--manual-sidebar-surface));
+  border-color: color-mix(in srgb, #7c3aed 55%, var(--manual-sidebar-border));
+}
+
+/* Calculated fields / rules — amber */
+.manage-btn--calc {
+  border-color: color-mix(in srgb, #d97706 38%, var(--manual-sidebar-border));
+  background: color-mix(in srgb, #d97706 13%, var(--manual-sidebar-surface));
+  color: color-mix(in srgb, #d97706 84%, var(--manual-sidebar-text));
+}
+.manage-btn--calc:hover {
+  background: color-mix(in srgb, #d97706 22%, var(--manual-sidebar-surface));
+  border-color: color-mix(in srgb, #d97706 55%, var(--manual-sidebar-border));
+}
+
+/* Config / pagination — blue */
+.manage-btn--config {
+  border-color: color-mix(in srgb, #2563eb 38%, var(--manual-sidebar-border));
+  background: color-mix(in srgb, #2563eb 12%, var(--manual-sidebar-surface));
+  color: color-mix(in srgb, #2563eb 84%, var(--manual-sidebar-text));
+}
+.manage-btn--config:hover {
+  background: color-mix(in srgb, #2563eb 20%, var(--manual-sidebar-surface));
+  border-color: color-mix(in srgb, #2563eb 55%, var(--manual-sidebar-border));
+}
+
+/* Apply buttons inside dialogs — primary action */
+.manage-btn.apply-btn {
+  background: var(--manual-sidebar-primary);
+  border-color: var(--manual-sidebar-primary);
+  color: var(--text-inverse, #fff);
+  font-weight: 700;
+}
+.manage-btn.apply-btn:hover { opacity: 0.9; }
+
+/* ---- Dialog field grid ---- */
+.dialog-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 0.75rem;
+}
+
+.dialog-field--full {
+  grid-column: 1 / -1;
+}
+
+/* ---- Form inputs ---- */
+.editor-field-label {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--manual-sidebar-text);
+  margin-bottom: 0.25rem;
+}
+
+.editor-input {
+  width: 100%;
+  padding: 0.375rem 0.5rem;
+  border: 1px solid var(--manual-sidebar-border-soft);
+  border-radius: 0.25rem;
+  font-size: 0.8125rem;
+  color: var(--manual-sidebar-text);
+  background: var(--manual-sidebar-surface);
+  box-sizing: border-box;
+}
+
+.editor-input:focus {
+  outline: none;
+  border-color: color-mix(in srgb, var(--manual-sidebar-primary) 72%, var(--manual-sidebar-border));
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--manual-sidebar-primary) 20%, transparent);
+}
+
+.editor-textarea {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  line-height: 1.45;
+  min-height: 9rem;
+  resize: vertical;
+}
+
+.editor-select {
+  width: 100%;
+  padding: 0.375rem 0.5rem;
+  border: 1px solid var(--manual-sidebar-border-soft);
+  border-radius: 0.25rem;
+  font-size: 0.8125rem;
+  color: var(--manual-sidebar-text);
+  background: var(--manual-sidebar-surface);
+  box-sizing: border-box;
+}
+
+.editor-select:disabled {
+  background: var(--manual-sidebar-soft);
+  color: var(--manual-sidebar-faint);
+  cursor: not-allowed;
+}
+
+.editor-field-group {
+  margin-top: 0.5rem;
+}
+
+.dialog-notice {
+  margin: 0 0 0.875rem;
+  padding: 0.625rem 0.75rem;
+  border-radius: 0.375rem;
+  font-size: 0.75rem;
+  line-height: 1.45;
+}
+
+.dialog-notice--warning {
+  border: 1px solid color-mix(in srgb, #d97706 36%, var(--manual-sidebar-border));
+  background: color-mix(in srgb, #d97706 10%, var(--manual-sidebar-surface));
+  color: color-mix(in srgb, #d97706 84%, var(--manual-sidebar-text));
+}
+
+/* ---- Toggle switch ---- */
+.toggle-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.3125rem 0;
+  gap: 0.5rem;
+}
+
+.toggle-label {
+  font-size: 0.8125rem;
+  color: var(--manual-sidebar-text);
+  flex: 1;
+}
+
+.toggle-switch {
+  position: relative;
+  display: inline-block;
+  width: 2.25rem;
+  height: 1.25rem;
+  flex-shrink: 0;
+  cursor: pointer;
+}
+
+.toggle-switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+  position: absolute;
+}
+
+.toggle-slider {
+  position: absolute;
+  inset: 0;
+  background: var(--manual-sidebar-border-soft);
+  border-radius: 9999px;
+  transition: background 0.2s;
+}
+
+.toggle-slider::before {
+  content: '';
+  position: absolute;
+  width: 1rem;
+  height: 1rem;
+  left: 0.125rem;
+  top: 0.125rem;
+  background: var(--manual-sidebar-surface);
+  border-radius: 50%;
+  transition: transform 0.2s;
+  box-shadow: 0 1px 2px color-mix(in srgb, #000 22%, transparent);
+}
+
+.toggle-switch input:checked + .toggle-slider {
+  background: var(--manual-sidebar-primary);
+}
+
+.toggle-switch input:checked + .toggle-slider::before {
+  transform: translateX(1rem);
+}
+
+.component-target-list,
+.static-filter-form {
+  display: grid;
+  gap: 0.625rem;
+}
+
+.checkbox-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  border: 1px solid var(--manual-sidebar-border-soft);
+  border-radius: 0.375rem;
+  background: var(--manual-sidebar-surface);
+  color: var(--manual-sidebar-text);
+  font-size: 0.8125rem;
+  padding: 0.5rem;
+}
+
+.checkbox-row small {
+  color: var(--manual-sidebar-muted);
+}
+
+.static-target-mapping,
+.static-condition-card {
+  display: grid;
+  gap: 0.5rem;
+  border: 1px solid var(--manual-sidebar-border-soft);
+  border-radius: 0.5rem;
+  background: var(--manual-sidebar-surface);
+  padding: 0.625rem;
+}
+
+.static-range-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5rem;
+}
+
+.static-condition-value {
+  display: grid;
+  gap: 0.5rem;
+}
+
+.config-tabs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.375rem;
+}
+
+.tab-btn {
+  border: 1px solid var(--manual-sidebar-border-soft);
+  border-radius: 0.375rem;
+  background: var(--manual-sidebar-surface);
+  color: var(--manual-sidebar-muted);
+  cursor: pointer;
+  font-size: 0.8125rem;
+  font-weight: 700;
+  padding: 0.5rem;
+}
+
+.tab-btn.active {
+  border-color: color-mix(in srgb, var(--manual-sidebar-primary) 55%, var(--manual-sidebar-border));
+  background: color-mix(in srgb, var(--manual-sidebar-primary) 12%, var(--manual-sidebar-surface));
+  color: color-mix(in srgb, var(--manual-sidebar-primary) 78%, var(--manual-sidebar-text));
+}

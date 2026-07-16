@@ -1,0 +1,170 @@
+
+.dashboard-runtime-cross-filter-bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  padding: 10px 12px;
+  margin: 8px 12px 6px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: color-mix(in srgb, var(--bg-secondary) 94%, var(--surface) 6%);
+}
+
+.dashboard-runtime-cross-filter-copy {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--text-secondary);
+  font-size: 12px;
+}
+
+.dashboard-runtime-cross-filter-copy strong {
+  color: var(--text-primary);
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.dashboard-runtime-cross-filter-list {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  flex: 1 1 auto;
+}
+
+.dashboard-runtime-cross-filter-chip,
+.dashboard-runtime-cross-filter-clear {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 30px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--surface);
+  color: var(--text-primary);
+  cursor: pointer;
+  font: inherit;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 0 10px;
+}
+
+.dashboard-runtime-cross-filter-chip:hover,
+.dashboard-runtime-cross-filter-clear:hover {
+  background: color-mix(in srgb, var(--color-primary, #2563eb) 8%, var(--surface));
+}
+
+.dashboard-render-spinner { width: 32px; height: 32px; border: 3px solid #dbeafe; border-bottom-color: #2563eb; border-radius: 999px; animation: dashboard-render-spin 0.8s linear infinite; }
+
+.dashboard-render-state-title,
+.dashboard-render-state-detail {
+  margin: 0;
+}
+
+.dashboard-render-state-title { color: var(--text-secondary); font-weight: 800; }
+
+.dashboard-render-state-detail { color: var(--muted); font-size: 12px; }
+
+.dashboard-table-component,
+.dashboard-matrix-component {
+  overflow: auto;
+  border: 1px solid var(--border);
+  background: var(--surface);
+}
+
+.dashboard-table-component table,
+.dashboard-matrix-component table,
+.component-data-dialog table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.dashboard-table-component th,
+.dashboard-table-component td,
+.dashboard-matrix-component th,
+.dashboard-matrix-component td,
+.component-data-dialog th,
+.component-data-dialog td {
+  border-bottom: 1px solid var(--border);
+  color: var(--text-primary);
+  padding: 10px 12px;
+  text-align: left;
+  white-space: nowrap;
+}
+
+.dashboard-table-component th,
+.dashboard-matrix-component th,
+.component-data-dialog th {
+  background: var(--bg-secondary);
+  color: var(--text-secondary);
+  font-size: 11px;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.dashboard-kpi-card {
+  display: grid;
+  align-content: center;
+  gap: var(--kpi-outer-gap, clamp(8px, 3cqh, 22px));
+  border: 1px solid var(--border);
+  background: var(--surface);
+  padding: clamp(12px, 5cqh, 28px);
+}
+
+.dashboard-kpi-heading { display: flex; align-items: center; justify-content: space-between; gap: clamp(8px, 2.2cqw, 18px); }
+
+.dashboard-kpi-heading p,
+.dashboard-kpi-status {
+  color: var(--text-secondary);
+  font-size: clamp(12px, min(2.8cqw, 5cqh), 18px);
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.dashboard-kpi-card strong {
+  color: var(--text-primary);
+  font-size: clamp(22px, min(16cqw, 30cqh), 82px);
+  line-height: 1;
+}
+
+.dashboard-kpi-status { border-radius: 999px; background: var(--bg-secondary); padding: 4px 8px; }
+
+.dashboard-kpi-meta { display: flex; flex-wrap: wrap; gap: clamp(8px, 2cqw, 16px); font-size: clamp(12px, min(2.8cqw, 5cqh), 18px); font-weight: 800; }
+
+.dashboard-kpi-trend,
+.dashboard-kpi-card.trend-up .dashboard-kpi-status {
+  color: #047857;
+}
+
+.dashboard-kpi-card.trend-down .dashboard-kpi-status,
+.dashboard-kpi-card.trend-down .dashboard-kpi-trend {
+  color: #b91c1c;
+}
+
+.table-state { min-height: 160px; }
+
+.dashboard-table-component .table-state,
+.dashboard-matrix-component .table-state { white-space: normal; }
+
+.chart-renderer-status {
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 800;
+}
+
+@keyframes dashboard-render-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.chart-fallback-table {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+}

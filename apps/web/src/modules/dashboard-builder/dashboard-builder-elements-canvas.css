@@ -1,0 +1,315 @@
+.dashboard-canvas-panel,
+.dashboard-canvas-elements {
+  display: grid;
+}
+
+.dashboard-canvas-panel {
+  gap: 0;
+}
+
+.dashboard-canvas-elements {
+  gap: 16px;
+}
+
+.dashboard-canvas-elements {
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  padding: 16px 20px 20px;
+}
+
+.dashboard-canvas-item {
+  display: block;
+  grid-column: span var(--component-width, 6);
+  min-height: calc(var(--component-height, 5) * 62px);
+  min-width: 0;
+}
+
+.dashboard-canvas-elements--edit {
+  position: relative;
+  display: block;
+  min-height: 360px;
+  padding: 0 !important;
+}
+
+.dashboard-canvas-panel--edit {
+  min-height: max(560px, calc(100dvh - 220px));
+}
+
+.dashboard-canvas-panel--edit .dashboard-canvas-elements--edit {
+  min-height: max(560px, calc(100dvh - 220px));
+}
+
+.dashboard-canvas-card {
+  position: relative;
+  display: grid;
+  grid-column: span var(--component-width, 6);
+  gap: 12px;
+  min-height: calc(var(--component-height, 5) * 62px);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--bg-primary);
+  box-shadow: var(--shadow-sm);
+  padding: 14px;
+  touch-action: none;
+}
+
+.dashboard-canvas-item > .dashboard-canvas-card {
+  grid-column: auto;
+  grid-row: auto;
+  height: 100%;
+  min-height: 0;
+}
+
+.dashboard-canvas-elements--edit .vue-grid-item {
+  background: var(--bg-primary);
+  border-radius: 8px;
+  box-shadow: 0 4px 6px 0 rgba(0, 0, 0, 0.1);
+  overflow: visible;
+  padding: 0 !important;
+}
+
+.dashboard-canvas-elements--edit .vue-grid-item--filter {
+  background: transparent;
+  box-shadow: none;
+}
+
+.dashboard-canvas-elements--edit .vue-grid-item--container {
+  background: transparent;
+  box-shadow: none;
+}
+
+.dashboard-canvas-elements--edit .vue-grid-item--export {
+  background: transparent;
+  box-shadow: none;
+}
+
+.dashboard-canvas-elements--edit .dashboard-canvas-card {
+  grid-column: auto;
+  grid-row: auto;
+  height: 100%;
+  min-height: 0;
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+  transition: box-shadow 120ms ease, border-color 120ms ease;
+}
+
+.dashboard-canvas-elements--edit .vue-grid-item.vue-grid-placeholder {
+  z-index: 2;
+  background: #2563eb;
+  border-radius: 8px;
+  padding: 0 !important;
+  opacity: 0.18;
+  transition-duration: 0.1s;
+  user-select: none;
+}
+
+.dashboard-canvas-elements--edit .vue-grid-item.vue-draggable-dragging {
+  cursor: move;
+  z-index: 3;
+  transition: none !important;
+}
+
+.dashboard-canvas-elements--edit .vue-grid-item.resizing {
+  z-index: 3;
+  opacity: 0.6;
+}
+
+.resize-handles-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 5;
+}
+
+.resize-handles-container .resize-handle {
+  pointer-events: auto;
+}
+
+.dashboard-canvas-elements--edit .vue-grid-item > .vue-resizable-handle {
+  position: absolute;
+  right: -4px;
+  bottom: -4px;
+  z-index: 10;
+  width: 12px;
+  height: 12px;
+  border: 1px solid var(--ai-primary-500);
+  border-radius: 2px;
+  background: var(--bg-primary);
+  box-shadow: 0 2px 4px rgba(15, 23, 42, 0.14);
+  padding: 0;
+  background-image: none;
+  background-origin: border-box;
+  box-sizing: border-box;
+  cursor: nwse-resize;
+  opacity: 0.45;
+  touch-action: none;
+  transition: opacity 0.15s ease, transform 0.15s ease;
+}
+
+.dashboard-canvas-elements--edit .vue-grid-item:hover > .vue-resizable-handle,
+.dashboard-canvas-elements--edit .vue-grid-item:focus-within > .vue-resizable-handle,
+.dashboard-canvas-elements--edit .vue-grid-item.resizing > .vue-resizable-handle {
+  opacity: 1;
+}
+
+.dashboard-canvas-card--editable {
+  cursor: move;
+  padding-top: 14px;
+}
+
+.dashboard-canvas-card--editable[data-component-kind="filter"] {
+  background: transparent;
+  border: 1px dashed var(--border);
+  box-shadow: none;
+  padding: 8px 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.dashboard-canvas-card--editable[data-component-kind="container"],
+.dashboard-canvas-card--editable[data-component-kind="filter-container"] {
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+  padding: 0;
+}
+
+.dashboard-canvas-card--editable[data-component-kind="export"] {
+  align-items: center;
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+  display: flex;
+  gap: 0;
+  overflow: visible;
+  padding: 0;
+}
+
+.dashboard-canvas-card--editable[data-component-kind="export"] > .dashboard-element-renderer {
+  height: auto;
+  min-height: 0;
+  width: 100%;
+}
+
+.dashboard-canvas-card--editable[data-component-kind="export"] .dashboard-export-button-element {
+  min-height: 0;
+}
+
+.dashboard-canvas-card--editable[data-component-kind="export"] .dashboard-export-button-element--legacy-toolbar {
+  align-items: center;
+}
+
+.dashboard-canvas-card--editable[data-component-kind="text"] {
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+  padding: 0;
+}
+
+.dashboard-canvas-card--view[data-component-kind="filter"] {
+  background: transparent;
+  border-color: transparent;
+  box-shadow: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.dashboard-canvas-card[data-component-kind="container"] > .dashboard-element-renderer,
+.dashboard-canvas-card[data-component-kind="filter-container"] > .dashboard-element-renderer {
+  height: 100%;
+  min-height: 0;
+}
+
+.dashboard-canvas-card[data-component-kind="filter"] > .dashboard-element-renderer {
+  flex: 1 1 auto;
+  min-height: 0;
+  height: 0;
+}
+
+.dashboard-canvas-card--two-row-card {
+  align-items: stretch;
+  gap: 0;
+  grid-template-rows: minmax(0, 1fr);
+  overflow: hidden;
+  padding: 0;
+}
+
+.dashboard-canvas-card--flush-kpi {
+  align-items: stretch;
+  gap: 0;
+  grid-template-rows: minmax(0, 1fr);
+  overflow: hidden;
+  padding: 0;
+}
+
+.dashboard-canvas-card--editable.dashboard-canvas-card--two-row-card {
+  padding: 0;
+}
+
+.dashboard-canvas-card--editable.dashboard-canvas-card--flush-kpi {
+  padding: 0;
+}
+
+.dashboard-canvas-card--moving,
+.dashboard-canvas-card--resizing {
+  cursor: move;
+  z-index: 24;
+  transition: none;
+  will-change: transform;
+}
+
+body.dashboard-canvas-is-dragging,
+body.dashboard-canvas-is-dragging * {
+  cursor: move !important;
+}
+
+.dashboard-canvas-card--editor-focused {
+  z-index: 12;
+  outline: 3px solid #2563eb;
+  outline-offset: 1px;
+  box-shadow: 0 0 0 6px rgba(37, 99, 235, 0.15);
+}
+
+.dashboard-canvas-card--editor-disabled {
+  opacity: 0.56;
+  pointer-events: none;
+  filter: saturate(0.82);
+  box-shadow: 0 1px 3px color-mix(in srgb, var(--border) 45%, transparent);
+}
+
+.dashboard-canvas-card--editable button,
+.dashboard-canvas-card--editable input,
+.dashboard-canvas-card--editable select,
+.dashboard-canvas-card--editable textarea,
+.dashboard-canvas-elements--edit .vue-grid-item > .vue-resizable-handle {
+  cursor: auto;
+}
+
+.dashboard-canvas-elements--edit .vue-grid-item > .vue-resizable-handle {
+  cursor: nwse-resize;
+}
+
+.dashboard-canvas-card--view {
+  border-color: transparent;
+  background: transparent;
+  box-shadow: none;
+  padding: 0;
+}
+
+.dashboard-canvas-card--view.dashboard-canvas-card--chrome-none {
+  overflow: visible;
+}
+
+.dashboard-canvas-card--view.dashboard-canvas-card--chrome-none,
+.dashboard-canvas-card--view.dashboard-canvas-card--chrome-none:not(.dashboard-canvas-card--two-row-card) {
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+  padding: 0;
+}

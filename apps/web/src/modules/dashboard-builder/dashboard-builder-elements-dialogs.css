@@ -1,0 +1,269 @@
+
+.component-data-dialog {
+  display: grid;
+  gap: 16px;
+  width: min(860px, 100%);
+  max-height: 88vh;
+  overflow: auto;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--surface);
+  box-shadow: var(--shadow-lg);
+  padding: 18px;
+}
+
+.component-data-preview {
+  display: grid;
+  gap: 8px;
+  overflow: auto;
+}
+
+.component-data-preview-caption {
+  color: var(--text-secondary);
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.component-info-dialog {
+  position: relative;
+  display: grid;
+  width: min(720px, 95vw);
+  max-height: 88vh;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--surface);
+  box-shadow: var(--shadow-lg);
+}
+
+.component-info-body {
+  display: grid;
+  gap: 14px;
+  overflow: auto;
+  padding: 16px 20px;
+}
+
+.component-info-header {
+  background: linear-gradient(180deg, var(--bg-primary), var(--surface));
+}
+
+.component-info-kicker {
+  margin: 0 0 2px;
+  color: var(--text-secondary);
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+.filter-editor-modal .component-info-dialog .component-info-tabs {
+  display: flex;
+  gap: 4px;
+  overflow-x: auto;
+  margin: 0;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--bg-secondary);
+  padding: 4px;
+}
+
+.filter-editor-modal .component-info-dialog .component-info-tabs .tab-button {
+  flex: 1 1 auto;
+  min-width: max-content;
+  border: 0;
+  border-radius: 6px;
+  background: transparent;
+  color: var(--text-secondary);
+  font-size: 13px;
+  font-weight: 800;
+  line-height: 1.2;
+  padding: 8px 10px;
+}
+
+.filter-editor-modal .component-info-dialog .component-info-tabs .tab-button:hover:not(:disabled) {
+  background: var(--bg-primary);
+  color: var(--text-primary);
+}
+
+.filter-editor-modal .component-info-dialog .component-info-tabs .tab-button.active,
+.filter-editor-modal .component-info-dialog .component-info-tabs .tab-button[aria-selected="true"] {
+  background: var(--bg-primary);
+  color: #2563eb;
+  box-shadow: 0 1px 2px color-mix(in srgb, var(--border) 70%, transparent);
+}
+
+.component-info-list,
+.component-info-panel {
+  display: grid;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--bg-primary);
+}
+
+.component-info-row,
+.component-info-empty {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  min-height: 44px;
+  border-bottom: 1px solid var(--border);
+  padding: 10px 12px;
+  color: var(--text-primary);
+  font-size: 13px;
+}
+
+.component-info-row:last-child,
+.component-info-empty:last-child {
+  border-bottom: 0;
+}
+
+.component-info-row strong {
+  color: var(--text-secondary);
+  font-weight: 800;
+  text-align: right;
+}
+
+.component-info-empty {
+  justify-content: flex-start;
+  color: var(--muted);
+}
+
+.component-info-form {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.component-info-form label {
+  display: grid;
+  gap: 6px;
+  color: var(--text-secondary);
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.component-info-form input,
+.component-info-form select,
+.component-info-form textarea {
+  width: 100%;
+  min-width: 0;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  font: inherit;
+  font-size: 13px;
+  padding: 9px 10px;
+}
+
+.component-info-form textarea {
+  resize: vertical;
+}
+
+.component-info-form input:focus,
+.component-info-form select:focus,
+.component-info-form textarea:focus {
+  outline: 2px solid color-mix(in srgb, #2563eb 28%, transparent);
+  outline-offset: 1px;
+  border-color: #2563eb;
+}
+
+.component-info-wide {
+  grid-column: 1 / -1;
+}
+
+.component-info-check {
+  display: flex !important;
+  align-items: center;
+  gap: 8px !important;
+  min-height: 38px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--bg-primary);
+  padding: 8px 10px;
+}
+
+.component-info-check input {
+  width: auto;
+}
+
+.component-info-row--compact {
+  grid-column: 1 / -1;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+}
+
+.component-info-field-table {
+  width: 100%;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-collapse: separate;
+  border-radius: 8px;
+  border-spacing: 0;
+  background: var(--bg-primary);
+}
+
+.component-info-field-table th,
+.component-info-field-table td {
+  border-bottom: 1px solid var(--border);
+  padding: 8px 10px;
+  text-align: left;
+  vertical-align: middle;
+}
+
+.component-info-field-table th {
+  background: var(--bg-secondary);
+  color: var(--text-secondary);
+  font-size: 11px;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.component-info-field-table tr:last-child td {
+  border-bottom: 0;
+}
+
+.component-info-field-table code {
+  color: var(--text-primary);
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.component-info-order-actions {
+  display: flex;
+  gap: 4px;
+}
+
+.component-info-order-actions button,
+.component-info-remove-btn {
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  background: var(--bg-primary);
+  color: var(--text-secondary);
+  cursor: pointer;
+  font-size: 11px;
+  font-weight: 800;
+  padding: 4px 6px;
+}
+
+.component-info-order-actions button:disabled {
+  cursor: not-allowed;
+  opacity: 0.45;
+}
+
+.component-info-remove-btn {
+  color: #b91c1c;
+}
+
+.component-info-error {
+  margin: 0;
+  border: 1px solid #fecaca;
+  border-radius: 6px;
+  background: #fef2f2;
+  color: #991b1b;
+  font-size: 13px;
+  font-weight: 700;
+  padding: 10px 12px;
+}

@@ -1,0 +1,58 @@
+.admin-dashboard-management-dialog .admin-form {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.admin-dashboard-management-view {
+  display: grid;
+  gap: 18px;
+}
+
+.admin-dashboard-management-view dl {
+  display: grid;
+  gap: 10px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin: 0;
+}
+
+.admin-dashboard-management-view dl div {
+  background: var(--admin-band);
+  border: 1px solid var(--admin-border);
+  border-radius: 8px;
+  padding: 12px;
+}
+
+.admin-dashboard-management-view dt,
+.admin-dashboard-management-visibility-intro p,
+.admin-check-row small {
+  color: var(--admin-text-soft);
+}
+
+.admin-dashboard-management-view dt {
+  font-size: 12px;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.admin-dashboard-management-view dd {
+  font-weight: 800;
+  margin: 4px 0 0;
+}
+
+.admin-dashboard-management-visibility-intro {
+  background: var(--admin-band);
+  border: 1px solid var(--admin-border);
+  border-radius: 8px;
+  padding: 12px;
+}
+
+.admin-check-row span {
+  display: grid;
+  gap: 3px;
+}
+
+@media (max-width: 760px) {
+  .admin-dashboard-management-view dl {
+    grid-template-columns: 1fr;
+  }
+}

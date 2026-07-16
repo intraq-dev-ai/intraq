@@ -1,0 +1,51 @@
+@media (max-width: 900px) {
+  .ai-analyzer-header {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .ai-analyzer-header-actions {
+    justify-content: flex-start;
+    max-width: 100%;
+  }
+
+  .analyzer-config-panel {
+    justify-content: flex-start;
+  }
+
+  .analyzer-field--compact,
+  .analyzer-field select {
+    width: 100%;
+    max-width: none;
+  }
+
+  .ai-analyzer-suggestions {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .ai-data-analyzer--full {
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+  }
+
+  .ai-analyzer-header-actions {
+    display: none;
+  }
+
+  .analyzer-message,
+  .analyzer-message[data-role="user"] {
+    max-width: calc(100% - 44px);
+  }
+
+  .analyzer-result-header {
+    grid-template-columns: 1fr;
+  }
+
+  .analyzer-result-actions {
+    justify-content: flex-start;
+    max-width: none;
+  }
+}

@@ -1,0 +1,317 @@
+.mcp-access-page {
+  gap: 18px;
+}
+
+.mcp-access-summary {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) max-content;
+  gap: 14px;
+  align-items: start;
+  padding: 18px;
+}
+
+.mcp-access-summary h2,
+.mcp-endpoint-card h2,
+.mcp-token-card h2,
+.mcp-previous-tokens h2,
+.mcp-dialog-card h2 {
+  margin: 0;
+  color: var(--admin-text);
+  font-size: 18px;
+}
+
+.mcp-access-summary p,
+.mcp-endpoint-card p,
+.mcp-token-empty p,
+.mcp-dialog-card p {
+  margin: 6px 0 0;
+  color: var(--admin-text-soft);
+  line-height: 1.45;
+}
+
+.mcp-access-summary .admin-error {
+  grid-column: 1 / -1;
+  margin: 0;
+}
+
+.mcp-access-grid {
+  display: grid;
+  gap: 16px;
+  grid-template-columns: minmax(320px, 0.9fr) minmax(360px, 1.1fr);
+}
+
+.mcp-endpoint-card,
+.mcp-token-card {
+  display: grid;
+  gap: 16px;
+  padding: 18px;
+}
+
+.mcp-copy-row {
+  display: grid;
+  align-items: center;
+  gap: 10px;
+  grid-template-columns: minmax(0, 1fr) max-content;
+}
+
+.mcp-copy-row code,
+.mcp-token-value-input,
+.mcp-token-prefix,
+.mcp-previous-token code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+}
+
+.mcp-copy-row code,
+.mcp-token-value-input {
+  min-width: 0;
+  overflow-wrap: anywhere;
+  border: 1px solid var(--admin-border);
+  border-radius: 8px;
+  background: var(--bg-secondary);
+  color: var(--admin-text);
+  font-size: 13px;
+  padding: 10px 12px;
+}
+
+.mcp-endpoint-card dl,
+.mcp-token-card dl {
+  display: grid;
+  gap: 12px;
+  margin: 0;
+}
+
+.mcp-endpoint-card dl {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.mcp-token-card dl {
+  grid-template-columns: 1.4fr 1fr 1fr;
+}
+
+.mcp-endpoint-card dt,
+.mcp-token-card dt {
+  margin: 0 0 4px;
+  color: var(--admin-text-soft);
+  font-size: 12px;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.mcp-endpoint-card dd,
+.mcp-token-card dd {
+  margin: 0;
+  color: var(--admin-text);
+  font-weight: 700;
+  overflow-wrap: anywhere;
+}
+
+.mcp-token-card header,
+.mcp-dialog-card header,
+.mcp-previous-token {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.mcp-card-label {
+  margin: 0 0 4px;
+  color: var(--admin-text-soft);
+  font-size: 12px;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.mcp-token-prefix {
+  display: inline-block;
+  margin-top: 4px;
+  color: var(--admin-text-soft);
+  font-size: 13px;
+}
+
+.mcp-token-empty {
+  display: grid;
+  gap: 12px;
+  justify-items: start;
+  border: 1px dashed var(--admin-border);
+  border-radius: 8px;
+  padding: 16px;
+}
+
+.mcp-status {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 28px;
+  white-space: nowrap;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 900;
+  padding: 4px 10px;
+  text-transform: capitalize;
+}
+
+.mcp-status.active {
+  background: #d1fae5;
+  color: #065f46;
+}
+
+.mcp-status.expired {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.mcp-status.revoked,
+.mcp-status.inactive {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+.mcp-previous-tokens {
+  display: grid;
+  gap: 10px;
+}
+
+.mcp-previous-token {
+  align-items: center;
+  border: 1px solid var(--admin-border);
+  border-radius: 8px;
+  background: var(--admin-panel);
+  padding: 12px 14px;
+}
+
+.mcp-previous-token span:first-child {
+  color: var(--admin-text);
+  font-weight: 800;
+}
+
+.mcp-previous-token code {
+  color: var(--admin-text-soft);
+  font-size: 13px;
+}
+
+.mcp-dialog-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 80;
+  display: grid;
+  place-items: center;
+  background: rgb(15 23 42 / 0.42);
+  padding: 20px;
+}
+
+.mcp-dialog-card {
+  display: grid;
+  gap: 18px;
+  width: min(680px, 100%);
+  max-height: min(760px, calc(100vh - 40px));
+  overflow: auto;
+  border: 1px solid var(--admin-border);
+  border-radius: 8px;
+  background: var(--admin-panel);
+  box-shadow: var(--admin-shadow);
+  padding: 20px;
+}
+
+.mcp-token-form,
+.mcp-created-token-field {
+  display: grid;
+  gap: 14px;
+}
+
+.mcp-token-form label,
+.mcp-created-token-field {
+  color: var(--admin-text);
+  font-weight: 800;
+}
+
+.mcp-token-form label,
+.mcp-created-token-field,
+.mcp-scope-option span {
+  display: grid;
+  gap: 6px;
+}
+
+.mcp-token-form input[type="text"],
+.mcp-token-form input[type="date"] {
+  min-height: 42px;
+  border: 1px solid var(--admin-border);
+  border-radius: 8px;
+  background: var(--admin-panel);
+  color: var(--admin-text);
+  font: inherit;
+  padding: 9px 11px;
+}
+
+.mcp-token-form fieldset {
+  display: grid;
+  gap: 10px;
+  min-width: 0;
+  max-height: 260px;
+  overflow: auto;
+  border: 1px solid var(--admin-border);
+  border-radius: 8px;
+  margin: 0;
+  padding: 14px;
+}
+
+.mcp-token-form legend,
+.mcp-token-form label > span,
+.mcp-created-token-field > span {
+  color: var(--admin-text-soft);
+  font-size: 12px;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.mcp-scope-option {
+  grid-template-columns: max-content minmax(0, 1fr);
+  align-items: start;
+}
+
+.mcp-scope-option input {
+  width: 18px;
+  height: 18px;
+  margin-top: 2px;
+  accent-color: var(--admin-primary);
+}
+
+.mcp-scope-option small {
+  color: var(--admin-text-soft);
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+.mcp-dialog-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+@media (max-width: 920px) {
+  .mcp-access-summary,
+  .mcp-access-grid,
+  .mcp-token-card dl {
+    grid-template-columns: 1fr;
+  }
+
+  .mcp-copy-row,
+  .mcp-token-card header,
+  .mcp-dialog-card header,
+  .mcp-previous-token {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .mcp-endpoint-card dl {
+    grid-template-columns: 1fr;
+  }
+
+  .mcp-dialog-actions .button,
+  .mcp-dialog-actions .admin-secondary-button {
+    width: 100%;
+  }
+}

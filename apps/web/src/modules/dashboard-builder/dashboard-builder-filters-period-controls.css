@@ -1,0 +1,486 @@
+.filter-component {
+  position: relative;
+  display: grid;
+  gap: 4px;
+  min-width: 160px;
+  max-width: 220px;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  padding: 0;
+}
+
+.filter-component.date-range-component {
+  min-width: 360px;
+  max-width: 430px;
+}
+
+.filter-component.date-range-component:has(.inline-date-range-filter) {
+  max-width: none;
+}
+
+.filter-component.period-filter-component {
+  min-width: 380px;
+  max-width: 520px;
+}
+
+.filter-controls,
+.date-range-filter {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.date-range-filter {
+  display: grid;
+  grid-template-columns: 28px minmax(260px, 1fr) 28px;
+  width: 100%;
+}
+
+.date-range-filter--no-navigation {
+  grid-template-columns: minmax(260px, 1fr);
+}
+
+.date-range-filter--datetime,
+.date-range-filter--inline,
+.date-range-filter--range-picker {
+  height: auto !important;
+  min-width: 0;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+}
+
+.period-filter {
+  --period-filter-surface: var(--period-filter-background, color-mix(in srgb, var(--surface) 92%, var(--bg-primary)));
+  --period-filter-border: var(--border);
+  --period-filter-control-bg: color-mix(in srgb, var(--surface) 88%, var(--bg-primary));
+  --period-filter-control-bg-hover: color-mix(in srgb, var(--surface) 76%, var(--bg-primary));
+  --period-filter-control-text: var(--text-secondary);
+  display: grid;
+  gap: 6px;
+  width: 100%;
+  color: var(--text-primary);
+  color-scheme: light dark;
+}
+
+.period-tabs {
+  display: inline-grid;
+  grid-auto-columns: minmax(58px, 1fr);
+  grid-auto-flow: column;
+  overflow: hidden;
+  width: 100%;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--surface);
+}
+
+.period-tab {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  min-height: 30px;
+  min-width: 0;
+  border: 0;
+  border-right: 1px solid var(--border);
+  background: transparent;
+  color: var(--text-secondary);
+  cursor: pointer;
+  font: inherit;
+  font-size: 12px;
+  font-weight: 800;
+  overflow: hidden;
+  padding: 0 8px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.period-tab-icon {
+  display: inline-flex;
+  align-items: center;
+  color: color-mix(in srgb, currentColor 58%, transparent);
+  font-size: 0.95em;
+  font-weight: 400;
+  line-height: 1;
+}
+
+.period-tab-label {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.period-tab:last-child {
+  border-right: 0;
+}
+
+.period-tab:hover {
+  background: color-mix(in srgb, var(--period-filter-active-color, var(--accent)) 8%, transparent);
+  color: var(--text-primary);
+}
+
+.period-tab.active {
+  background: color-mix(in srgb, var(--period-filter-active-color, #2563eb) 12%, var(--bg-primary));
+  box-shadow: inset 0 -2px var(--period-filter-active-color, #2563eb);
+  color: var(--text-primary);
+}
+
+.period-picker {
+  display: grid;
+  grid-template-columns: 28px minmax(0, 1fr) 28px;
+  align-items: center;
+  gap: 4px;
+}
+
+.filter-component.period-filter-component--toolbar {
+  max-width: none;
+}
+
+.period-filter--toolbar {
+  overflow: hidden;
+  border: 1px solid var(--period-filter-border);
+  border-radius: 8px;
+  background: var(--period-filter-surface);
+  gap: 10px;
+  padding: 12px;
+}
+
+.period-filter--toolbar .period-tabs {
+  display: inline-grid;
+  grid-auto-columns: minmax(68px, 1fr);
+  grid-auto-flow: column;
+  width: min(100%, 360px);
+  max-width: 100%;
+  overflow: hidden;
+  border: 1px solid var(--period-filter-border);
+  border-radius: 6px;
+  background: color-mix(in srgb, var(--period-filter-surface) 82%, var(--bg-primary));
+}
+
+.period-filter--toolbar .period-tabs::after {
+  display: none;
+  content: none;
+}
+
+.period-filter--toolbar .period-tab {
+  position: relative;
+  min-width: 0;
+  min-height: 32px;
+  border: 0;
+  border-right: 1px solid var(--period-filter-border);
+  background: transparent;
+  color: var(--text-secondary);
+  font-size: 12px;
+  font-weight: 800;
+  text-transform: none;
+}
+
+.period-filter--toolbar .period-tab:last-child {
+  border-right: 0;
+}
+
+.period-filter--toolbar .period-tab.active {
+  background: color-mix(in srgb, var(--period-filter-active-color, #2563eb) 12%, var(--bg-primary));
+  box-shadow: inset 0 -2px var(--period-filter-active-color, #2563eb);
+  color: var(--text-primary);
+  z-index: 1;
+}
+
+.period-toolbar {
+  box-sizing: border-box;
+  display: grid;
+  grid-template-columns: minmax(180px, 1fr) auto;
+  align-items: center;
+  gap: 12px;
+  min-height: 0;
+  border-top: 0;
+  border-bottom: 0;
+  padding: 0;
+}
+
+.period-filter--hide-toolbar-divider .period-toolbar {
+  border-bottom: 0;
+}
+
+.period-toolbar-summary {
+  overflow: hidden;
+  color: var(--text-primary);
+  font-size: 13px;
+  font-weight: 800;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.period-toolbar-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 4px;
+  min-width: 0;
+  flex-wrap: nowrap;
+}
+
+.period-toolbar-btn {
+  min-height: 36px;
+  border: 1px solid transparent;
+  border-radius: 2px;
+  background: var(--period-filter-control-bg);
+  color: var(--period-filter-control-text);
+  cursor: pointer;
+  font: inherit;
+  font-size: 12px;
+  padding: 0 8px;
+  white-space: nowrap;
+}
+
+.period-toolbar-btn:hover {
+  border-color: var(--period-filter-border);
+  background: var(--period-filter-control-bg-hover);
+  color: var(--text-primary);
+}
+
+.period-toolbar-btn--icon {
+  display: inline-grid;
+  place-items: center;
+  min-width: 36px;
+  width: 36px;
+  padding: 0;
+  font-size: 14px;
+  font-weight: 900;
+  line-height: 1;
+}
+
+.period-toolbar-date-control {
+  position: relative;
+  display: inline-flex;
+  flex: 0 0 170px;
+  min-width: 156px;
+  width: 170px;
+}
+
+.period-toolbar-date-input {
+  flex: 0 0 170px;
+  min-height: 36px;
+  min-width: 156px;
+  width: 170px;
+  border: 1px solid var(--period-filter-border);
+  border-radius: 2px;
+  background: var(--period-filter-control-bg);
+  background-color: var(--period-filter-control-bg);
+  color: var(--text-primary);
+  color-scheme: light dark;
+  font: inherit;
+  font-size: 12px;
+  padding: 0 38px 0 10px;
+}
+
+.period-toolbar-date-icon {
+  position: absolute;
+  top: 1px;
+  right: 1px;
+  bottom: 1px;
+  display: inline-grid;
+  place-items: center;
+  width: 34px;
+  border: 0;
+  border-left: 1px solid color-mix(in srgb, var(--period-filter-border) 78%, transparent);
+  border-radius: 0 1px 1px 0;
+  background: color-mix(in srgb, var(--period-filter-control-bg) 88%, var(--bg-primary));
+  color: var(--period-filter-control-text);
+  cursor: pointer;
+  font: inherit;
+  padding: 0;
+}
+
+.period-toolbar-date-icon:hover,
+.period-toolbar-date-icon:focus-visible {
+  background: color-mix(in srgb, var(--period-filter-control-bg) 80%, var(--bg-primary));
+}
+
+.period-toolbar-date-icon svg {
+  width: 17px;
+  height: 17px;
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.9;
+}
+
+.period-toolbar-date-input::-webkit-calendar-picker-indicator {
+  opacity: 0;
+  cursor: pointer;
+}
+
+.period-date-trigger {
+  appearance: none;
+  cursor: text;
+  text-align: left;
+}
+
+.period-date-trigger span {
+  overflow: hidden;
+  min-width: 0;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.period-toolbar-date-control--custom-calendar .period-toolbar-date-input {
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.period-date-control--custom-calendar .period-date-input {
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+:root[data-theme="dark"] .period-toolbar-date-input,
+.dark-theme .period-toolbar-date-input {
+  color-scheme: dark;
+}
+
+.period-toolbar-date-control--legacy .period-toolbar-date-input {
+  min-height: 34px;
+  border-color: #ddd;
+  border-radius: 0;
+  background: #fff;
+  background-color: #fff;
+  color: #333;
+  color-scheme: light;
+  font-family: "Open Sans", Arial, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.period-toolbar-date-control--legacy .period-toolbar-date-input:hover,
+.period-toolbar-date-control--legacy .period-toolbar-date-input:focus {
+  border-color: #cfcfcf;
+  box-shadow: inset 0 1px 1px rgb(0 0 0 / 7.5%);
+  outline: none;
+}
+
+.period-toolbar-date-control--legacy .period-toolbar-date-input:focus-visible {
+  outline: none;
+}
+
+.period-toolbar-date-control--legacy .period-toolbar-date-icon {
+  border-left-color: #ddd;
+  border-radius: 0;
+  background: #fff;
+  color: #444;
+}
+
+.period-toolbar-date-control--minimal .period-toolbar-date-input {
+  border-color: transparent;
+  border-bottom-color: var(--period-filter-border);
+  border-radius: 0;
+  background: transparent;
+  background-color: transparent;
+  color: var(--text-primary);
+}
+
+.period-toolbar-date-control--minimal .period-toolbar-date-input:hover,
+.period-toolbar-date-control--minimal .period-toolbar-date-input:focus {
+  border-bottom-color: var(--period-filter-control-text);
+  outline: none;
+}
+
+.period-toolbar-date-control--minimal .period-toolbar-date-icon {
+  border-left-color: transparent;
+  background: transparent;
+}
+
+.inline-date-range-filter {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+  width: 100%;
+}
+
+.period-toolbar-actions .inline-date-range-filter {
+  flex: 0 1 auto;
+  width: auto;
+}
+
+.inline-date-range-filter--datetime {
+  align-items: center;
+  gap: 8px;
+  width: auto;
+}
+
+.inline-date-range-filter--datetime .dashboard-date-time-picker {
+  flex: 0 1 390px;
+  width: min(390px, 100%);
+}
+
+.inline-date-range-filter--period.inline-date-range-filter--datetime .dashboard-date-time-picker {
+  flex-basis: 390px;
+  width: 390px;
+}
+
+.inline-date-range-input {
+  min-height: 36px;
+  min-width: 0;
+  width: 100%;
+  border: 1px solid var(--period-filter-border, var(--border));
+  border-radius: 2px;
+  background: var(--period-filter-control-bg, var(--surface));
+  color: var(--text-primary);
+  color-scheme: light dark;
+  font: inherit;
+  font-size: 12px;
+  padding: 0 10px;
+}
+
+.inline-date-range-filter--period .inline-date-range-input {
+  flex: 0 0 220px;
+  width: 220px;
+}
+
+.inline-date-range-separator {
+  flex: 0 0 auto;
+  color: var(--text-secondary);
+  font-size: 12px;
+  white-space: nowrap;
+}
+
+.period-toolbar .inline-date-range-filter {
+  --period-filter-control-bg: #fff;
+  --period-filter-border: #ddd;
+}
+
+.period-toolbar .inline-date-range-input,
+.dashboard-filter-element .period-toolbar .inline-date-range-input {
+  border-color: #ddd;
+  border-radius: 0;
+  background: #fff;
+  color: #333;
+  color-scheme: light;
+  font-family: "Open Sans", Arial, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.period-toolbar .inline-date-range-input:hover,
+.period-toolbar .inline-date-range-input:focus {
+  border-color: #cfcfcf;
+  box-shadow: inset 0 1px 1px rgb(0 0 0 / 7.5%);
+  outline: none;
+}
+
+@media (max-width: 900px) {
+  .period-toolbar {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .period-toolbar-actions {
+    flex-wrap: wrap;
+    justify-content: flex-start;
+  }
+}

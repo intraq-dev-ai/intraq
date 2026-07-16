@@ -1,0 +1,392 @@
+<script setup lang="ts">
+import type { DashboardElement, DashboardVersion } from '../types';
+import CardConfigurationControls from './editor/CardConfigurationControls.vue';
+import ChartConfigurationControls from './editor/ChartConfigurationControls.vue';
+import EditorElementBasics from './editor/EditorElementBasics.vue';
+import FilterConfigurationControls from './editor/FilterConfigurationControls.vue';
+import MatrixConfigurationControls from './editor/MatrixConfigurationControls.vue';
+import TableConfigurationControls from './editor/TableConfigurationControls.vue';
+import { useDashboardElementEditor, type SaveElementPatch } from './editor/useDashboardElementEditor';
+import VisualizationControls from './editor/VisualizationControls.vue';
+import VersionHistoryPanel from './VersionHistoryPanel.vue';
+
+const props = defineProps<{
+  canEditDashboard: boolean;
+  isSaving: boolean;
+  selectedElement: DashboardElement | null;
+  versions: DashboardVersion[];
+}>();
+
+const emit = defineEmits<{
+  restoreVersion: [versionId: string];
+  saveElement: [patch: SaveElementPatch];
+}>();
+
+const {
+  cardBackgroundColor,
+  cardComparisonField,
+  cardBottomRowContent,
+  cardGridColumns,
+  cardLayout,
+  cardLayoutDesign,
+  cardLayoutPreset,
+  cardShowIndicator,
+  cardShowSparkline,
+  cardShowTrend,
+  cardShowWrapperTitle,
+  cardSparklineField,
+  cardSparklineColor,
+  cardShowMinMaxAvg,
+  cardFormatType,
+  cardUnit,
+  cardPrecision,
+  cardPrefix,
+  cardSuffix,
+  cardCurrencySymbol,
+  cardAggregationType,
+  cardTitle,
+  cardTitleBackground,
+  cardTitleColor,
+  cardTitleFontSize,
+  cardTitlePosition,
+  cardTrendField,
+  cardType,
+  cardRowHeightRatio,
+  cardTopRowContent,
+  cardValueFontSize,
+  cardValueBackground,
+  cardValueColor,
+  cardWrapperTitle,
+  cardYField,
+  chartEnableY2,
+  chartExportJpeg,
+  chartExportPdf,
+  chartExportPng,
+  chartExportPrint,
+  chartExportSvg,
+  chartFillMissingTimeBuckets,
+  chartLegendItemsPerPage,
+  chartLegendMarkerStyle,
+  chartLegendPosition,
+  chartLineInterpolation,
+  chartLineTension,
+  chartMixedAxisPrimaryHeadroomRatio,
+  chartSeriesAxesText,
+  chartSeriesColorsText,
+  chartSeriesLabelsText,
+  chartSeriesTypesText,
+  chartShowDataLabels,
+  chartShowExportMenu,
+  chartShowGrid,
+  chartShowXAxis,
+  chartShowYAxis,
+  chartSortBy,
+  chartSortDirection,
+  chartStackBars,
+  chartTimeBucketFillValue,
+  chartTimeBucketInterval,
+  chartTopN,
+  chartXAxisDateFormat,
+  chartXAxisDateFormatParameter,
+  chartXAxisDateFormatsText,
+  chartXAxisDateMidnightFormat,
+  chartXAxisDateMidnightFormatsText,
+  chartXAxisLabel,
+  chartY2AxisLabel,
+  chartY2AxisPaddingMode,
+  chartY2AxisPaddingRatio,
+  chartY2AxisStartMode,
+  chartYAxisLabel,
+  chartYAxisPaddingMode,
+  chartYAxisPaddingRatio,
+  chartYAxisStartMode,
+  columnsText,
+  configError,
+  configuredFields,
+  elementChartType,
+  elementName,
+  elementType,
+  filterDatePickerDisplayMode,
+  filterDateRangeDisplayMode,
+  filterField,
+  filterInputType,
+  filterOperator,
+  filterPeriodDatePickerTheme,
+  filterPeriodNavigationStyle,
+  filterShowPeriodBottomDivider,
+  filterTarget,
+  filterValue,
+  matrixBorderColor,
+  matrixColumnCollapseFieldsText,
+  matrixColumnFieldsText,
+  matrixColumnHeaderLabel,
+  matrixColumnWidthsText,
+  matrixConditionalFormattingText,
+  matrixDefaultColumnCollapseState,
+  matrixDefaultRowCollapseState,
+  matrixDisplayMode,
+  matrixEnableColumnCollapse,
+  matrixEnableRowCollapse,
+  matrixFiltersText,
+  matrixFontFamily,
+  matrixFontSize,
+  matrixHeaderBg,
+  matrixHeaderText,
+  matrixMultiSortText,
+  matrixRowCollapseFieldsText,
+  matrixRowDataDisplayMode,
+  matrixRowFieldsText,
+  matrixRowBg,
+  matrixRowHeaderBg,
+  matrixRowHeaderLabel,
+  matrixRowHeaderText,
+  matrixRowHeaderWidth,
+  matrixRowText,
+  matrixShowBorders,
+  matrixShowColumnSubtotals,
+  matrixShowColumnTotals,
+  matrixShowRowSubtotals,
+  matrixShowRowTotals,
+  matrixShowValueHeaders,
+  matrixSortBy,
+  matrixSortDirection,
+  matrixValueHeaderLabel,
+  matrixValueHeaderWidth,
+  matrixValueFieldsText,
+  measureFields,
+  resultLimit,
+  resultLimitExplicit,
+  showLegend,
+  showTooltip,
+  submitElement,
+  tableActionsText,
+  tableDataMode,
+  tableDisplayMode,
+  tableEnableExport,
+  tableEnableFilters,
+  tableEnablePagination,
+  tableEnableSearch,
+  tableEnableSorting,
+  tableFillMissingTimeBuckets,
+  tableFiltersText,
+  tableGroupFieldsText,
+  tablePageSize,
+  tableShowTotal,
+  tableTimeBucketFillValue,
+  tableTimeBucketInterval,
+  tableTotalColumnsText,
+  tableTotalLabel,
+  tableTotalLabelColumn,
+  valueField,
+  xField
+} = useDashboardElementEditor(props, patch => emit('saveElement', patch));
+</script>
+
+<template>
+  <aside class="dashboard-editor-rail" aria-label="Dashboard editor panels">
+    <form
+      v-if="selectedElement"
+      class="dashboard-element-editor"
+      aria-label="Dashboard element editor"
+      @submit.prevent="submitElement"
+    >
+      <h3>Edit {{ selectedElement.name }}</h3>
+      <EditorElementBasics
+        v-model:element-name="elementName"
+        v-model:element-type="elementType"
+        v-model:element-chart-type="elementChartType"
+      />
+      <VisualizationControls
+        v-if="elementType !== 'filter'"
+        v-model:x-field="xField"
+        v-model:measure-fields="measureFields"
+        v-model:value-field="valueField"
+        v-model:result-limit="resultLimit"
+        v-model:result-limit-explicit="resultLimitExplicit"
+        v-model:show-legend="showLegend"
+        v-model:show-tooltip="showTooltip"
+        :configured-fields="configuredFields()"
+      />
+      <FilterConfigurationControls
+        v-if="elementType === 'filter'"
+        v-model:filter-date-picker-display-mode="filterDatePickerDisplayMode"
+        v-model:filter-date-range-display-mode="filterDateRangeDisplayMode"
+        v-model:filter-field="filterField"
+        v-model:filter-input-type="filterInputType"
+        v-model:filter-operator="filterOperator"
+        v-model:filter-period-date-picker-theme="filterPeriodDatePickerTheme"
+        v-model:filter-period-navigation-style="filterPeriodNavigationStyle"
+        v-model:filter-show-period-bottom-divider="filterShowPeriodBottomDivider"
+        v-model:filter-target="filterTarget"
+        v-model:filter-value="filterValue"
+      />
+      <TableConfigurationControls
+        v-if="elementType === 'table'"
+        v-model:columns-text="columnsText"
+        v-model:table-data-mode="tableDataMode"
+        v-model:table-display-mode="tableDisplayMode"
+        v-model:table-fill-missing-time-buckets="tableFillMissingTimeBuckets"
+        v-model:table-time-bucket-interval="tableTimeBucketInterval"
+        v-model:table-time-bucket-fill-value="tableTimeBucketFillValue"
+        v-model:table-page-size="tablePageSize"
+        v-model:table-group-fields-text="tableGroupFieldsText"
+        v-model:table-filters-text="tableFiltersText"
+        v-model:table-actions-text="tableActionsText"
+        v-model:table-enable-search="tableEnableSearch"
+        v-model:table-enable-filters="tableEnableFilters"
+        v-model:table-enable-sorting="tableEnableSorting"
+        v-model:table-enable-export="tableEnableExport"
+        v-model:table-enable-pagination="tableEnablePagination"
+        v-model:table-show-total="tableShowTotal"
+        v-model:table-total-columns-text="tableTotalColumnsText"
+        v-model:table-total-label="tableTotalLabel"
+        v-model:table-total-label-column="tableTotalLabelColumn"
+        :configured-fields="configuredFields()"
+      />
+      <CardConfigurationControls
+        v-if="elementType === 'card'"
+        v-model:card-title="cardTitle"
+        v-model:card-wrapper-title="cardWrapperTitle"
+        v-model:card-show-wrapper-title="cardShowWrapperTitle"
+        v-model:card-type="cardType"
+        v-model:card-layout="cardLayout"
+        v-model:card-layout-design="cardLayoutDesign"
+        v-model:card-layout-preset="cardLayoutPreset"
+        v-model:card-y-field="cardYField"
+        v-model:card-value-font-size="cardValueFontSize"
+        v-model:card-trend-field="cardTrendField"
+        v-model:card-comparison-field="cardComparisonField"
+        v-model:card-comparison-display-mode="cardComparisonDisplayMode"
+        v-model:card-comparison-direction="cardComparisonDirection"
+        v-model:card-grid-columns="cardGridColumns"
+        v-model:card-title-position="cardTitlePosition"
+        v-model:card-title-font-size="cardTitleFontSize"
+        v-model:card-background-color="cardBackgroundColor"
+        v-model:card-title-background="cardTitleBackground"
+        v-model:card-title-color="cardTitleColor"
+        v-model:card-value-background="cardValueBackground"
+        v-model:card-value-color="cardValueColor"
+        v-model:card-sparkline-field="cardSparklineField"
+        v-model:card-sparkline-color="cardSparklineColor"
+        v-model:card-show-min-max-avg="cardShowMinMaxAvg"
+        v-model:card-format-type="cardFormatType"
+        v-model:card-unit="cardUnit"
+        v-model:card-precision="cardPrecision"
+        v-model:card-prefix="cardPrefix"
+        v-model:card-suffix="cardSuffix"
+        v-model:card-currency-symbol="cardCurrencySymbol"
+        v-model:card-aggregation-type="cardAggregationType"
+        v-model:card-show-trend="cardShowTrend"
+        v-model:card-show-indicator="cardShowIndicator"
+        v-model:card-show-sparkline="cardShowSparkline"
+        v-model:card-top-row-content="cardTopRowContent"
+        v-model:card-bottom-row-content="cardBottomRowContent"
+        v-model:card-row-height-ratio="cardRowHeightRatio"
+        :configured-fields="configuredFields()"
+      />
+      <MatrixConfigurationControls
+        v-if="elementType === 'matrix'"
+        v-model:matrix-row-fields-text="matrixRowFieldsText"
+        v-model:matrix-column-fields-text="matrixColumnFieldsText"
+        v-model:matrix-value-fields-text="matrixValueFieldsText"
+        v-model:matrix-display-mode="matrixDisplayMode"
+        v-model:matrix-show-value-headers="matrixShowValueHeaders"
+        v-model:matrix-row-header-label="matrixRowHeaderLabel"
+        v-model:matrix-column-header-label="matrixColumnHeaderLabel"
+        v-model:matrix-value-header-label="matrixValueHeaderLabel"
+        v-model:matrix-row-header-width="matrixRowHeaderWidth"
+        v-model:matrix-value-header-width="matrixValueHeaderWidth"
+        v-model:matrix-column-widths-text="matrixColumnWidthsText"
+        v-model:matrix-row-data-display-mode="matrixRowDataDisplayMode"
+        v-model:matrix-filters-text="matrixFiltersText"
+        v-model:matrix-conditional-formatting-text="matrixConditionalFormattingText"
+        v-model:matrix-multi-sort-text="matrixMultiSortText"
+        v-model:matrix-default-row-collapse-state="matrixDefaultRowCollapseState"
+        v-model:matrix-default-column-collapse-state="matrixDefaultColumnCollapseState"
+        v-model:matrix-sort-by="matrixSortBy"
+        v-model:matrix-sort-direction="matrixSortDirection"
+        v-model:matrix-row-collapse-fields-text="matrixRowCollapseFieldsText"
+        v-model:matrix-column-collapse-fields-text="matrixColumnCollapseFieldsText"
+        v-model:matrix-show-row-totals="matrixShowRowTotals"
+        v-model:matrix-show-column-totals="matrixShowColumnTotals"
+        v-model:matrix-show-row-subtotals="matrixShowRowSubtotals"
+        v-model:matrix-show-column-subtotals="matrixShowColumnSubtotals"
+        v-model:matrix-enable-row-collapse="matrixEnableRowCollapse"
+        v-model:matrix-enable-column-collapse="matrixEnableColumnCollapse"
+        v-model:matrix-show-borders="matrixShowBorders"
+        v-model:matrix-border-color="matrixBorderColor"
+        v-model:matrix-header-bg="matrixHeaderBg"
+        v-model:matrix-header-text="matrixHeaderText"
+        v-model:matrix-row-header-bg="matrixRowHeaderBg"
+        v-model:matrix-row-header-text="matrixRowHeaderText"
+        v-model:matrix-row-bg="matrixRowBg"
+        v-model:matrix-row-text="matrixRowText"
+        v-model:matrix-font-family="matrixFontFamily"
+        v-model:matrix-font-size="matrixFontSize"
+        :configured-fields="configuredFields()"
+      />
+      <ChartConfigurationControls
+        v-if="elementType === 'chart'"
+        :chart-type="elementChartType"
+        v-model:chart-legend-position="chartLegendPosition"
+        v-model:chart-legend-marker-style="chartLegendMarkerStyle"
+        v-model:chart-legend-items-per-page="chartLegendItemsPerPage"
+        v-model:chart-x-axis-label="chartXAxisLabel"
+        v-model:chart-x-axis-date-format="chartXAxisDateFormat"
+        v-model:chart-x-axis-date-format-parameter="chartXAxisDateFormatParameter"
+        v-model:chart-x-axis-date-formats-text="chartXAxisDateFormatsText"
+        v-model:chart-x-axis-date-midnight-format="chartXAxisDateMidnightFormat"
+        v-model:chart-x-axis-date-midnight-formats-text="chartXAxisDateMidnightFormatsText"
+        v-model:chart-y-axis-label="chartYAxisLabel"
+        v-model:chart-y-axis-start-mode="chartYAxisStartMode"
+        v-model:chart-y-axis-padding-mode="chartYAxisPaddingMode"
+        v-model:chart-y-axis-padding-ratio="chartYAxisPaddingRatio"
+        v-model:chart-y-axis-tick-padding="chartYAxisTickPadding"
+        v-model:chart-y-axis-title-padding="chartYAxisTitlePadding"
+        v-model:chart-spacing-preset="chartSpacingPreset"
+        v-model:chart-padding-top="chartPaddingTop"
+        v-model:chart-padding-right="chartPaddingRight"
+        v-model:chart-padding-bottom="chartPaddingBottom"
+        v-model:chart-padding-left="chartPaddingLeft"
+        v-model:chart-mixed-axis-primary-headroom-ratio="chartMixedAxisPrimaryHeadroomRatio"
+        v-model:chart-enable-y2="chartEnableY2"
+        v-model:chart-y2-axis-label="chartY2AxisLabel"
+        v-model:chart-y2-axis-start-mode="chartY2AxisStartMode"
+        v-model:chart-y2-axis-padding-mode="chartY2AxisPaddingMode"
+        v-model:chart-y2-axis-padding-ratio="chartY2AxisPaddingRatio"
+        v-model:chart-line-interpolation="chartLineInterpolation"
+        v-model:chart-line-tension="chartLineTension"
+        v-model:chart-show-export-menu="chartShowExportMenu"
+        v-model:chart-export-print="chartExportPrint"
+        v-model:chart-export-png="chartExportPng"
+        v-model:chart-export-jpeg="chartExportJpeg"
+        v-model:chart-export-pdf="chartExportPdf"
+        v-model:chart-export-svg="chartExportSvg"
+        v-model:chart-fill-missing-time-buckets="chartFillMissingTimeBuckets"
+        v-model:chart-time-bucket-interval="chartTimeBucketInterval"
+        v-model:chart-time-bucket-fill-value="chartTimeBucketFillValue"
+        v-model:chart-sort-by="chartSortBy"
+        v-model:chart-sort-direction="chartSortDirection"
+        v-model:chart-top-n="chartTopN"
+        v-model:chart-series-labels-text="chartSeriesLabelsText"
+        v-model:chart-series-colors-text="chartSeriesColorsText"
+        v-model:chart-series-types-text="chartSeriesTypesText"
+        v-model:chart-series-axes-text="chartSeriesAxesText"
+        v-model:chart-show-grid="chartShowGrid"
+        v-model:chart-show-x-axis="chartShowXAxis"
+        v-model:chart-show-y-axis="chartShowYAxis"
+        v-model:chart-show-data-labels="chartShowDataLabels"
+        v-model:chart-stack-bars="chartStackBars"
+        :configured-fields="configuredFields()"
+      />
+      <p v-if="configError" class="editor-config-error" role="alert">{{ configError }}</p>
+      <button class="button" type="submit" :disabled="isSaving">Save element</button>
+    </form>
+
+    <VersionHistoryPanel
+      :versions="versions"
+      :can-edit-dashboard="canEditDashboard"
+      @restore="emit('restoreVersion', $event)"
+    />
+  </aside>
+</template>

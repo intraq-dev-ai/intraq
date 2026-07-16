@@ -1,0 +1,48 @@
+{
+  "name": "intraq",
+  "version": "0.8.2",
+  "private": true,
+  "type": "module",
+  "packageManager": "npm@11.13.0",
+  "engines": {
+    "node": ">=24.15.0 <25",
+    "npm": ">=11.12.1"
+  },
+  "overrides": {
+    "esbuild": "^0.28.1"
+  },
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "predev": "npm run build:packages",
+    "require:node24": "node scripts/require-node24.mjs",
+    "dev": "node scripts/dev.mjs",
+    "dev:api": "npm run dev --workspace @intraq/api",
+    "dev:web": "npm run dev --workspace @intraq/web",
+    "db:generate": "npm run db:generate --workspace @intraq/db",
+    "db:migrate": "npm run db:migrate --workspace @intraq/db",
+    "db:seed": "npm run db:seed --workspace @intraq/db",
+    "db:validate": "npm run db:validate --workspace @intraq/db",
+    "prebuild": "npm run require:node24 && npm run db:generate",
+    "build": "npm run build:packages && npm run build --workspace @intraq/api && npm run build --workspace @intraq/web",
+    "build:packages": "npm run build --workspace @intraq/contracts && npm run build --workspace @intraq/agent-core && npm run build --workspace @intraq/db",
+    "start": "node apps/api/dist/server.js",
+    "pretype-check": "node scripts/generate-prisma-client.mjs && npm run build:packages",
+    "type-check": "tsc -b --pretty false",
+    "test:smoke": "vitest run tests/smoke",
+    "test": "npm run type-check && npm run test:smoke"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "^4.11.3",
+    "@playwright/test": "^1.58.0",
+    "@types/node": "^24.10.0",
+    "fast-check": "^3.23.2",
+    "javascript-obfuscator": "^4.2.2",
+    "tsx": "^4.20.6",
+    "typescript": "^5.9.0",
+    "vitest": "^4.0.0"
+  },
+  "license": "SEE LICENSE IN LICENSE.md"
+}

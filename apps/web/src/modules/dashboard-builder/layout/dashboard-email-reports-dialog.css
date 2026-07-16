@@ -1,0 +1,256 @@
+.email-reports-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 90;
+  display: grid;
+  place-items: center;
+  background: rgba(15, 23, 42, 0.54);
+  padding: 20px;
+}
+
+.email-reports-dialog {
+  --report-border: var(--admin-border, var(--border));
+  --report-panel: var(--admin-panel, var(--surface));
+  --report-band: var(--admin-band, var(--bg-secondary));
+  --report-text: var(--admin-text, var(--text-primary));
+  width: min(980px, 100%);
+  max-height: min(780px, calc(100vh - 40px));
+  overflow: auto;
+  border: 1px solid var(--report-border);
+  border-radius: 8px;
+  background: var(--report-panel);
+  box-shadow: 0 24px 64px rgba(15, 23, 42, 0.3);
+  color: var(--report-text);
+  padding: 18px;
+}
+
+.email-reports-dialog .dialog-header,
+.email-reports-dialog .panel-header,
+.email-reports-dialog .row-actions,
+.email-reports-dialog .delivery-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.email-reports-dialog .dialog-header,
+.email-reports-dialog .deliveries-panel {
+  border-bottom: 1px solid var(--report-border);
+  padding-bottom: 14px;
+}
+
+.email-reports-dialog .dialog-header h2,
+.email-reports-dialog .panel h3,
+.email-reports-dialog .deliveries-panel h3,
+.email-reports-dialog .dialog-header p,
+.email-reports-dialog .panel-header p,
+.email-reports-dialog .subscription-row p {
+  margin: 0;
+}
+
+.email-reports-dialog .dialog-header h2 {
+  font-size: 22px;
+}
+
+.email-reports-dialog .eyebrow {
+  margin: 0 0 4px;
+  color: var(--admin-primary-strong, var(--ai-primary-600));
+  font-size: 12px;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.email-reports-dialog .dialog-grid {
+  display: grid;
+  grid-template-columns: minmax(260px, 330px) minmax(0, 1fr);
+  gap: 14px;
+  margin-top: 14px;
+}
+
+.email-reports-dialog .panel,
+.email-reports-dialog .deliveries-panel {
+  display: grid;
+  gap: 12px;
+  border: 1px solid var(--report-border);
+  border-radius: 8px;
+  background: var(--report-band);
+  padding: 14px;
+}
+
+.email-reports-dialog .deliveries-panel {
+  margin-top: 14px;
+}
+
+.email-reports-dialog .field {
+  display: grid;
+  gap: 6px;
+  color: var(--admin-text-soft, var(--text-secondary));
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.email-reports-dialog .field input,
+.email-reports-dialog .field select,
+.email-reports-dialog .field textarea {
+  width: 100%;
+  border: 1px solid var(--report-border);
+  border-radius: 8px;
+  background: var(--bg-primary, #fff);
+  color: var(--text-primary, #0f172a);
+  padding: 9px 10px;
+}
+
+.email-reports-dialog .section-label {
+  margin: 0;
+  color: var(--admin-text-soft, var(--text-secondary));
+  font-size: 12px;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.email-reports-dialog .check {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 800;
+}
+
+.email-reports-dialog .check input {
+  accent-color: var(--admin-primary, var(--ai-primary-500));
+}
+
+.email-reports-dialog .format-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.email-reports-dialog .format-options span {
+  border: 1px solid var(--report-border);
+  border-radius: 999px;
+  background: var(--report-panel);
+  font-size: 12px;
+  font-weight: 900;
+  padding: 5px 9px;
+}
+
+.email-reports-dialog .subscription-list,
+.email-reports-dialog .delivery-list {
+  display: grid;
+  gap: 10px;
+}
+
+.email-reports-dialog .subscription-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) max-content;
+  gap: 10px 12px;
+  border: 1px solid var(--report-border);
+  border-radius: 8px;
+  background: var(--report-panel);
+  padding: 12px;
+}
+
+.email-reports-dialog .subscription-row.selected {
+  border-color: var(--admin-primary, var(--ai-primary-500));
+}
+
+.email-reports-dialog .row-actions {
+  grid-column: 1 / -1;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+}
+
+.email-reports-dialog .primary-button,
+.email-reports-dialog .secondary-button,
+.email-reports-dialog .danger-button,
+.email-reports-dialog .icon-button {
+  min-height: 34px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 850;
+  padding: 0 12px;
+}
+
+.email-reports-dialog .primary-button {
+  border: 1px solid var(--admin-primary, var(--ai-primary-500));
+  background: var(--admin-primary, var(--ai-primary-500));
+  color: var(--color-primary-contrast, #0f172a);
+}
+
+.email-reports-dialog .secondary-button,
+.email-reports-dialog .icon-button {
+  border: 1px solid var(--report-border);
+  background: var(--report-panel);
+  color: var(--report-text);
+}
+
+.email-reports-dialog .danger-button {
+  border: 1px solid color-mix(in srgb, #ef4444 48%, var(--report-border));
+  background: color-mix(in srgb, #ef4444 10%, var(--report-panel));
+  color: color-mix(in srgb, #ef4444 82%, var(--report-text));
+}
+
+.email-reports-dialog .primary-button:disabled,
+.email-reports-dialog .secondary-button:disabled,
+.email-reports-dialog .danger-button:disabled {
+  cursor: not-allowed;
+  opacity: 0.58;
+}
+
+.email-reports-dialog .badge,
+.email-reports-dialog .message,
+.email-reports-dialog .empty-state {
+  border-radius: 8px;
+  padding: 8px 10px;
+}
+
+.email-reports-dialog .badge {
+  border: 1px solid var(--report-border);
+  background: var(--report-panel);
+  font-size: 12px;
+  font-weight: 900;
+}
+
+.email-reports-dialog .success {
+  border-color: color-mix(in srgb, var(--ai-success-500) 42%, var(--report-border));
+  color: color-mix(in srgb, var(--ai-success-600) 88%, var(--report-text));
+}
+
+.email-reports-dialog .warning {
+  border-color: color-mix(in srgb, var(--brand-gold) 48%, var(--report-border));
+  color: var(--admin-primary-strong, var(--ai-primary-600));
+}
+
+.email-reports-dialog .danger,
+.email-reports-dialog .delivery-error {
+  color: color-mix(in srgb, #ef4444 84%, var(--report-text));
+}
+
+.email-reports-dialog .message.danger,
+.email-reports-dialog .empty-state {
+  background: var(--report-panel);
+}
+
+.email-reports-dialog .delivery-row {
+  align-items: center;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+}
+
+.email-reports-dialog .sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  clip-path: inset(50%);
+}
+
+@media (max-width: 760px) {
+  .email-reports-dialog .dialog-grid,
+  .email-reports-dialog .subscription-row {
+    grid-template-columns: 1fr;
+  }
+}

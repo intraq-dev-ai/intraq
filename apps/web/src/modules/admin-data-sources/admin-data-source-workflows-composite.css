@@ -1,0 +1,332 @@
+
+.admin-ds-composite-summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  border: 1px solid var(--admin-border);
+  border-radius: 8px;
+  background: var(--admin-band);
+  padding: 14px;
+}
+
+.admin-ds-composite-summary div {
+  display: grid;
+  gap: 4px;
+}
+
+.admin-ds-composite-summary strong,
+.admin-ds-composite-inspector h3 {
+  color: var(--admin-text);
+}
+
+.admin-ds-composite-summary small {
+  color: var(--admin-text-soft);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.admin-ds-composite-summary-label {
+  color: var(--admin-text-soft);
+  font-size: 12px;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.admin-ds-composite-raw-json {
+  border: 1px solid var(--admin-border);
+  border-radius: 8px;
+  background: var(--admin-panel);
+  padding: 10px 12px;
+}
+
+.admin-ds-composite-raw-json summary {
+  color: var(--admin-text);
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 900;
+}
+
+.admin-ds-composite-raw-json label {
+  margin-top: 12px;
+}
+
+.admin-ds-composite-workflow-dialog {
+  display: grid;
+  gap: 16px;
+  width: min(1280px, 100%);
+}
+
+.admin-ds-composite-workflow-body {
+  display: grid;
+  grid-template-columns: 220px minmax(0, 1fr) minmax(300px, 380px);
+  gap: 16px;
+  min-height: 620px;
+}
+
+.admin-ds-composite-palette,
+.admin-ds-composite-inspector {
+  display: grid;
+  align-content: start;
+  gap: 10px;
+  border: 1px solid var(--admin-border);
+  border-radius: 8px;
+  background: var(--admin-panel);
+  padding: 12px;
+}
+
+.admin-ds-workflow-node-picker {
+  display: grid;
+  gap: 4px;
+  width: 100%;
+  border: 1px solid var(--admin-border);
+  border-radius: 8px;
+  background: var(--admin-band);
+  color: var(--admin-text);
+  cursor: pointer;
+  padding: 12px;
+  text-align: left;
+}
+
+.admin-ds-workflow-node-picker:hover {
+  border-color: color-mix(in srgb, var(--admin-primary) 55%, var(--admin-border));
+}
+
+.admin-ds-workflow-node-picker small {
+  color: var(--admin-text-soft);
+  font-size: 12px;
+  font-weight: 650;
+  line-height: 1.35;
+}
+
+.admin-ds-composite-canvas {
+  position: relative;
+  overflow: auto;
+  min-height: 620px;
+  border: 1px solid var(--admin-border);
+  border-radius: 8px;
+  background:
+    linear-gradient(var(--admin-border) 1px, transparent 1px),
+    linear-gradient(90deg, var(--admin-border) 1px, transparent 1px),
+    var(--admin-band);
+  background-size: 36px 36px;
+}
+
+.admin-ds-composite-lines {
+  position: absolute;
+  inset: 0;
+  width: 1040px;
+  min-width: 100%;
+  height: 620px;
+  pointer-events: none;
+}
+
+.admin-ds-composite-lines path {
+  fill: none;
+  stroke: var(--admin-primary);
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 3;
+}
+
+.admin-ds-composite-node {
+  position: absolute;
+  display: grid;
+  gap: 4px;
+  width: 190px;
+  min-height: 86px;
+  border: 1px solid var(--admin-border);
+  border-radius: 8px;
+  background: var(--admin-panel);
+  box-shadow: var(--admin-shadow);
+  color: var(--admin-text);
+  cursor: pointer;
+  padding: 12px;
+  text-align: left;
+}
+
+.admin-ds-composite-node[draggable="true"] {
+  cursor: grab;
+}
+
+.admin-ds-composite-node[draggable="true"]:active {
+  cursor: grabbing;
+}
+
+.admin-ds-composite-node.dragging {
+  opacity: 0.62;
+}
+
+.admin-ds-composite-node.selected {
+  border-color: color-mix(in srgb, var(--admin-primary) 76%, var(--admin-border));
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--admin-primary) 18%, transparent);
+}
+
+.admin-ds-composite-node span {
+  width: max-content;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--admin-primary) 12%, var(--admin-panel));
+  color: color-mix(in srgb, var(--admin-primary) 82%, var(--admin-text));
+  font-size: 11px;
+  font-weight: 900;
+  padding: 2px 7px;
+  text-transform: uppercase;
+}
+
+.admin-ds-composite-node small {
+  color: var(--admin-text-soft);
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+.admin-ds-composite-node.trigger span {
+  background: color-mix(in srgb, #0ea5e9 14%, var(--admin-panel));
+  color: color-mix(in srgb, #0ea5e9 84%, var(--admin-text));
+}
+
+.admin-ds-composite-node.source span {
+  background: color-mix(in srgb, #22c55e 14%, var(--admin-panel));
+  color: color-mix(in srgb, #16a34a 88%, var(--admin-text));
+}
+
+.admin-ds-composite-node.merge span {
+  background: color-mix(in srgb, #f59e0b 16%, var(--admin-panel));
+  color: color-mix(in srgb, #b45309 88%, var(--admin-text));
+}
+
+.admin-ds-composite-node.output span {
+  background: color-mix(in srgb, #8b5cf6 14%, var(--admin-panel));
+  color: color-mix(in srgb, #7c3aed 86%, var(--admin-text));
+}
+
+.admin-ds-composite-inspector label {
+  display: grid;
+  gap: 6px;
+  color: var(--admin-text);
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.admin-ds-composite-inspector input,
+.admin-ds-composite-inspector select,
+.admin-ds-composite-inspector textarea {
+  width: 100%;
+  border: 1px solid var(--admin-border);
+  border-radius: 8px;
+  background: var(--bg-primary);
+  color: var(--admin-text);
+  font: inherit;
+  font-weight: 650;
+  padding: 10px 12px;
+}
+
+.admin-ds-composite-inspector textarea {
+  min-height: 92px;
+  resize: vertical;
+}
+
+.admin-ds-composite-inspector-head,
+.admin-ds-composite-inline-actions {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.admin-ds-composite-inline-actions {
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.admin-ds-composite-check-row {
+  display: flex !important;
+  align-items: center;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 8px !important;
+}
+
+.admin-ds-composite-check-row input {
+  width: auto;
+}
+
+.admin-ds-composite-json-preview {
+  overflow: auto;
+  max-height: 220px;
+  border: 1px solid var(--admin-border);
+  border-radius: 8px;
+  background: var(--bg-primary);
+  color: var(--admin-text);
+  font-size: 12px;
+  line-height: 1.5;
+  padding: 12px;
+}
+
+.admin-ds-composite-output-summary {
+  display: grid;
+  gap: 8px;
+  margin: 0;
+}
+
+.admin-ds-composite-output-summary div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  border-bottom: 1px solid var(--admin-border);
+  padding: 8px 0;
+}
+
+.admin-ds-composite-output-summary dt {
+  color: var(--admin-text-soft);
+  font-weight: 900;
+}
+
+.admin-ds-composite-output-summary dd {
+  margin: 0;
+  color: var(--admin-text);
+  font-weight: 800;
+  text-align: right;
+}
+
+.admin-ds-composite-token-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 8px;
+}
+
+.admin-ds-composite-token-grid span {
+  border: 1px solid var(--admin-border);
+  border-radius: 999px;
+  background: var(--admin-band);
+  color: var(--admin-text);
+  font-size: 12px;
+  font-weight: 800;
+  padding: 6px 9px;
+}
+
+@media (max-width: 760px) {
+  .admin-ds-table-section-header,
+  .admin-ds-table-picker-row {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .admin-ds-filter-row {
+    grid-template-columns: 1fr;
+  }
+
+  .admin-ds-composite-summary,
+  .admin-ds-composite-inspector-head {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .admin-ds-composite-workflow-body {
+    grid-template-columns: 1fr;
+  }
+
+  .admin-ds-composite-canvas {
+    min-height: 520px;
+  }
+}

@@ -1,0 +1,143 @@
+
+.setup-completed {
+  text-align: left;
+}
+
+.setup-success-mark {
+  display: grid;
+  width: 54px;
+  height: 54px;
+  place-items: center;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--ai-success-500) 16%, var(--surface));
+  color: color-mix(in srgb, var(--ai-success-600) 88%, var(--text-primary));
+  font-size: 28px;
+  font-weight: 900;
+}
+
+.setup-next-steps ol,
+.setup-diagnostics-alert ol {
+  margin: 0;
+  padding-left: 20px;
+}
+
+.setup-diagnostics-alert {
+  border: 1px solid color-mix(in srgb, #dc2626 45%, var(--border));
+  border-radius: 8px;
+  background: color-mix(in srgb, #dc2626 10%, var(--surface));
+  color: color-mix(in srgb, #dc2626 86%, var(--text-primary));
+  padding: 14px;
+}
+
+.setup-diagnostics {
+  border-top: 1px solid var(--border);
+  margin-top: 6px;
+  padding-top: 18px;
+}
+
+.setup-diagnostics summary {
+  color: var(--text-primary);
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.setup-diagnostic-list {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.setup-diagnostic-item {
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--surface);
+  padding: 12px;
+}
+
+.setup-diagnostic-item p {
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+.setup-diagnostic-status {
+  width: fit-content;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 800;
+  padding: 3px 8px;
+  text-transform: uppercase;
+}
+
+.setup-diagnostic-status.success {
+  background: color-mix(in srgb, var(--ai-success-500) 16%, var(--surface));
+  color: color-mix(in srgb, var(--ai-success-600) 88%, var(--text-primary));
+}
+
+.setup-diagnostic-status.failed {
+  background: color-mix(in srgb, #dc2626 12%, var(--surface));
+  color: color-mix(in srgb, #dc2626 86%, var(--text-primary));
+}
+
+.setup-diagnostic-status.pending {
+  background: color-mix(in srgb, var(--brand-gold) 14%, var(--surface));
+  color: color-mix(in srgb, var(--ai-primary-800) 88%, var(--text-primary));
+}
+
+.backend-alert {
+  border-color: color-mix(in srgb, #dc2626 45%, var(--border));
+  background: color-mix(in srgb, #dc2626 10%, var(--surface));
+}
+
+.backend-checks {
+  margin: 0;
+  padding-left: 20px;
+}
+
+.backend-error-log {
+  display: grid;
+  gap: 8px;
+  margin-top: 12px;
+  text-align: left;
+}
+
+.backend-error-log pre {
+  overflow: auto;
+  border-radius: 8px;
+  background: var(--surface);
+  color: var(--text-primary);
+  margin: 0;
+  padding: 10px;
+  white-space: pre-wrap;
+}
+
+.backend-developer-help p {
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+.auth-status {
+  padding: 22px;
+}
+
+.auth-status p[role='status'] {
+  border-left: 4px solid var(--color-primary);
+  margin: 0;
+  background: color-mix(in srgb, var(--brand-gold) 14%, var(--surface));
+  padding: 12px 14px;
+}
+
+.error-banner {
+  border: 1px solid color-mix(in srgb, #dc2626 45%, var(--border));
+  border-radius: 8px;
+  background: color-mix(in srgb, #dc2626 10%, var(--surface));
+  color: color-mix(in srgb, #dc2626 86%, var(--text-primary));
+  padding: 10px 12px;
+}
+
+.auth-page-setup-flow .auth-layout {
+  width: min(100%, 800px);
+  grid-template-columns: 1fr;
+}
+
+.auth-page-setup-flow .auth-card {
+  padding: 0;
+}

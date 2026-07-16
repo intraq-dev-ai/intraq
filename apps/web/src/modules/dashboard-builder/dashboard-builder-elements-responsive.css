@@ -1,0 +1,139 @@
+
+@media (max-width: 900px) {
+  .dashboard-canvas-elements {
+    grid-template-columns: 1fr;
+  }
+
+  .dashboard-canvas-card {
+    grid-column: 1;
+  }
+
+  .dashboard-element-header {
+    padding-right: 0;
+  }
+
+  .component-info-form {
+    grid-template-columns: 1fr;
+  }
+
+  .card-wrapper-actions {
+    position: static;
+    opacity: 1;
+  }
+}
+
+/* Canvas drag-over highlight when dragging from palette */
+.dashboard-canvas-panel.canvas-drag-active {
+  outline: 2px dashed var(--color-primary, #2563eb);
+  outline-offset: -4px;
+  background: color-mix(in srgb, var(--color-primary, #2563eb) 4%, var(--canvas-bg, transparent));
+}
+
+.dashboard-news-renderer,
+.dashboard-chatbot-renderer {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  height: 100%;
+  min-height: 0;
+  padding: 1rem;
+  color: var(--text-primary);
+  background: var(--surface);
+}
+
+.dashboard-news-renderer header,
+.dashboard-chatbot-renderer header {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.dashboard-news-renderer header p {
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.dashboard-news-renderer h3,
+.dashboard-chatbot-renderer h3 {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.dashboard-news-renderer article {
+  border: 1px solid var(--border);
+  border-radius: 0.375rem;
+  padding: 0.75rem;
+  background: var(--bg-secondary);
+}
+
+.dashboard-news-renderer article span {
+  color: var(--text-secondary);
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.dashboard-news-renderer article h4 {
+  margin: 0.25rem 0;
+  font-size: 0.875rem;
+}
+
+.dashboard-news-renderer article p,
+.chatbot-message {
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: 0.8125rem;
+  line-height: 1.45;
+}
+
+.dashboard-chatbot-renderer header {
+  align-items: center;
+  flex-direction: row;
+}
+
+.dashboard-chatbot-renderer header div {
+  display: grid;
+  place-items: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 0.375rem;
+  background: color-mix(in srgb, var(--color-primary) 14%, var(--surface));
+  color: var(--color-primary);
+  font-size: 0.75rem;
+  font-weight: 800;
+}
+
+.chatbot-message {
+  border: 1px solid var(--border);
+  border-radius: 0.375rem;
+  padding: 0.75rem;
+  background: var(--bg-secondary);
+}
+
+.chatbot-suggestions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.375rem;
+}
+
+.chatbot-suggestions button {
+  border: 1px solid var(--border);
+  border-radius: 0.375rem;
+  padding: 0.35rem 0.5rem;
+  color: var(--text-primary);
+  background: var(--surface);
+  font-size: 0.75rem;
+}
+
+.dashboard-chatbot-renderer input {
+  width: 100%;
+  border: 1px solid var(--border);
+  border-radius: 0.375rem;
+  padding: 0.5rem 0.625rem;
+  color: var(--text-secondary);
+  background: var(--bg-secondary);
+}

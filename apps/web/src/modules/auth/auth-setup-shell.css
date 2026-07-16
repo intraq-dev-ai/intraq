@@ -1,0 +1,176 @@
+
+.external-state-box {
+  border-color: color-mix(in srgb, #2563eb 38%, var(--border));
+  background: color-mix(in srgb, #2563eb 12%, var(--surface));
+}
+
+.external-state-warn {
+  border-color: color-mix(in srgb, var(--brand-gold) 45%, var(--border));
+  background: color-mix(in srgb, var(--brand-gold) 14%, var(--surface));
+}
+
+.external-state-box h3,
+.backend-alert h3,
+.setup-section h3 {
+  margin: 0;
+  color: var(--text-primary);
+  font-size: 16px;
+}
+
+.setup-form {
+  gap: 0;
+}
+
+.auth-page-setup-flow {
+  align-items: center;
+  background: linear-gradient(135deg, var(--tenant-gradient-start) 0%, var(--tenant-gradient-end) 100%);
+  padding: 20px;
+}
+
+.auth-page-setup-flow .auth-layout {
+  width: min(100%, 800px);
+  grid-template-columns: 1fr;
+}
+
+.auth-page-setup-flow .auth-main {
+  gap: 0;
+}
+
+.auth-page-setup-flow .auth-card {
+  overflow: hidden;
+  border: 1px solid color-mix(in srgb, var(--border) 70%, transparent);
+  border-radius: 12px;
+  background: var(--surface);
+  box-shadow: var(--shadow-md);
+  color: var(--text-primary);
+  padding: 0;
+}
+
+.setup-card-heading {
+  display: grid;
+  gap: 30px;
+  border-bottom: 1px solid var(--border);
+  background: color-mix(in srgb, var(--brand-gold) 7%, var(--surface));
+  padding: 30px;
+}
+
+.setup-product-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.setup-product-mark {
+  display: grid;
+  width: 46px;
+  height: 46px;
+  place-items: center;
+  border-radius: 10px;
+  background: var(--ai-navy-900);
+  color: var(--ai-primary-300);
+  font-size: 23px;
+  font-weight: 900;
+}
+
+.setup-logo h3 {
+  color: var(--text-primary);
+  font-size: 40px;
+  font-weight: 700;
+  line-height: 1;
+  margin: 0;
+}
+
+.setup-logo p {
+  color: var(--text-secondary);
+  font-size: 16px;
+  margin: 5px 0 0;
+}
+
+.setup-step-indicator {
+  display: flex;
+  justify-content: space-between;
+}
+
+.setup-progress-step {
+  position: relative;
+  z-index: 0;
+  display: flex;
+  flex: 1;
+  align-items: center;
+  border: 0;
+  background: transparent;
+  color: var(--text-secondary);
+  cursor: pointer;
+  flex-direction: column;
+  font: inherit;
+  gap: 8px;
+  padding: 0;
+}
+
+.setup-progress-step:disabled {
+  cursor: default;
+}
+
+.setup-progress-step:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  top: 20px;
+  right: -40%;
+  left: 60%;
+  height: 2px;
+  background: var(--border);
+}
+
+.setup-progress-step.completed:not(:last-child)::after {
+  background: var(--ai-success-500);
+}
+
+.setup-step-number {
+  display: grid;
+  width: 40px;
+  height: 40px;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--bg-tertiary);
+  color: var(--text-tertiary);
+  font-weight: 600;
+}
+
+.setup-progress-step.active .setup-step-number {
+  background: var(--color-primary);
+  color: var(--color-primary-contrast);
+}
+
+.setup-progress-step.completed .setup-step-number {
+  background: var(--ai-success-500);
+  color: var(--text-inverse);
+}
+
+.setup-step-label {
+  color: var(--text-tertiary);
+  font-size: 14px;
+  text-align: center;
+}
+
+.setup-progress-step.active .setup-step-label {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+.setup-content,
+.setup-completed,
+.setup-next-steps,
+.setup-diagnostics,
+.setup-diagnostic-list,
+.setup-diagnostic-item,
+.setup-diagnostics-alert,
+.setup-nested-panel {
+  display: grid;
+  gap: 12px;
+}
+
+.setup-content,
+.setup-completed {
+  padding: 40px;
+}

@@ -1,0 +1,138 @@
+
+.admin-ds-filter-dialog {
+  display: grid;
+  width: min(760px, 100%);
+  gap: 16px;
+}
+
+.admin-ds-workflow-body {
+  display: grid;
+  gap: 16px;
+}
+
+.admin-ds-workflow-search {
+  display: grid;
+  gap: 6px;
+}
+
+.admin-ds-workflow-search span,
+.admin-ds-filter-row span {
+  color: var(--admin-text);
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.admin-ds-workflow-search input,
+.admin-ds-filter-row input,
+.admin-ds-filter-row select {
+  width: 100%;
+  min-height: 40px;
+  border: 1px solid var(--admin-border);
+  border-radius: 8px;
+  background: var(--bg-primary);
+  color: var(--admin-text);
+  padding: 0 12px;
+}
+
+.admin-ds-table-section {
+  display: grid;
+  gap: 12px;
+  border: 1px solid var(--admin-border);
+  border-radius: 8px;
+  background: var(--admin-band);
+  padding: 14px;
+}
+
+.admin-ds-table-section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.admin-ds-table-section-header h3 {
+  margin: 0;
+  color: var(--admin-text);
+  font-size: 15px;
+  font-weight: 900;
+}
+
+.admin-ds-table-picker-list,
+.admin-ds-filter-list {
+  display: grid;
+  gap: 10px;
+}
+
+.admin-ds-table-picker-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  border: 1px solid var(--admin-border);
+  border-radius: 8px;
+  background: var(--admin-panel);
+  padding: 10px 12px;
+}
+
+.admin-ds-table-picker-row label {
+  display: flex;
+  align-items: center;
+  min-width: 0;
+  gap: 10px;
+  font-weight: 800;
+}
+
+.admin-ds-table-picker-row small {
+  border: 1px solid var(--admin-border);
+  border-radius: 999px;
+  color: var(--admin-text-soft);
+  font-size: 11px;
+  font-weight: 900;
+  padding: 2px 7px;
+}
+
+.admin-ds-filter-row {
+  display: grid;
+  align-items: end;
+  grid-template-columns: minmax(140px, 1.2fr) minmax(120px, 0.8fr) minmax(140px, 1fr) 90px auto;
+  gap: 10px;
+  border: 1px solid var(--admin-border);
+  border-radius: 8px;
+  background: var(--admin-band);
+  padding: 12px;
+}
+
+.admin-ds-filter-row legend {
+  color: var(--admin-text-soft);
+  font-size: 12px;
+  font-weight: 900;
+  padding: 0 4px;
+}
+
+.admin-ds-filter-count {
+  display: inline-grid;
+  min-width: 20px;
+  height: 20px;
+  place-items: center;
+  border-radius: 999px;
+  background: var(--admin-primary);
+  color: var(--color-primary-contrast);
+  font-size: 11px;
+  margin-left: 6px;
+  padding: 0 6px;
+}
+
+.admin-ds-workflow-state {
+  margin: 0;
+  color: var(--admin-text-soft);
+  font-weight: 700;
+}
+
+.admin-ds-workflow-error {
+  margin: 0;
+  border: 1px solid color-mix(in srgb, #ef4444 42%, var(--admin-border));
+  border-radius: 8px;
+  background: color-mix(in srgb, #ef4444 10%, var(--admin-panel));
+  color: color-mix(in srgb, #ef4444 82%, var(--admin-text));
+  padding: 10px 12px;
+}

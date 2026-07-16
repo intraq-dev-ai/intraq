@@ -1,0 +1,268 @@
+.analyzer-queue-panel {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  width: 100%;
+  max-width: 24rem;
+  height: 80vh;
+  max-height: 600px;
+  flex-direction: column;
+  overflow: hidden;
+  border: 1px solid var(--border-primary);
+  background: var(--surface);
+  box-shadow: var(--shadow-md);
+  color: var(--text-primary);
+}
+
+.analyzer-queue-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+}
+
+.analyzer-queue-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.58);
+}
+
+.analyzer-queue-panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  border-bottom: 1px solid var(--border-primary);
+  background: var(--bg-secondary);
+  padding: 16px;
+  color: var(--text-primary);
+}
+
+.analyzer-queue-panel-header div {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.analyzer-queue-panel-header h3 {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.analyzer-queue-panel-header span {
+  border-radius: 999px;
+  background: var(--color-primary);
+  color: var(--color-primary-contrast);
+  padding: 2px 8px;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.analyzer-queue-panel-header svg {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  color: var(--color-primary);
+}
+
+.analyzer-queue-panel-header button {
+  display: inline-flex;
+  width: 28px;
+  height: 28px;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  border-radius: 6px;
+  background: transparent;
+  color: var(--text-secondary);
+  cursor: pointer;
+}
+
+.analyzer-queue-panel-header button:hover {
+  background: var(--bg-tertiary);
+  color: var(--text-primary);
+}
+
+.analyzer-queue-empty {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 32px;
+  color: var(--text-tertiary);
+  text-align: center;
+}
+
+.analyzer-queue-empty svg {
+  width: 64px;
+  height: 64px;
+  margin-bottom: 16px;
+}
+
+.analyzer-queue-empty p {
+  margin: 0 0 4px;
+  color: var(--text-secondary);
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.analyzer-queue-empty span {
+  max-width: 260px;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.analyzer-queue-list {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 12px;
+  margin: 0;
+  overflow-y: auto;
+  padding: 16px;
+  list-style: none;
+}
+
+.analyzer-queue-item {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  justify-content: space-between;
+  border: 1px solid var(--border-primary);
+  border-radius: 8px;
+  background: var(--bg-secondary);
+  padding: 12px;
+  transition: border-color 150ms ease;
+}
+
+.analyzer-queue-item:hover {
+  border-color: color-mix(in srgb, var(--color-primary) 68%, var(--border-primary));
+}
+
+.analyzer-queue-item-main {
+  min-width: 0;
+  color: var(--text-primary);
+}
+
+.analyzer-queue-item-main > div {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+}
+
+.analyzer-queue-item-icon {
+  display: inline-flex;
+  width: 20px;
+  height: 20px;
+  flex: 0 0 auto;
+  color: var(--color-primary);
+}
+
+.analyzer-queue-item-icon svg {
+  width: 20px;
+  height: 20px;
+}
+
+.analyzer-queue-item h4 {
+  margin: 0;
+  overflow: hidden;
+  color: var(--text-primary);
+  font-size: 14px;
+  font-weight: 700;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.analyzer-queue-item p,
+.analyzer-queue-item small {
+  display: block;
+  margin: 4px 0 0 28px;
+  color: var(--text-secondary);
+  font-size: 12px;
+}
+
+.analyzer-queue-item > button {
+  display: inline-flex;
+  width: 28px;
+  height: 28px;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  border-radius: 6px;
+  background: transparent;
+  color: var(--text-tertiary);
+  cursor: pointer;
+}
+
+.analyzer-queue-item > button:hover {
+  background: color-mix(in srgb, #ef4444 12%, var(--bg-primary));
+  color: #ef4444;
+}
+
+.analyzer-queue-item > button svg {
+  width: 16px;
+  height: 16px;
+}
+
+.analyzer-queue-footer {
+  display: grid;
+  gap: 8px;
+  border-top: 1px solid var(--border-primary);
+  background: var(--bg-secondary);
+  padding: 16px;
+}
+
+.analyzer-queue-footer button {
+  min-height: 38px;
+  border-radius: 8px;
+  cursor: pointer;
+  font: inherit;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.analyzer-queue-primary {
+  border: 1px solid var(--color-primary);
+  background: var(--color-primary);
+  color: var(--color-primary-contrast);
+}
+
+.analyzer-queue-primary:hover {
+  background: color-mix(in srgb, var(--color-primary) 84%, var(--text-primary));
+}
+
+.analyzer-queue-secondary {
+  border: 1px solid var(--border-primary);
+  background: var(--surface);
+  color: var(--text-primary);
+}
+
+.analyzer-queue-secondary:hover {
+  background: var(--bg-tertiary);
+}
+
+.analyzer-queue-danger {
+  border: 1px solid transparent;
+  background: transparent;
+  color: color-mix(in srgb, #ef4444 86%, var(--text-primary));
+}
+
+.analyzer-queue-danger:hover {
+  background: color-mix(in srgb, #ef4444 12%, var(--bg-primary));
+}
+
+@media (min-width: 640px) {
+  .analyzer-queue-overlay {
+    align-items: center;
+  }
+
+  .analyzer-queue-panel {
+    border-radius: 12px 0 0 12px;
+  }
+}

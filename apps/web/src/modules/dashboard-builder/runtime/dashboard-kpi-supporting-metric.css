@@ -1,0 +1,45 @@
+.dashboard-kpi-supporting {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+  max-width: 100%;
+  color: var(--muted);
+  font-size: clamp(11px, min(2.4cqw, 4.5cqh), 14px);
+  font-variant-numeric: tabular-nums;
+  line-height: 1.25;
+  order: 2;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.dashboard-kpi-card .dashboard-kpi-supporting-value {
+  flex: 0 0 auto;
+  color: var(--text-secondary);
+  font-size: clamp(13px, min(2.8cqw, 5.2cqh), 16px);
+  font-weight: 900;
+  line-height: 1;
+}
+
+.dashboard-kpi-supporting-label {
+  min-width: 0;
+  overflow: hidden;
+  font-size: inherit;
+  text-overflow: ellipsis;
+}
+
+.dashboard-kpi-supporting.tone-info .dashboard-kpi-supporting-value {
+  color: var(--color-primary);
+}
+
+.dashboard-kpi-supporting.tone-success .dashboard-kpi-supporting-value {
+  color: var(--ai-success-600, #059669);
+}
+
+.dashboard-kpi-supporting.tone-warning .dashboard-kpi-supporting-value {
+  color: var(--operational-amber, #b7791f);
+}
+
+.dashboard-kpi-supporting.tone-danger .dashboard-kpi-supporting-value {
+  color: var(--ai-danger-600, #dc2626);
+}

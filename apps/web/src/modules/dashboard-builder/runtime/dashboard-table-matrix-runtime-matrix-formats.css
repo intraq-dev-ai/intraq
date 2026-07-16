@@ -1,0 +1,213 @@
+
+.dashboard-matrix-component thead th {
+  position: relative;
+  top: 0;
+  z-index: 1;
+  background: var(--dashboard-matrix-header-bg);
+  color: var(--dashboard-matrix-header-text);
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+.dashboard-matrix-component tbody th {
+  z-index: 1;
+  background: var(--dashboard-matrix-row-header-bg);
+  color: var(--dashboard-matrix-row-header-text);
+  font-size: 12px;
+  font-weight: 800;
+  text-transform: none;
+}
+
+.dashboard-matrix-component tbody td {
+  background: var(--dashboard-matrix-cell-bg);
+  color: var(--dashboard-matrix-cell-text);
+}
+
+.dashboard-matrix-component .dashboard-matrix-value-divider {
+  border-inline-start: 1px solid color-mix(in srgb, var(--dashboard-matrix-border, var(--border)) 82%, transparent);
+}
+
+.dashboard-matrix-component[data-show-borders="true"] .dashboard-matrix-value-divider,
+.dashboard-matrix-component[data-table-format="bordered"] .dashboard-matrix-value-divider {
+  border-inline-start: 0;
+}
+
+.dashboard-table-component[data-display-mode="compact"] th,
+.dashboard-table-component[data-display-mode="compact"] td,
+.dashboard-matrix-component[data-display-mode="compact"] th,
+.dashboard-matrix-component[data-display-mode="compact"] td {
+  padding: 5px 8px;
+}
+
+.dashboard-table-component[data-display-mode="dense"] th,
+.dashboard-table-component[data-display-mode="dense"] td,
+.dashboard-matrix-component[data-display-mode="dense"] th,
+.dashboard-matrix-component[data-display-mode="dense"] td {
+  padding: 4px 6px;
+}
+
+.dashboard-table-component[data-table-format="striped"] {
+  --dashboard-table-alt-row-bg: color-mix(in srgb, #2563eb 8%, var(--surface));
+}
+
+.dashboard-matrix-component[data-table-format="striped"] {
+  --dashboard-matrix-alt-row-bg: color-mix(in srgb, #2563eb 8%, var(--surface));
+}
+
+.dashboard-matrix-component[data-table-format="striped"] tbody tr:nth-child(even):not(.is-total):not(.is-subtotal) td,
+.dashboard-matrix-component[data-table-format="striped"] tbody tr:nth-child(even):not(.is-total):not(.is-subtotal) th {
+  background: var(--dashboard-matrix-alt-row-bg);
+}
+
+.dashboard-table-component[data-table-format="bordered"] th,
+.dashboard-table-component[data-table-format="bordered"] td {
+  border-bottom: 1px solid var(--dashboard-table-border, var(--border));
+  border-right: 1px solid var(--dashboard-table-border, var(--border));
+}
+
+.dashboard-table-component[data-table-format="bordered"] tr th:first-child,
+.dashboard-table-component[data-table-format="bordered"] tr td:first-child {
+  border-left: 1px solid var(--dashboard-table-border, var(--border));
+}
+
+.dashboard-table-component[data-table-format="bordered"] thead tr:first-child th {
+  border-top: 1px solid var(--dashboard-table-border, var(--border));
+}
+
+.dashboard-matrix-component[data-table-format="bordered"] th,
+.dashboard-matrix-component[data-table-format="bordered"] td {
+  border-bottom: 1px solid var(--dashboard-matrix-border, var(--border));
+  border-right: 1px solid var(--dashboard-matrix-border, var(--border));
+}
+
+.dashboard-matrix-component[data-table-format="bordered"] tr th:first-child,
+.dashboard-matrix-component[data-table-format="bordered"] tr td:first-child {
+  border-left: 1px solid var(--dashboard-matrix-border, var(--border));
+}
+
+.dashboard-matrix-component[data-table-format="bordered"] thead tr:first-child th {
+  border-top: 1px solid var(--dashboard-matrix-border, var(--border));
+}
+
+.dashboard-table-component[data-table-format="minimal"] {
+  --dashboard-table-alt-row-bg: transparent;
+  --dashboard-table-border: transparent;
+  --dashboard-table-header-bg: transparent;
+  --dashboard-table-header-text: var(--text-secondary);
+}
+
+.dashboard-matrix-component[data-table-format="minimal"] {
+  --dashboard-matrix-alt-row-bg: transparent;
+  --dashboard-matrix-border: transparent;
+  --dashboard-matrix-header-bg: transparent;
+  --dashboard-matrix-row-header-bg: transparent;
+  --dashboard-matrix-header-text: var(--text-secondary);
+  --dashboard-matrix-row-header-text: var(--text-secondary);
+}
+
+.dashboard-table-component[data-table-format="modern"] {
+  --dashboard-table-alt-row-bg: color-mix(in srgb, #2563eb 5%, var(--surface));
+  --dashboard-table-header-bg: color-mix(in srgb, #e0f2fe 78%, var(--surface));
+  --dashboard-table-border: color-mix(in srgb, #cbd5e1 82%, var(--border));
+  --dashboard-table-radius: 12px;
+  --dashboard-table-shadow: 0 14px 32px rgba(15, 23, 42, 0.10);
+}
+
+.dashboard-matrix-component[data-table-format="modern"] {
+  --dashboard-matrix-alt-row-bg: color-mix(in srgb, #2563eb 5%, var(--surface));
+  --dashboard-matrix-header-bg: color-mix(in srgb, #e0f2fe 78%, var(--surface));
+  --dashboard-matrix-row-header-bg: color-mix(in srgb, #e0f2fe 78%, var(--surface));
+  --dashboard-matrix-border: color-mix(in srgb, #cbd5e1 82%, var(--border));
+  --dashboard-matrix-radius: 12px;
+  --dashboard-matrix-shadow: 0 14px 32px rgba(15, 23, 42, 0.10);
+}
+
+.dashboard-table-component[data-table-format="corporate"] {
+  --dashboard-table-header-bg: #1e3a8a;
+  --dashboard-table-header-text: #eff6ff;
+  --dashboard-table-alt-row-bg: color-mix(in srgb, #dbeafe 48%, var(--surface));
+}
+
+.dashboard-matrix-component[data-table-format="corporate"] {
+  --dashboard-matrix-header-bg: #1e3a8a;
+  --dashboard-matrix-row-header-bg: #1e3a8a;
+  --dashboard-matrix-header-text: #eff6ff;
+  --dashboard-matrix-row-header-text: #eff6ff;
+  --dashboard-matrix-alt-row-bg: color-mix(in srgb, #dbeafe 48%, var(--surface));
+}
+
+.dashboard-table-component[data-table-format="dark"] {
+  --dashboard-table-header-bg: #0f172a;
+  --dashboard-table-header-text: #f8fafc;
+  --dashboard-table-row-bg: color-mix(in srgb, #111827 82%, var(--surface));
+  --dashboard-table-alt-row-bg: color-mix(in srgb, #1f2937 86%, var(--surface));
+  --dashboard-table-row-text: #f8fafc;
+  --dashboard-table-border: color-mix(in srgb, #475569 72%, var(--border));
+}
+
+.dashboard-matrix-component[data-table-format="dark"] {
+  --dashboard-matrix-header-bg: #0f172a;
+  --dashboard-matrix-row-header-bg: #0f172a;
+  --dashboard-matrix-header-text: #f8fafc;
+  --dashboard-matrix-row-header-text: #f8fafc;
+  --dashboard-matrix-cell-bg: color-mix(in srgb, #111827 82%, var(--surface));
+  --dashboard-matrix-alt-row-bg: color-mix(in srgb, #1f2937 86%, var(--surface));
+  --dashboard-matrix-cell-text: #f8fafc;
+  --dashboard-matrix-border: color-mix(in srgb, #475569 72%, var(--border));
+}
+
+.dashboard-table-component[data-table-format="colorful"] {
+  --dashboard-table-header-bg: linear-gradient(90deg, #7c3aed 0%, #2563eb 52%, #0ea5e9 100%);
+  --dashboard-table-header-text: #f8fafc;
+  --dashboard-table-alt-row-bg: color-mix(in srgb, #e0f2fe 55%, var(--surface));
+}
+
+.dashboard-matrix-component[data-table-format="colorful"] {
+  --dashboard-matrix-header-bg: linear-gradient(90deg, #7c3aed 0%, #2563eb 52%, #0ea5e9 100%);
+  --dashboard-matrix-row-header-bg: linear-gradient(90deg, #7c3aed 0%, #2563eb 52%, #0ea5e9 100%);
+  --dashboard-matrix-header-text: #f8fafc;
+  --dashboard-matrix-row-header-text: #f8fafc;
+  --dashboard-matrix-alt-row-bg: color-mix(in srgb, #e0f2fe 55%, var(--surface));
+}
+
+.dashboard-table-component[data-table-format="compact"] {
+  --dashboard-table-cell-padding-y: 5px;
+  --dashboard-table-cell-padding-x: 8px;
+}
+
+.dashboard-matrix-component[data-table-format="compact"] {
+  --dashboard-table-cell-padding-y: 5px;
+  --dashboard-table-cell-padding-x: 8px;
+}
+
+.dashboard-table-component[data-table-format="spacious"] {
+  --dashboard-table-cell-padding-y: 11px;
+  --dashboard-table-cell-padding-x: 14px;
+}
+
+.dashboard-matrix-component[data-table-format="spacious"] {
+  --dashboard-table-cell-padding-y: 11px;
+  --dashboard-table-cell-padding-x: 14px;
+}
+
+.dashboard-table-component[data-table-format="report"] {
+  --dashboard-table-header-bg: transparent;
+  --dashboard-table-header-text: var(--text-primary);
+  --dashboard-table-alt-row-bg: transparent;
+}
+
+.dashboard-matrix-component[data-table-format="report"] {
+  --dashboard-matrix-header-bg: transparent;
+  --dashboard-matrix-row-header-bg: transparent;
+  --dashboard-matrix-header-text: var(--text-primary);
+  --dashboard-matrix-row-header-text: var(--text-primary);
+  --dashboard-matrix-alt-row-bg: transparent;
+}
+
+.dashboard-table-component[data-table-format="report"] thead th {
+  border-bottom: 2px solid var(--dashboard-table-border, var(--border));
+}
+
+.dashboard-matrix-component[data-table-format="report"] thead th {
+  border-bottom: 2px solid var(--dashboard-matrix-border, var(--border));
+}

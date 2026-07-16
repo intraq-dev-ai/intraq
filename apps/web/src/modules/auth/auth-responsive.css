@@ -1,0 +1,67 @@
+
+@media (max-width: 860px) {
+  .auth-page {
+    align-items: start;
+    padding: 16px;
+  }
+
+  .auth-layout,
+  .auth-page-setup-flow .auth-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .auth-hero,
+  .auth-card {
+    padding: 24px;
+  }
+
+  .auth-page-setup-flow {
+    align-items: stretch;
+    padding: 0;
+  }
+
+  .auth-page-setup-flow .auth-card {
+    min-height: 100vh;
+    border-radius: 0;
+    padding: 0;
+  }
+
+  .auth-hero {
+    gap: 18px;
+  }
+
+  .setup-card-heading,
+  .setup-content,
+  .setup-completed {
+    padding: 24px;
+  }
+
+  .setup-step-indicator {
+    gap: 10px;
+    overflow-x: auto;
+    padding-bottom: 2px;
+  }
+
+  .setup-progress-step {
+    min-width: 92px;
+  }
+
+  .setup-progress-step:not(:last-child)::after {
+    display: none;
+  }
+
+  .setup-form-actions {
+    flex-direction: column-reverse;
+  }
+
+  .auth-card-setup .button,
+  .auth-card-setup .auth-actions .button {
+    width: 100%;
+  }
+
+  .setup-grid,
+  .setup-step-grid,
+  .setup-diagnostic-list {
+    grid-template-columns: 1fr;
+  }
+}

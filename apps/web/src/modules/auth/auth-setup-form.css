@@ -1,0 +1,222 @@
+
+.setup-section {
+  display: grid;
+  gap: 20px;
+}
+
+.setup-step-panel h2 {
+  color: var(--text-primary);
+  font-size: 24px;
+  font-weight: 700;
+  margin: 0;
+}
+
+.setup-section h3,
+.setup-completed h3,
+.setup-diagnostics-alert h3,
+.setup-next-steps h4 {
+  color: var(--text-primary);
+  font-size: 18px;
+  font-weight: 600;
+  margin: 0;
+}
+
+.setup-completed h3 {
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.step-description {
+  color: var(--text-secondary);
+  font-size: 16px;
+  line-height: 1.6;
+  margin: 0 0 10px;
+}
+
+.help-text,
+.setup-content .field-help {
+  color: var(--text-secondary);
+  font-size: 14px;
+  line-height: 1.5;
+  margin: 0;
+}
+
+.auth-card-setup .auth-form label,
+.auth-card-setup .auth-field {
+  color: var(--text-primary);
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.auth-card-setup .auth-form input,
+.auth-card-setup .auth-form textarea,
+.auth-card-setup .auth-form select {
+  border: 2px solid var(--border);
+  border-radius: 8px;
+  background: var(--surface);
+  color: var(--text-primary);
+  font-size: 16px;
+  padding: 12px 16px;
+}
+
+.auth-card-setup .auth-form textarea {
+  min-height: 92px;
+}
+
+.auth-card-setup .auth-form input:focus,
+.auth-card-setup .auth-form textarea:focus {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-primary) 18%, transparent);
+}
+
+.setup-grid,
+.setup-step-grid {
+  display: grid;
+  gap: 20px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.setup-nested-panel {
+  border-radius: 8px;
+  background: var(--bg-secondary);
+  margin-top: 10px;
+  padding: 24px;
+}
+
+.auth-card-setup .auth-radio-row {
+  gap: 20px;
+}
+
+.auth-card-setup .auth-radio-row label {
+  color: var(--text-primary);
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.setup-color-field span {
+  align-items: center;
+  display: flex;
+  gap: 10px;
+}
+
+.auth-card-setup .auth-form input[type="color"] {
+  width: 80px;
+  height: 48px;
+  cursor: pointer;
+  padding: 8px;
+}
+
+.setup-color-field output {
+  color: var(--text-secondary);
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 13px;
+}
+
+.setup-logo-preview {
+  display: grid;
+  gap: 12px;
+  border: 2px dashed var(--border);
+  border-radius: 8px;
+  background: var(--surface);
+  margin-top: 8px;
+  padding: 20px;
+  text-align: center;
+}
+
+.preview-label {
+  color: var(--text-secondary);
+  font-size: 14px;
+}
+
+.setup-logo-display {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 60px;
+}
+
+.setup-logo-display img {
+  max-width: 200px;
+  max-height: 60px;
+  object-fit: contain;
+}
+
+.setup-logo-text-preview {
+  display: grid;
+  gap: 4px;
+}
+
+.setup-logo-text-preview strong {
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.setup-logo-text-preview span {
+  color: var(--text-secondary);
+  font-size: 14px;
+}
+
+.setup-step {
+  display: grid;
+  gap: 4px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--surface);
+  padding: 12px;
+}
+
+.setup-step span {
+  color: var(--text-secondary);
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.setup-step strong {
+  color: var(--text-primary);
+  overflow-wrap: anywhere;
+}
+
+.setup-form-actions {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  border-top: 1px solid var(--border);
+  margin-top: 16px;
+  padding-top: 24px;
+}
+
+.auth-card-setup .button,
+.auth-card-setup .auth-actions .button {
+  width: auto;
+  min-width: 130px;
+  border-radius: 8px;
+  background: var(--color-primary);
+  color: var(--color-primary-contrast);
+  font-size: 16px;
+  font-weight: 600;
+  min-height: 48px;
+  padding: 0 24px;
+}
+
+.auth-card-setup .button:hover:not(:disabled) {
+  background: var(--ai-primary-600);
+}
+
+.auth-card-setup .button:disabled,
+.auth-card-setup .auth-actions .button:disabled {
+  background: color-mix(in srgb, var(--text-secondary) 42%, var(--surface));
+  color: var(--text-secondary);
+  cursor: not-allowed;
+  opacity: 1;
+}
+
+.auth-card-setup .button-secondary {
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text-primary);
+}
+
+.auth-card-setup .button-secondary:hover:not(:disabled) {
+  background: var(--bg-tertiary);
+}

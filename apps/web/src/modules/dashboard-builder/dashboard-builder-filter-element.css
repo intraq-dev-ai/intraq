@@ -1,0 +1,400 @@
+.dashboard-filter-element {
+  display: grid;
+  grid-template-rows: 1fr;
+  align-content: stretch;
+  gap: 4px;
+  min-height: 0;
+  height: 100%;
+  width: 100%;
+  border: 0;
+  border-radius: 0;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  padding: 0;
+}
+
+.dashboard-filter-element--transparent {
+  background: transparent;
+}
+
+.dashboard-filter-element--transparent .filter-component:not(.period-filter-component) {
+  background: transparent;
+}
+
+.dashboard-filter-element--transparent .filter-label {
+  color: var(--text-secondary);
+}
+
+.dashboard-filter-element .filter-component {
+  max-width: 100%;
+  min-width: 0;
+  width: 100%;
+  height: 100%;
+  grid-template-rows: auto 1fr;
+}
+
+.dashboard-container-element {
+  --dashboard-container-bg: color-mix(in srgb, var(--bg-secondary) 84%, var(--bg-primary));
+  --dashboard-container-border-color: var(--border);
+  --dashboard-container-border-width: 1px;
+  --dashboard-container-radius: 8px;
+  --dashboard-container-padding: 14px;
+  --dashboard-container-gap: 12px;
+  --dashboard-container-toolbar-gap: 6px;
+  display: grid;
+  align-content: stretch;
+  gap: var(--dashboard-container-gap);
+  height: 100%;
+  min-height: 0;
+  width: 100%;
+  border: var(--dashboard-container-border-width) solid var(--dashboard-container-border-color);
+  border-radius: var(--dashboard-container-radius);
+  background: var(--dashboard-container-bg);
+  color: var(--text-primary);
+  padding: var(--dashboard-container-padding);
+}
+
+.dashboard-container-element__header {
+  display: flex;
+  align-items: center;
+  min-width: 0;
+}
+
+.dashboard-container-element__header h3 {
+  overflow: hidden;
+  margin: 0;
+  color: var(--text-primary);
+  font-size: 14px;
+  font-weight: 800;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.dashboard-container-element__grid {
+  display: grid;
+  grid-template-columns: repeat(var(--dashboard-container-columns, 4), minmax(0, 1fr));
+  align-items: stretch;
+  gap: var(--dashboard-container-gap);
+  min-height: 0;
+}
+
+.dashboard-container-element__grid .dashboard-filter-element,
+.dashboard-container-element__grid .filter-component:not(.period-filter-component) {
+  background: transparent;
+}
+
+.dashboard-container-element__toolbar {
+  align-items: flex-start;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--dashboard-container-toolbar-gap);
+  min-height: 0;
+  min-width: 0;
+}
+
+.dashboard-container-element__toolbar .dashboard-export-button-element {
+  height: auto;
+  min-height: 0;
+  width: auto;
+}
+
+.dashboard-container-element__empty {
+  display: grid;
+  place-items: center;
+  min-height: 80px;
+  border: 1px dashed var(--dashboard-container-border-color);
+  border-radius: calc(var(--dashboard-container-radius) * 0.75);
+  color: var(--text-secondary);
+  font-size: 12px;
+  font-weight: 700;
+  text-align: center;
+}
+
+@media (max-width: 900px) {
+  .dashboard-container-element__grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+.dashboard-filter-element .date-range-filter,
+.dashboard-filter-element .filter-input,
+.dashboard-filter-element input.filter-input,
+.dashboard-filter-element .filter-search-input,
+.dashboard-filter-element .searchable-dropdown {
+  max-width: none;
+  width: 100%;
+}
+
+.dashboard-filter-element input.filter-input {
+  align-self: start;
+  height: 34px;
+  min-height: 34px;
+}
+
+.dashboard-container-element__grid .dashboard-filter-element:has(.period-filter--toolbar) {
+  grid-column: 1 / -1;
+}
+
+.dashboard-container-element__grid .dashboard-filter-element:has(.period-filter--toolbar) .filter-component {
+  height: auto;
+}
+
+.dashboard-container-element__grid .period-filter--toolbar {
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  gap: 0;
+  padding: 0;
+}
+
+.dashboard-filter-element .date-range-filter {
+  grid-template-columns: 28px minmax(0, 1fr) 28px;
+}
+
+.dashboard-filter-element .date-range-filter.date-range-filter--no-navigation {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.dashboard-filter-element .filter-buttons-wrapper {
+  height: 100%;
+}
+
+.dashboard-filter-element .filter-buttons-group {
+  height: 100%;
+}
+
+.dashboard-filter-element .filter-btn-option {
+  height: 100%;
+  width: 100%;
+}
+
+.dashboard-filter-element-title-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  cursor: move;
+  min-height: 24px;
+}
+
+.dashboard-filter-element label {
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+  font-weight: 500;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.dashboard-filter-clear-btn {
+  border: 0;
+  background: transparent;
+  color: var(--accent);
+  cursor: pointer;
+  flex: 0 0 auto;
+  font: inherit;
+  font-size: 12px;
+  font-weight: 800;
+  padding: 2px 0;
+}
+
+.dashboard-filter-element input,
+.dashboard-filter-element select {
+  min-height: 34px;
+  min-width: 0;
+  width: 100%;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--surface);
+  color: var(--text-primary);
+  font: inherit;
+  font-size: 0.875rem;
+  line-height: 1.25;
+  padding: 0.5rem 2rem 0.5rem 0.75rem;
+}
+
+.dashboard-filter-element .period-toolbar-date-control {
+  flex: 0 0 170px;
+  min-width: 156px;
+  width: 170px;
+}
+
+.dashboard-filter-element .period-toolbar-date-input {
+  flex: 0 0 170px;
+  min-height: 36px;
+  min-width: 156px;
+  width: 170px;
+  border-color: var(--period-filter-border);
+  border-radius: 2px;
+  background: var(--period-filter-control-bg);
+  color: var(--text-primary);
+  padding: 0 38px 0 10px;
+}
+
+.dashboard-filter-element .period-toolbar-date-control--legacy .period-toolbar-date-input {
+  min-height: 34px;
+  border-color: #ddd;
+  border-radius: 0;
+  background: #fff;
+  color: #333;
+  color-scheme: light;
+  font-family: "Open Sans", Arial, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.dashboard-filter-element .period-toolbar-date-control--minimal .period-toolbar-date-input {
+  border-color: transparent;
+  border-bottom-color: var(--period-filter-border);
+  border-radius: 0;
+  background: transparent;
+}
+
+.dashboard-filter-element .period-date-input {
+  min-height: 28px;
+  border: 0;
+  border-left: 1px solid var(--border);
+  border-radius: 0;
+  background: transparent;
+  color: var(--text-secondary);
+  padding: 0 8px;
+}
+
+.dashboard-filter-element-dropdown {
+  position: relative;
+}
+
+.dashboard-filter-element-list {
+  display: grid;
+  gap: 8px;
+  min-height: 0;
+}
+
+.dashboard-filter-element-list-options {
+  display: grid;
+  gap: 2px;
+  min-height: 0;
+  max-height: 100%;
+  overflow: auto;
+}
+
+.dashboard-filter-element-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  gap: 6px;
+  min-height: 0;
+  overflow: auto;
+}
+
+.dashboard-filter-button-option {
+  min-height: 30px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  cursor: pointer;
+  flex: 0 1 auto;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 700;
+  max-width: 100%;
+  overflow: hidden;
+  padding: 0 10px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.dashboard-filter-button-option:hover,
+.dashboard-filter-button-option[aria-pressed="true"] {
+  border-color: var(--accent);
+  background: var(--bg-secondary);
+  color: var(--accent);
+}
+
+.dashboard-filter-element-input-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 38px;
+}
+
+.dashboard-filter-element-input-row input {
+  border-bottom-right-radius: 0;
+  border-top-right-radius: 0;
+}
+
+.dashboard-filter-element-input-row button {
+  min-height: 38px;
+  border: 1px solid var(--border);
+  border-left: 0;
+  border-radius: 0 6px 6px 0;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+}
+
+.dashboard-filter-element-input-row svg {
+  width: 16px;
+  height: 16px;
+  fill: none;
+  stroke: currentColor;
+}
+
+.dashboard-filter-element-options {
+  position: absolute;
+  z-index: 30;
+  top: calc(100% + 4px);
+  right: 0;
+  left: 0;
+  display: grid;
+  max-height: 190px;
+  overflow: auto;
+  border: 1px solid var(--border);
+  border-radius: 7px;
+  background: var(--surface);
+  box-shadow: var(--shadow-lg);
+  padding: 4px;
+}
+
+.dashboard-filter-element-option {
+  min-height: 30px;
+  border: 0;
+  border-radius: 5px;
+  background: transparent;
+  color: var(--text-primary);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font: inherit;
+  font-size: 13px;
+  justify-content: flex-start;
+  padding: 0 8px;
+  text-align: left;
+}
+
+.dashboard-filter-element-option:hover,
+.dashboard-filter-element-option[aria-selected="true"] {
+  background: var(--bg-secondary);
+}
+
+.dashboard-filter-element-range {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  gap: 6px;
+}
+
+.dashboard-filter-element-range button {
+  min-height: 38px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  cursor: pointer;
+  font: inherit;
+  font-size: 12px;
+  font-weight: 800;
+  padding: 0 10px;
+}

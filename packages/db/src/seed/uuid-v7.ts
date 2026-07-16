@@ -1,0 +1,49 @@
+import { createHash, randomBytes } from 'node:crypto';
+
+export type IdFactory = () => string;
+
+export const createUuidV7: IdFactory = () => {
+  const bytes = randomBytes(16);
+  const timestamp = BigInt(Date.now());
+
+  bytes[0] = Number((timestamp >> 40n) & 0xffn);
+  bytes[1] = Number((timestamp >> 32n) & 0xffn);
+  bytes[2] = Number((timestamp >> 24n) & 0xffn);
+  bytes[3] = Number((timestamp >> 16n) & 0xffn);
+  bytes[4] = Number((timestamp >> 8n) & 0xffn);
+  bytes[5] = Number(timestamp & 0xffn);
+  bytes[6] = ((bytes[6] ?? 0) & 0x0f) | 0x70;
+  bytes[8] = ((bytes[8] ?? 0) & 0x3f) | 0x80;
+
+  const hex = bytes.toString('hex');
+  return [
+    hex.slice(0, 8),
+    hex.slice(8, 12),
+    hex.slice(12, 16),
+    hex.slice(16, 20),
+    hex.slice(20)
+  ].join('-');
+};
+
+export function createStableUuidV7(seed: string, timestamp = new Date('2026-01-01T00:00:00.000Z')): string {
+  const bytes = createHash('sha256').update(seed).digest().subarray(0, 16);
+  const milliseconds = BigInt(timestamp.getTime());
+
+  bytes[0] = Number((milliseconds >> 40n) & 0xffn);
+  bytes[1] = Number((milliseconds >> 32n) & 0xffn);
+  bytes[2] = Number((milliseconds >> 24n) & 0xffn);
+  bytes[3] = Number((milliseconds >> 16n) & 0xffn);
+  bytes[4] = Number((milliseconds >> 8n) & 0xffn);
+  bytes[5] = Number(milliseconds & 0xffn);
+  bytes[6] = ((bytes[6] ?? 0) & 0x0f) | 0x70;
+  bytes[8] = ((bytes[8] ?? 0) & 0x3f) | 0x80;
+
+  const hex = bytes.toString('hex');
+  return [
+    hex.slice(0, 8),
+    hex.slice(8, 12),
+    hex.slice(12, 16),
+    hex.slice(16, 20),
+    hex.slice(20)
+  ].join('-');
+}

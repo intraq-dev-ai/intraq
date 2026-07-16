@@ -1,0 +1,259 @@
+.admin-dashboard-management-panel .admin-table-wrap {
+  overflow-x: auto;
+}
+
+.admin-dashboard-management-panel table {
+  min-width: 1040px;
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.admin-dashboard-management-panel thead th {
+  background: #f7fafc !important;
+  padding: 16px 12px !important;
+  text-align: left;
+  font-weight: 600 !important;
+  color: #4a5568 !important;
+  font-size: 14px !important;
+  border-bottom: 1px solid #e2e8f0 !important;
+  white-space: nowrap;
+}
+
+.admin-dashboard-management-panel tbody td {
+  padding: 16px 12px !important;
+  border-bottom: 1px solid #f1f5f9 !important;
+  vertical-align: top;
+}
+
+.admin-dashboard-management-panel tbody tr:hover {
+  background: #f8fafc !important;
+}
+
+.admin-dashboard-management-panel td p {
+  color: #718096;
+  font-size: 13px;
+  margin: 4px 0 0;
+}
+
+.admin-dashboard-management-panel td strong {
+  font-weight: 600;
+  color: #2d3748;
+}
+
+.admin-dashboard-management-sort {
+  align-items: center;
+  background: transparent;
+  border: 0;
+  color: inherit;
+  cursor: pointer;
+  display: inline-flex;
+  font: inherit;
+  font-weight: 600;
+  gap: 4px;
+  padding: 0;
+  user-select: none;
+}
+
+.admin-dashboard-management-sort:hover {
+  color: #2d3748;
+}
+
+.admin-dashboard-management-sort-icon {
+  width: 16px;
+  height: 16px;
+  transition: transform 0.2s ease;
+  flex-shrink: 0;
+}
+
+.admin-dashboard-management-sort-icon.is-desc {
+  transform: rotate(180deg);
+}
+
+/* Badges */
+.category-badge,
+.sample-badge,
+.status-badge,
+.type-badge,
+.visibility-badge {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 16px;
+  font-size: 12px;
+  font-weight: 500;
+  padding: 4px 12px;
+  white-space: nowrap;
+}
+
+.sample-badge {
+  background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+  color: #744210;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  padding: 2px 8px;
+  border-radius: 12px;
+  margin-left: 8px;
+}
+
+.category-badge {
+  background: #edf2f7;
+  color: #4a5568;
+}
+
+.type-badge.tenant {
+  background: #e6fffa;
+  color: #234e52;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+.type-badge.global {
+  background: #ebf8ff;
+  color: #2a4365;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+.type-badge.sample {
+  background: #fef5e7;
+  color: #744210;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+.status-badge.active {
+  background: #f0fff4;
+  color: #22543d;
+  text-transform: capitalize;
+  font-weight: 600;
+}
+
+.status-badge.draft {
+  background: #fffbeb;
+  color: #744210;
+  text-transform: capitalize;
+  font-weight: 600;
+}
+
+.status-badge.archived {
+  background: #f7fafc;
+  color: #4a5568;
+  text-transform: capitalize;
+  font-weight: 600;
+}
+
+.visibility-badge {
+  background: #ebf8ff;
+  color: #2a4365;
+  font-size: 12px;
+}
+
+/* Action buttons */
+.admin-dashboard-management-actions {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  position: relative;
+}
+
+.admin-dashboard-management-actions .action-btn {
+  width: 32px;
+  height: 32px;
+  border: none;
+  border-radius: 6px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.admin-dashboard-management-actions .action-btn svg {
+  fill: currentColor;
+  width: 16px;
+  height: 16px;
+}
+
+.admin-dashboard-management-actions .view {
+  background: #ebf8ff;
+  color: #2b6cb0;
+}
+.admin-dashboard-management-actions .view:hover { background: #bee3f8; }
+
+.admin-dashboard-management-actions .edit {
+  background: #f0fff4;
+  color: #38a169;
+}
+.admin-dashboard-management-actions .edit:hover { background: #c6f6d5; }
+
+.admin-dashboard-management-actions .clone {
+  background: #fef5e7;
+  color: #d69e2e;
+}
+.admin-dashboard-management-actions .clone:hover { background: #faf089; }
+
+.admin-dashboard-management-actions .delete {
+  background: #fff5f5;
+  color: #e53e3e;
+}
+.admin-dashboard-management-actions .delete:hover { background: #fed7d7; }
+
+/* More / dropdown */
+.admin-dashboard-management-more {
+  position: relative;
+}
+
+.admin-dashboard-management-more summary {
+  width: 32px;
+  height: 32px;
+  background: #f7fafc;
+  color: #718096;
+  border-radius: 6px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 16px;
+  list-style: none;
+  border: none;
+  transition: background 0.2s;
+}
+
+.admin-dashboard-management-more summary:hover { background: #edf2f7; }
+.admin-dashboard-management-more summary::-webkit-details-marker { display: none; }
+
+.admin-dashboard-management-menu {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  z-index: 10;
+  min-width: 160px;
+  padding: 4px;
+}
+
+.admin-dashboard-management-menu button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  padding: 10px 14px;
+  border: none;
+  background: none;
+  text-align: left;
+  cursor: pointer;
+  font-size: 14px;
+  color: #4a5568;
+  border-radius: 6px;
+  transition: background 0.15s;
+  font-weight: 500;
+}
+
+.admin-dashboard-management-menu button:hover { background: #f7fafc; }
+
+.admin-dashboard-management-menu .danger { color: #e53e3e; }
+.admin-dashboard-management-menu .danger:hover { background: #fed7d7; }

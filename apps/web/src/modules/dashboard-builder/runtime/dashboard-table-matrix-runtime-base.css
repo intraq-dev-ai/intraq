@@ -1,0 +1,258 @@
+.dashboard-table-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  min-height: 46px;
+  border-bottom: 1px solid var(--dashboard-table-border, var(--border));
+  padding: 8px 12px;
+}
+
+.dashboard-table-component,
+.dashboard-matrix-component {
+  min-width: 0;
+  overflow-x: auto;
+  overflow-y: auto;
+  color: var(--text-primary);
+  overscroll-behavior: contain;
+}
+
+.dashboard-canvas-card--view.dashboard-canvas-card--auto-content-height .dashboard-table-component,
+.dashboard-canvas-card--view.dashboard-canvas-card--auto-content-height .dashboard-matrix-component {
+  box-sizing: border-box;
+  overflow: visible;
+  padding-bottom: var(--dashboard-auto-content-table-bottom-space, 18px);
+}
+
+.dashboard-table-component {
+  --dashboard-table-border: var(--border);
+  --dashboard-table-header-bg: color-mix(in srgb, var(--bg-secondary) 92%, var(--surface) 8%);
+  --dashboard-table-header-text: var(--text-primary);
+  --dashboard-table-row-bg: var(--surface);
+  --dashboard-table-alt-row-bg: color-mix(in srgb, var(--dashboard-table-border) 7%, var(--dashboard-table-row-bg));
+  --dashboard-table-row-text: var(--text-primary);
+  --dashboard-table-group-bg: color-mix(in srgb, var(--dashboard-table-border) 18%, var(--dashboard-table-row-bg));
+  --dashboard-table-group-total-bg: color-mix(in srgb, var(--dashboard-table-border) 26%, var(--dashboard-table-row-bg));
+  --dashboard-table-group-total-text: var(--dashboard-table-row-text);
+  --dashboard-table-group-total-border: color-mix(in srgb, var(--border) 84%, var(--text-primary) 10%);
+  --dashboard-table-group-total-border-width: 1px;
+  --dashboard-table-group-total-font-weight: 800;
+  --dashboard-table-group-total-font-size: inherit;
+  --dashboard-table-group-button-bg: color-mix(in srgb, var(--dashboard-table-border) 11%, var(--dashboard-table-row-bg));
+  --dashboard-table-total-bg: color-mix(in srgb, var(--bg-secondary) 88%, var(--text-primary) 12%);
+  --dashboard-table-total-text: var(--dashboard-table-row-text);
+  --dashboard-table-total-border: color-mix(in srgb, var(--dashboard-table-border) 88%, var(--text-primary) 12%);
+  --dashboard-table-total-border-width: 1px;
+  --dashboard-table-total-font-weight: 900;
+  --dashboard-table-total-font-size: inherit;
+  --dashboard-table-cell-padding-y: 7px;
+  --dashboard-table-cell-padding-x: 10px;
+  --dashboard-table-radius: 0;
+  --dashboard-table-shadow: none;
+  border-radius: var(--dashboard-table-radius);
+  box-shadow: var(--dashboard-table-shadow);
+}
+
+.dashboard-matrix-component {
+  --dashboard-matrix-border: var(--border);
+  --dashboard-matrix-header-bg: color-mix(in srgb, var(--bg-secondary) 92%, var(--surface) 8%);
+  --dashboard-matrix-header-text: var(--text-primary);
+  --dashboard-matrix-row-header-bg: color-mix(in srgb, var(--surface) 96%, var(--text-primary) 4%);
+  --dashboard-matrix-row-header-text: var(--text-primary);
+  --dashboard-matrix-cell-bg: var(--surface);
+  --dashboard-matrix-alt-row-bg: color-mix(in srgb, var(--dashboard-matrix-border) 6%, var(--dashboard-matrix-cell-bg));
+  --dashboard-matrix-cell-text: var(--text-primary);
+  --dashboard-matrix-radius: 0;
+  --dashboard-matrix-shadow: none;
+  border-radius: var(--dashboard-matrix-radius);
+  box-shadow: var(--dashboard-matrix-shadow);
+}
+
+.dashboard-table-search {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.dashboard-table-search-icon {
+  position: absolute;
+  left: 8px;
+  width: 14px;
+  height: 14px;
+  color: var(--text-secondary);
+  pointer-events: none;
+}
+
+.dashboard-table-search input {
+  width: min(220px, 100%);
+  min-height: 32px;
+  border: 1px solid var(--dashboard-table-border, var(--border));
+  border-radius: 6px;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  font: inherit;
+  font-size: 12px;
+  font-weight: 500;
+  padding: 5px 10px 5px 28px;
+}
+
+.dashboard-table-search input:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--color-primary) 12%, transparent);
+}
+
+.dashboard-table-filter-status {
+  flex-basis: 100%;
+  margin: -2px 0 0;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.dashboard-table-tools {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--text-secondary);
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.dashboard-table-tools button {
+  min-height: 32px;
+  border: 1px solid var(--dashboard-table-border, var(--border));
+  border-radius: 6px;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  cursor: pointer;
+  font: inherit;
+  font-weight: 600;
+  padding: 5px 10px;
+}
+
+.dashboard-table-tools button:disabled {
+  cursor: progress;
+  opacity: 0.68;
+}
+
+.dashboard-table-export-error {
+  max-width: 360px;
+  color: var(--danger, #b91c1c);
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.dashboard-table-component table,
+.dashboard-matrix-component table {
+  font-size: 12px;
+  table-layout: auto;
+}
+
+.dashboard-table-component table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+.dashboard-matrix-component table {
+  border-collapse: separate;
+  border-spacing: 0;
+  min-width: max-content;
+}
+
+.dashboard-matrix-component[data-show-borders="true"] th,
+.dashboard-matrix-component[data-show-borders="true"] td {
+  border-bottom: 1px solid var(--dashboard-matrix-border-color, var(--border));
+  border-right: 1px solid var(--dashboard-matrix-border-color, var(--border));
+}
+
+.dashboard-matrix-component[data-show-borders="true"] tr th:first-child,
+.dashboard-matrix-component[data-show-borders="true"] tr td:first-child {
+  border-left: 1px solid var(--dashboard-matrix-border-color, var(--border));
+}
+
+.dashboard-matrix-component[data-show-borders="true"] thead tr:first-child th {
+  border-top: 1px solid var(--dashboard-matrix-border-color, var(--border));
+}
+
+.dashboard-matrix-size-warning {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  border-bottom: 1px solid var(--border);
+  background: color-mix(in srgb, var(--brand-gold) 12%, var(--surface));
+  color: var(--text-primary);
+  font-size: 12px;
+  font-weight: 800;
+  padding: 8px 10px;
+}
+
+.dashboard-matrix-size-warning button {
+  min-height: 28px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--surface);
+  color: var(--text-primary);
+  cursor: pointer;
+  font: inherit;
+  padding: 3px 8px;
+}
+
+.dashboard-table-component th,
+.dashboard-table-component td,
+.dashboard-matrix-component th,
+.dashboard-matrix-component td {
+  max-width: 280px;
+  padding: var(--dashboard-table-cell-padding-y, 7px) var(--dashboard-table-cell-padding-x, 10px);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  vertical-align: middle;
+}
+
+.dashboard-table-component td.is-multiline {
+  text-overflow: clip;
+  white-space: pre-line;
+}
+
+.dashboard-table-component thead th {
+  position: relative;
+  overflow: visible;
+  background: var(--dashboard-table-header-bg);
+  color: var(--dashboard-table-header-text);
+  font-weight: 700;
+  text-transform: none;
+}
+
+.dashboard-table-component tbody td,
+.dashboard-table-component tbody th {
+  background: var(--dashboard-table-row-bg);
+  color: var(--dashboard-table-row-text);
+}
+
+.dashboard-table-component tbody tr:nth-child(even):not(.is-group):not(.is-group-total):not(.is-total) td {
+  background: var(--dashboard-table-alt-row-bg);
+}
+
+.dashboard-table-component .dashboard-table-control-cell {
+  width: 34px;
+  min-width: 34px;
+  max-width: 34px;
+  padding-left: 8px;
+  padding-right: 6px;
+  text-align: center;
+}
+
+.dashboard-table-component tbody tr.is-group th,
+.dashboard-table-component tbody tr.is-group td {
+  border-top: 1px solid color-mix(in srgb, var(--border) 86%, var(--text-primary) 10%);
+  border-bottom: 1px solid color-mix(in srgb, var(--border) 86%, var(--text-primary) 10%);
+  background: var(--dashboard-table-group-bg);
+  color: var(--dashboard-table-row-text);
+  font-weight: 800;
+}
+
+.dashboard-table-component tbody tr.is-group th {
+  letter-spacing: 0;
+}

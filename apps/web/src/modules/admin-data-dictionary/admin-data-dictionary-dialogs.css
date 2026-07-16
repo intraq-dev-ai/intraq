@@ -1,0 +1,221 @@
+.admin-dictionary-dialog-backdrop {
+  position: fixed;
+  z-index: 1000;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(15, 23, 42, 0.48);
+  padding: 24px;
+}
+
+.admin-dictionary-dialog {
+  display: flex;
+  width: min(1000px, 100%);
+  max-height: min(760px, calc(100vh - 48px));
+  flex-direction: column;
+  overflow: hidden;
+  border-radius: 12px;
+  background: var(--admin-panel);
+  box-shadow: 0 24px 70px rgba(15, 23, 42, 0.24);
+}
+
+.admin-dictionary-review-dialog {
+  width: min(1100px, 100%);
+}
+
+.admin-dictionary-dialog-header,
+.admin-dictionary-dialog-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  border-bottom: 1px solid var(--admin-border);
+  padding: 18px 20px;
+}
+
+.admin-dictionary-dialog-footer {
+  border-top: 1px solid var(--admin-border);
+  border-bottom: 0;
+  color: var(--admin-text-soft);
+  font-weight: 800;
+}
+
+.admin-dictionary-dialog-footer div {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: flex-end;
+}
+
+.admin-dictionary-dialog-header h2,
+.admin-dictionary-dialog-header p {
+  margin: 0;
+}
+
+.admin-dictionary-dialog-header h2 {
+  color: var(--admin-text);
+  font-size: 22px;
+  font-weight: 800;
+}
+
+.admin-dictionary-dialog-header p {
+  color: var(--admin-text-soft);
+}
+
+.admin-dictionary-dialog .admin-icon-button {
+  width: 36px;
+  height: 36px;
+  border: 1px solid var(--admin-border);
+  border-radius: 8px;
+  background: var(--admin-panel);
+  color: var(--admin-text);
+  cursor: pointer;
+  font-weight: 800;
+}
+
+.admin-dictionary-dialog-body {
+  display: grid;
+  gap: 16px;
+  overflow: auto;
+  padding: 20px;
+}
+
+.admin-dictionary-dialog-search {
+  display: grid;
+  gap: 7px;
+  color: var(--admin-text);
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.admin-dictionary-dialog-search input {
+  min-height: 42px;
+  border: 1px solid var(--admin-border);
+  border-radius: 8px;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  padding: 0 12px;
+}
+
+.admin-dictionary-filter-options,
+.admin-dictionary-choice-stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.admin-dictionary-filter-options button {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 34px;
+  border: 1px solid var(--admin-border);
+  border-radius: 999px;
+  background: var(--admin-panel);
+  color: var(--admin-text);
+  cursor: pointer;
+  font-weight: 800;
+  padding: 0 12px;
+}
+
+.admin-dictionary-filter-options button.active {
+  border-color: var(--admin-primary);
+  background: color-mix(in srgb, var(--brand-gold) 14%, var(--admin-panel));
+  color: var(--admin-primary-strong);
+}
+
+.admin-dictionary-dialog-grid {
+  display: grid;
+  gap: 14px;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
+
+.admin-dictionary-choice {
+  display: grid;
+  gap: 10px;
+  border: 2px solid var(--admin-border);
+  border-radius: 10px;
+  background: var(--admin-panel);
+  color: var(--admin-text);
+  cursor: pointer;
+  padding: 16px;
+  text-align: left;
+}
+
+.admin-dictionary-choice:hover,
+.admin-dictionary-choice.selected {
+  border-color: var(--admin-primary);
+  background: color-mix(in srgb, var(--brand-gold) 14%, var(--admin-panel));
+}
+
+.admin-dictionary-choice.has-issues {
+  border-color: color-mix(in srgb, var(--brand-gold) 72%, var(--admin-border));
+}
+
+.admin-dictionary-choice-heading {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.admin-dictionary-choice-heading span,
+.admin-dictionary-choice small,
+.admin-dictionary-choice-description,
+.admin-dictionary-choice-stats {
+  color: var(--admin-text-soft);
+}
+
+.admin-dictionary-choice-heading span {
+  border-radius: 999px;
+  background: var(--admin-band);
+  font-size: 12px;
+  font-weight: 800;
+  padding: 4px 8px;
+}
+
+.admin-dictionary-choice-description,
+.admin-dictionary-issues {
+  line-height: 1.45;
+}
+
+.admin-dictionary-choice-stats {
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.admin-dictionary-issues {
+  color: color-mix(in srgb, var(--admin-primary-strong) 86%, var(--admin-text));
+  font-size: 13px;
+}
+
+.admin-dictionary-review-summary {
+  display: grid;
+  gap: 12px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.admin-dictionary-review-summary div {
+  border: 1px solid var(--admin-border);
+  border-radius: 10px;
+  background: var(--admin-band);
+  padding: 14px;
+}
+
+.admin-dictionary-review-summary span {
+  color: var(--admin-text);
+  font-weight: 800;
+}
+
+.admin-dictionary-review-summary p {
+  margin: 6px 0 0;
+  color: var(--admin-text-soft);
+  line-height: 1.5;
+}
+
+@media (max-width: 1180px) {
+  .admin-dictionary-review-summary {
+    grid-template-columns: 1fr;
+  }
+}

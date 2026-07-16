@@ -1,0 +1,122 @@
+.manual-sidebar-palette {
+  padding: 1rem;
+  border-bottom: 1px solid var(--manual-sidebar-border);
+  background: var(--manual-sidebar-panel);
+}
+
+.manual-sidebar-palette-header h2 {
+  font-size: 0.9375rem;
+  font-weight: 700;
+  color: var(--manual-sidebar-text);
+  margin: 0 0 0.75rem;
+}
+
+.manual-palette-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5rem;
+}
+
+.manual-palette-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.625rem 0.5rem;
+  border: 1px solid var(--manual-sidebar-border-soft);
+  border-radius: 0.375rem;
+  background: var(--manual-sidebar-surface);
+  cursor: pointer;
+  font-size: 0.75rem;
+  color: var(--manual-sidebar-text);
+  font-weight: 500;
+  transition: background 0.15s, border-color 0.15s;
+}
+
+.manual-palette-btn:hover {
+  background: color-mix(in srgb, var(--manual-sidebar-primary) 10%, var(--manual-sidebar-surface));
+  border-color: color-mix(in srgb, var(--manual-sidebar-primary) 54%, var(--manual-sidebar-border));
+  color: color-mix(in srgb, var(--manual-sidebar-primary) 82%, var(--manual-sidebar-text));
+}
+
+.manual-palette-btn svg {
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+.palette-bar,
+.palette-column,
+.palette-stacked {
+  border-color: color-mix(in srgb, #4f46e5 34%, var(--manual-sidebar-border));
+  background: color-mix(in srgb, #4f46e5 10%, var(--manual-sidebar-surface));
+  color: color-mix(in srgb, #4f46e5 80%, var(--manual-sidebar-text));
+}
+
+.palette-line,
+.palette-area {
+  border-color: color-mix(in srgb, #059669 34%, var(--manual-sidebar-border));
+  background: color-mix(in srgb, #059669 10%, var(--manual-sidebar-surface));
+  color: color-mix(in srgb, #059669 80%, var(--manual-sidebar-text));
+}
+
+.palette-pie,
+.palette-doughnut {
+  border-color: color-mix(in srgb, #db2777 34%, var(--manual-sidebar-border));
+  background: color-mix(in srgb, #db2777 10%, var(--manual-sidebar-surface));
+  color: color-mix(in srgb, #db2777 80%, var(--manual-sidebar-text));
+}
+
+.palette-table,
+.palette-matrix {
+  border-color: color-mix(in srgb, #d97706 34%, var(--manual-sidebar-border));
+  background: color-mix(in srgb, #d97706 10%, var(--manual-sidebar-surface));
+  color: color-mix(in srgb, #d97706 80%, var(--manual-sidebar-text));
+}
+
+.palette-card,
+.palette-news,
+.palette-chatbot {
+  border-color: color-mix(in srgb, #0891b2 34%, var(--manual-sidebar-border));
+  background: color-mix(in srgb, #0891b2 10%, var(--manual-sidebar-surface));
+  color: color-mix(in srgb, #0891b2 80%, var(--manual-sidebar-text));
+}
+
+.palette-filter {
+  border-color: color-mix(in srgb, #dc2626 34%, var(--manual-sidebar-border));
+  background: color-mix(in srgb, #dc2626 10%, var(--manual-sidebar-surface));
+  color: color-mix(in srgb, #dc2626 80%, var(--manual-sidebar-text));
+}
+
+/* ---- Data source selectors (palette mode) ---- */
+.manual-sidebar-datasource {
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid var(--manual-sidebar-border);
+  background: var(--manual-sidebar-panel);
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.manual-ds-row {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.manual-ds-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--manual-sidebar-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.manual-ds-select {
+  width: 100%;
+  padding: 0.375rem 0.5rem;
+  border: 1px solid var(--manual-sidebar-border-soft);
+  border-radius: 0.25rem;
+  font-size: 0.8125rem;
+  color: var(--manual-sidebar-text);
+  background: var(--manual-sidebar-surface);
+}

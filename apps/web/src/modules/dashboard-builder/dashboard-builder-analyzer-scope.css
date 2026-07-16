@@ -1,0 +1,48 @@
+.dashboard-analyzer-scope {
+  display: grid;
+}
+
+.dashboard-analyzer-context {
+  display: grid;
+  align-content: start;
+  align-items: stretch;
+  gap: 6px;
+}
+
+.dashboard-analyzer-component-select {
+  display: grid;
+  gap: 5px;
+}
+
+.dashboard-analyzer-component-select span {
+  color: var(--text-secondary);
+  font-size: 10px;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.dashboard-analyzer-component-select select {
+  width: 100%;
+  min-width: 0;
+  min-height: 36px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--surface);
+  color: var(--text-primary);
+  font: inherit;
+  font-size: 12px;
+  padding: 0 30px 0 9px;
+}
+
+.dashboard-analyzer-component-select select:focus,
+.dashboard-analyzer-component-select select:focus-visible {
+  outline: 2px solid color-mix(in srgb, var(--ai-primary-500) 55%, transparent);
+  outline-offset: 1px;
+}
+
+.dashboard-analyzer-context .dashboard-analyzer-context-count {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

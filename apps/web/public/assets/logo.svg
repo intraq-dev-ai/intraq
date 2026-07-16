@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 72" role="img" aria-labelledby="title desc">
+  <title id="title">intraQ</title>
+  <desc id="desc">intraQ logo</desc>
+  <defs>
+    <linearGradient id="brandText" x1="70" y1="14" x2="180" y2="58" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#fcd34d" />
+      <stop offset="1" stop-color="#d97706" />
+    </linearGradient>
+    <linearGradient id="brandMark" x1="10" y1="8" x2="58" y2="64" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0f172a" />
+      <stop offset="1" stop-color="#3b2606" />
+    </linearGradient>
+  </defs>
+  <rect x="8" y="8" width="56" height="56" rx="14" fill="url(#brandMark)" />
+  <text x="36" y="46" text-anchor="middle" fill="#fcd34d" font-family="Inter, Arial, sans-serif" font-size="28" font-weight="900">iQ</text>
+  <text x="76" y="47" fill="url(#brandText)" font-family="Inter, Arial, sans-serif" font-size="38" font-weight="800">intraQ</text>
+</svg>

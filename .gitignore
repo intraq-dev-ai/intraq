@@ -1,0 +1,13 @@
+node_modules/
+**/node_modules/
+dist/
+coverage/
+playwright-report/
+test-results/
+artifacts/
+.auth/
+.env*
+!.env.example
+*.log
+*.tsbuildinfo
+generated-pdfs/

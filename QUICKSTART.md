@@ -1,0 +1,95 @@
+# Quickstart
+
+This guide runs intraQ locally with the generic sample sales dataset.
+
+## Option 1: Docker Compose
+
+```bash
+cp .env.example .env
+docker compose up --build
+```
+
+Open `http://localhost:4100`.
+
+The Compose setup starts PostgreSQL, runs migrations, seeds the local demo data,
+and serves the built web app from the API container.
+
+Seeded local login:
+
+| Email | Password |
+|---|---|
+| `admin@local.intraq.test` | `intraq-demo` |
+
+## Option 2: Local development
+
+Prerequisites:
+
+- Node.js 24 LTS. This repo pins `24.16.0` in `.nvmrc` and `.node-version`.
+- npm 11.12+.
+- PostgreSQL 14+.
+
+Use the pinned Node version:
+
+```bash
+nvm use
+```
+
+Install dependencies:
+
+```bash
+npm ci
+```
+
+Create local environment config:
+
+```bash
+cp .env.example .env
+```
+
+Edit `.env`:
+
+```bash
+DATABASE_URL=postgresql://user:password@localhost:5432/intraq
+AUTH_TOKEN_SECRET=replace-with-at-least-32-random-characters
+```
+
+Prepare the database:
+
+```bash
+npm run db:migrate
+npm run db:seed
+```
+
+Start development servers:
+
+```bash
+npm run dev
+```
+
+The API runs on `http://127.0.0.1:4100`.
+The web dev server runs on `http://127.0.0.1:5173`.
+
+## Validation
+
+```bash
+npm test
+npm run build
+```
+
+`npm test` runs type-checking and a small source-package smoke test.
+
+## AI provider setup
+
+AI is bring-your-own-provider. For local/manual AI behavior testing in this
+workspace, use Codex OAuth. Do not put OpenAI API keys in local developer env
+files.
+
+## What is seeded
+
+The baseline seed creates:
+
+- one local tenant;
+- one owner account;
+- one generic sample sales source;
+- one dashboard-ready `sample_sales_model` table with sample rows and
+  metadata.

@@ -1,0 +1,270 @@
+.api-workflow-docs-page {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  min-height: 100%;
+}
+
+.api-docs-hero,
+.api-docs-toolbar,
+.api-docs-summary,
+.api-docs-redoc-shell,
+.api-docs-fallback,
+.api-docs-empty,
+.api-docs-loading {
+  border: 1px solid #d8e0ee;
+  border-radius: 8px;
+  background: #fff;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.05);
+}
+
+.api-docs-hero {
+  display: flex;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 24px;
+}
+
+.api-docs-hero h1,
+.api-docs-redoc-shell h2,
+.api-docs-fallback h2,
+.api-docs-empty h2 {
+  margin: 0;
+  color: #172033;
+}
+
+.api-docs-hero h1 {
+  font-size: 28px;
+  line-height: 1.2;
+}
+
+.api-docs-hero p,
+.api-docs-fallback p,
+.api-docs-empty p {
+  max-width: 760px;
+  margin: 8px 0 0;
+  color: #536174;
+  line-height: 1.55;
+}
+
+.api-docs-kicker {
+  margin: 0 0 6px;
+  color: #2563eb;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+.api-docs-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.api-docs-toolbar {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 18px;
+  padding: 16px 18px;
+}
+
+.api-docs-toolbar label {
+  display: flex;
+  flex: 1;
+  min-width: 260px;
+  max-width: 520px;
+  flex-direction: column;
+  gap: 8px;
+  color: #344154;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.api-docs-toolbar select {
+  min-height: 42px;
+  border: 1px solid #c7d2e5;
+  border-radius: 6px;
+  background: #fff;
+  color: #172033;
+  font: inherit;
+  font-weight: 600;
+  padding: 0 12px;
+}
+
+.api-docs-toolbar-status {
+  color: #536174;
+  font-size: 13px;
+  text-align: right;
+}
+
+.api-docs-summary {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 1px;
+  overflow: hidden;
+  background: #d8e0ee;
+}
+
+.api-docs-summary > div {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  gap: 6px;
+  background: #fff;
+  padding: 16px;
+}
+
+.api-docs-summary span {
+  color: #64748b;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.api-docs-summary strong {
+  overflow: hidden;
+  color: #172033;
+  font-size: 16px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.api-docs-redoc-shell {
+  overflow: hidden;
+}
+
+.api-docs-redoc-shell > header,
+.api-docs-fallback > header {
+  border-bottom: 1px solid #e3e9f3;
+  padding: 18px 20px;
+}
+
+.api-docs-redoc-viewer {
+  min-height: 720px;
+}
+
+.api-docs-redoc-viewer redoc {
+  display: block;
+}
+
+.api-docs-fallback {
+  display: flex;
+  flex-direction: column;
+}
+
+.api-docs-operation {
+  border-top: 1px solid #e3e9f3;
+  padding: 18px 20px;
+}
+
+.api-docs-operation > header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.api-docs-operation code {
+  overflow-wrap: anywhere;
+  color: #1f2937;
+  font-size: 13px;
+}
+
+.api-docs-operation h3 {
+  margin: 12px 0 0;
+  color: #172033;
+  font-size: 18px;
+}
+
+.api-docs-operation p {
+  margin: 8px 0 0;
+  color: #536174;
+}
+
+.api-docs-method {
+  display: inline-flex;
+  min-width: 56px;
+  justify-content: center;
+  border-radius: 5px;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 800;
+  padding: 5px 8px;
+}
+
+.api-docs-method--get {
+  background: #0f766e;
+}
+
+.api-docs-method--post {
+  background: #2563eb;
+}
+
+.api-docs-method--put,
+.api-docs-method--patch {
+  background: #7c3aed;
+}
+
+.api-docs-method--delete {
+  background: #dc2626;
+}
+
+.api-docs-contract {
+  color: #1d4ed8;
+}
+
+.api-docs-operation details {
+  margin-top: 12px;
+}
+
+.api-docs-operation summary {
+  cursor: pointer;
+  color: #2563eb;
+  font-weight: 700;
+}
+
+.api-docs-operation pre {
+  overflow: auto;
+  max-height: 360px;
+  border: 1px solid #d8e0ee;
+  border-radius: 6px;
+  background: #0f172a;
+  color: #e2e8f0;
+  font-size: 12px;
+  line-height: 1.5;
+  padding: 14px;
+}
+
+.api-docs-empty,
+.api-docs-loading {
+  padding: 24px;
+}
+
+@media (max-width: 900px) {
+  .api-docs-hero,
+  .api-docs-toolbar {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .api-docs-actions {
+    justify-content: flex-start;
+  }
+
+  .api-docs-toolbar-status {
+    text-align: left;
+  }
+
+  .api-docs-summary {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 560px) {
+  .api-docs-summary {
+    grid-template-columns: 1fr;
+  }
+}

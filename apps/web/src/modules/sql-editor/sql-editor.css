@@ -1,0 +1,344 @@
+@import './sql-editor-workspace.css';
+@import './sql-editor-pivot.css';
+@import './sql-editor-modals.css';
+
+.sql-editor-layout {
+  --color-bg: var(--bg-secondary);
+  --color-bg-alt: var(--surface);
+  --color-bg-hover: var(--bg-tertiary);
+  --color-border: var(--border);
+  --color-text: var(--text-primary);
+  --color-text-muted: var(--muted);
+  --sql-bg: var(--color-bg);
+  --sql-bg-alt: var(--color-bg-alt);
+  --sql-bg-hover: var(--color-bg-hover);
+  --sql-border: var(--color-border);
+  --sql-text: var(--color-text);
+  --sql-muted: var(--color-text-muted);
+  --sql-accent: var(--ai-primary-500);
+  --sql-success: var(--ai-success-500);
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  min-height: 640px;
+  overflow: hidden;
+  border: 0;
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+:root[data-theme="dark"] .sql-editor-layout {
+  --color-bg: var(--bg-secondary);
+  --color-bg-alt: var(--surface);
+  --color-bg-hover: var(--bg-tertiary);
+  --color-border: var(--border);
+  --color-text: var(--text-primary);
+  --color-text-muted: var(--muted);
+}
+
+.sql-main,
+.sql-editor-panel,
+.resizable-split-container,
+.sql-editor-query-panel,
+.sql-editor-results-panel,
+.sql-editor-schema-panel,
+.sql-editor-right-content {
+  min-width: 0;
+  min-height: 0;
+}
+
+.sql-main {
+  display: flex;
+  flex: 1;
+}
+
+.sql-editor-panel,
+.resizable-split-container,
+.sql-editor-query-panel,
+.sql-editor-results-panel,
+.sql-editor-schema-panel,
+.sql-editor-right-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.sql-editor-panel {
+  flex: 1 1 auto;
+  border-right: 1px solid var(--color-border);
+  overflow: hidden;
+}
+
+.sql-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  min-height: 64px;
+  padding: 12px 20px;
+  border-bottom: 1px solid var(--color-border);
+  background: var(--color-bg-alt);
+}
+
+.header-left,
+.header-center,
+.header-actions,
+.data-source-control,
+.custom-data-sources-section,
+.sql-editor-action-row,
+.sql-editor-pivot-controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.header-left {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.editor-title {
+  margin: 0;
+  color: var(--color-text);
+  font-size: 20px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.sql-editor-title-group {
+  display: flex;
+  align-items: center;
+}
+
+.dropdown-label,
+.sql-editor-status,
+.muted {
+  color: var(--color-text-muted);
+  font-size: 12px;
+}
+
+.dropdown-label {
+  font-weight: 500;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.sql-editor-field span,
+.sql-editor-check {
+  font-weight: 700;
+}
+
+.data-source-select,
+.custom-data-source-select,
+.sql-editor-field input,
+.sql-editor-field select,
+.sql-editor-field textarea {
+  min-height: 32px;
+  border: 1px solid var(--color-border);
+  border-radius: 6px;
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-size: 13px;
+  padding: 0 8px;
+}
+
+.sql-editor-field textarea {
+  min-height: 92px;
+  padding: 10px;
+  resize: vertical;
+}
+
+.data-source-select {
+  min-width: 230px;
+}
+
+.custom-data-source-select {
+  width: 188px;
+  border-color: color-mix(in srgb, var(--sql-accent) 70%, var(--color-border));
+}
+
+.connection-status,
+.sql-editor-status {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.connection-label {
+  max-width: 120px;
+  overflow: hidden;
+  color: var(--color-text-muted);
+  font-size: 11px;
+  font-weight: 500;
+  text-overflow: ellipsis;
+  text-transform: capitalize;
+  white-space: nowrap;
+}
+
+.status-dot,
+.sql-editor-status-dot,
+.active-indicator {
+  width: 8px;
+  height: 8px;
+  flex: 0 0 auto;
+  border-radius: 50%;
+  background: var(--sql-success);
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--sql-success) 22%, transparent);
+}
+
+.header-actions {
+  justify-content: flex-end;
+}
+
+.sql-editor-status {
+  margin: 0;
+  white-space: nowrap;
+}
+
+.button,
+.execute-btn,
+.clear-btn,
+.theme-btn,
+.sql-editor-icon-button,
+.sql-editor-secondary-button,
+.sql-editor-suggestion {
+  border: 1px solid var(--color-border);
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  transition: background 0.2s, border-color 0.2s, color 0.2s, opacity 0.2s;
+}
+
+.execute-btn {
+  min-height: 36px;
+  border-color: #3b82f6 !important;
+  background: #3b82f6 !important;
+  color: white !important;
+  padding: 0 14px;
+}
+
+.execute-btn:hover:not(:disabled) {
+  border-color: #2563eb !important;
+  background: #2563eb !important;
+}
+
+.clear-btn,
+.theme-btn,
+.sql-editor-secondary-button {
+  min-height: 32px;
+  background: var(--color-bg-alt);
+  color: var(--color-text);
+  padding: 0 10px;
+  border-color: color-mix(in srgb, var(--color-border) 80%, var(--color-text));
+}
+
+:root[data-theme="light"] .sql-editor-secondary-button {
+  border-color: #d1d5db;
+  background: #f9fafb;
+}
+
+.theme-btn,
+.sql-editor-icon-button {
+  display: inline-grid;
+  width: 34px;
+  height: 34px;
+  place-items: center;
+  border-radius: 6px;
+}
+
+.save-btn {
+  border-color: #10b981 !important;
+  background: #10b981 !important;
+  color: white !important;
+}
+
+.save-btn:hover:not(:disabled) {
+  border-color: #059669 !important;
+  background: #059669 !important;
+}
+
+.update-btn {
+  border-color: #f59e0b;
+  background: #f59e0b;
+  color: white;
+}
+
+.update-btn:hover:not(:disabled) {
+  border-color: #d97706;
+  background: #d97706;
+}
+
+.theme-icon,
+.sql-editor-icon-button svg {
+  width: 18px;
+  height: 18px;
+}
+
+.sql-profile-dropdown {
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+}
+
+.sql-profile-dropdown .profile-button {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  min-height: 34px;
+  gap: 0;
+  border-color: var(--color-border);
+  border-radius: 50%;
+  background: var(--color-bg-hover);
+  color: var(--color-text);
+  padding: 0;
+}
+
+.sql-profile-dropdown .profile-avatar {
+  display: grid;
+  width: 22px;
+  height: 22px;
+  flex: 0 0 22px;
+  place-items: center;
+  background: transparent;
+  color: var(--color-text);
+  font-weight: 800;
+}
+
+.sql-profile-dropdown .profile-trigger-icon {
+  display: block;
+  width: 18px;
+  height: 18px;
+}
+
+.sql-profile-dropdown .profile-identity,
+.sql-profile-dropdown .profile-name,
+.sql-profile-dropdown .profile-role,
+.sql-profile-dropdown .profile-caret {
+  display: none;
+}
+
+button:disabled,
+select:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
+textarea:focus,
+input:focus,
+select:focus,
+button:focus-visible {
+  outline: 2px solid color-mix(in srgb, var(--sql-accent) 45%, transparent);
+  outline-offset: -1px;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+}

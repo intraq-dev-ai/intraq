@@ -1,0 +1,239 @@
+.api-workflow-guidelines-page {
+  gap: 20px;
+}
+
+.api-guide-hero,
+.api-guide-quick-start,
+.api-guide-feature,
+.api-guide-examples {
+  border: 1px solid var(--admin-border);
+  border-radius: 8px;
+  background: var(--admin-panel);
+  box-shadow: var(--admin-shadow);
+}
+
+.api-guide-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 20px;
+  align-items: start;
+  padding: 24px;
+}
+
+.api-guide-hero h1,
+.api-guide-quick-start h2,
+.api-guide-feature h2,
+.api-guide-examples h2,
+.api-guide-example-grid h3 {
+  margin: 0;
+  color: var(--admin-text);
+}
+
+.api-guide-hero h1 {
+  font-size: clamp(28px, 4vw, 42px);
+  line-height: 1.05;
+}
+
+.api-guide-hero p,
+.api-guide-quick-start p,
+.api-guide-feature p,
+.api-guide-examples p,
+.api-guide-where span,
+.api-guide-feature li,
+.api-guide-quick-start li {
+  color: var(--admin-text-soft);
+  font-size: 14px;
+  line-height: 1.55;
+}
+
+.api-guide-hero p {
+  max-width: 840px;
+  margin: 12px 0 0;
+  font-size: 15px;
+}
+
+.api-guide-kicker {
+  margin: 0 0 8px;
+  color: color-mix(in srgb, var(--admin-primary) 86%, var(--admin-text));
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+.api-guide-hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: flex-end;
+}
+
+.api-guide-quick-start {
+  display: grid;
+  grid-template-columns: minmax(240px, 0.45fr) minmax(0, 1fr);
+  gap: 20px;
+  padding: 22px;
+}
+
+.api-guide-quick-start ol,
+.api-guide-feature ol {
+  margin: 0;
+  padding-left: 22px;
+}
+
+.api-guide-quick-start li + li,
+.api-guide-feature li + li {
+  margin-top: 8px;
+}
+
+.api-guide-feature-list {
+  display: grid;
+  gap: 14px;
+}
+
+.api-guide-feature {
+  display: grid;
+  grid-template-columns: minmax(260px, 0.38fr) minmax(0, 1fr);
+  min-height: 220px;
+  overflow: hidden;
+}
+
+.api-guide-feature > header {
+  display: grid;
+  align-content: start;
+  gap: 14px;
+  border-right: 1px solid var(--admin-border);
+  background: var(--admin-band);
+  padding: 20px;
+}
+
+.api-guide-feature > header > span {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--admin-primary) 12%, var(--admin-panel));
+  color: color-mix(in srgb, var(--admin-primary) 82%, var(--admin-text));
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.api-guide-feature h2,
+.api-guide-quick-start h2,
+.api-guide-examples h2 {
+  font-size: 20px;
+  line-height: 1.2;
+}
+
+.api-guide-feature header p,
+.api-guide-quick-start p,
+.api-guide-examples header p {
+  margin: 8px 0 0;
+}
+
+.api-guide-feature-body {
+  display: grid;
+  gap: 16px;
+  padding: 20px;
+}
+
+.api-guide-where {
+  display: grid;
+  gap: 6px;
+  border: 1px solid color-mix(in srgb, var(--admin-primary) 28%, var(--admin-border));
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--admin-primary) 7%, var(--admin-panel));
+  padding: 12px 14px;
+}
+
+.api-guide-where strong,
+.api-guide-result strong {
+  color: var(--admin-text);
+  font-size: 13px;
+}
+
+.api-guide-result {
+  margin: 0;
+  border-top: 1px solid var(--admin-border);
+  padding-top: 12px;
+}
+
+.api-guide-examples {
+  display: grid;
+  gap: 18px;
+  padding: 22px;
+}
+
+.api-guide-example-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.api-guide-example-grid article {
+  display: grid;
+  gap: 10px;
+  min-width: 0;
+  border: 1px solid var(--admin-border);
+  border-radius: 8px;
+  background: var(--admin-band);
+  padding: 16px;
+}
+
+.api-guide-example-grid p {
+  margin: 0;
+}
+
+.api-guide-example-grid pre {
+  overflow: auto;
+  margin: 0;
+  border: 1px solid var(--admin-border);
+  border-radius: 8px;
+  background: color-mix(in srgb, #0f172a 94%, var(--admin-panel));
+  color: #e5eefb;
+  padding: 14px;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.api-guide-example-grid code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+}
+
+.admin-ds-header-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: flex-end;
+}
+
+@media (max-width: 980px) {
+  .api-guide-hero,
+  .api-guide-quick-start,
+  .api-guide-feature,
+  .api-guide-example-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .api-guide-feature > header {
+    border-right: 0;
+    border-bottom: 1px solid var(--admin-border);
+  }
+
+  .api-guide-hero-actions,
+  .admin-ds-header-actions {
+    justify-content: flex-start;
+  }
+}
+
+@media (max-width: 640px) {
+  .api-guide-hero,
+  .api-guide-quick-start,
+  .api-guide-feature > header,
+  .api-guide-feature-body,
+  .api-guide-examples {
+    padding: 16px;
+  }
+}

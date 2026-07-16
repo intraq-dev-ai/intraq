@@ -1,0 +1,314 @@
+
+.dashboard-new-dialog-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 90;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+  padding: 20px;
+}
+
+.dashboard-new-dialog {
+  display: grid;
+  width: min(360px, 100%);
+  gap: 16px;
+  border: 1px solid color-mix(in srgb, var(--border) 84%, transparent);
+  border-radius: 8px;
+  background: var(--surface);
+  box-shadow: var(--shadow-md);
+  padding: 18px;
+}
+
+.dashboard-new-dialog h3 {
+  color: var(--text-primary);
+  font-size: 18px;
+  font-weight: 800;
+}
+
+.dashboard-ai-dialog {
+  width: 100%;
+  max-width: 500px;
+  max-height: 90vh;
+  gap: 0;
+  border: 0;
+  border-radius: 16px;
+  background: var(--surface);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  padding: 0;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+}
+
+.dashboard-dialog-eyebrow {
+  margin: 0 0 4px;
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+.dashboard-new-dialog label {
+  display: grid;
+  gap: 7px;
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.dashboard-new-dialog input,
+.dashboard-new-dialog textarea {
+  min-height: 38px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  font: inherit;
+  padding: 0 10px;
+}
+
+.dashboard-new-dialog textarea {
+  min-height: 96px;
+  padding: 9px 10px;
+  resize: vertical;
+}
+
+.dashboard-ai-dialog-heading {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+}
+
+.dashboard-ai-dialog-icon {
+  width: 24px;
+  height: 24px;
+  color: #ffffff;
+  flex: 0 0 24px;
+}
+
+.dashboard-ai-dialog-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 20px 24px;
+  background: linear-gradient(135deg, var(--tenant-gradient-start) 0%, var(--tenant-gradient-end) 100%);
+  border-bottom: none;
+}
+
+.dashboard-ai-dialog-body {
+  flex: 1 1 auto;
+  overflow-y: auto;
+  padding: 24px;
+}
+
+.dashboard-ai-dialog-close {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px;
+  border: 0;
+  border-radius: 6px;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.9);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.dashboard-ai-dialog-close:hover {
+  background: rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+}
+
+.dashboard-ai-dialog-close svg {
+  width: 20px;
+  height: 20px;
+}
+
+.dashboard-ai-dialog h3 {
+  color: #ffffff;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.dashboard-ai-message {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.dashboard-ai-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, var(--tenant-gradient-start) 0%, var(--tenant-gradient-end) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 36px;
+  color: #ffffff;
+}
+
+.dashboard-ai-avatar svg {
+  width: 20px;
+  height: 20px;
+}
+
+.dashboard-ai-message-content {
+  flex: 1 1 auto;
+  background: color-mix(in srgb, var(--bg-secondary) 88%, var(--surface));
+  border-radius: 12px;
+  padding: 12px 16px;
+}
+
+.dashboard-ai-message-text {
+  margin: 0;
+  color: var(--text-primary);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.dashboard-ai-suggestions {
+  margin-top: 16px;
+}
+
+.dashboard-ai-suggestions-label {
+  margin: 0 0 12px;
+  color: var(--text-secondary);
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.dashboard-ai-suggestion-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.dashboard-ai-suggestion-chip {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  background: var(--surface);
+  color: var(--text-primary);
+  cursor: pointer;
+  font-size: 13px;
+  padding: 8px 16px;
+  transition: all 0.2s;
+}
+
+.dashboard-ai-suggestion-chip:hover {
+  transform: translateY(-1px);
+  border-color: var(--color-primary);
+  background: color-mix(in srgb, var(--bg-secondary) 88%, var(--surface));
+  color: var(--color-primary);
+}
+
+.dashboard-ai-dialog-footer {
+  padding: 20px 24px;
+  border-top: 1px solid var(--border);
+  background: color-mix(in srgb, var(--bg-secondary) 88%, var(--surface));
+}
+
+.dashboard-ai-input-stack {
+  position: relative;
+  display: block;
+  width: 100%;
+}
+
+.dashboard-ai-input {
+  width: 100%;
+  min-height: 46px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--surface);
+  color: var(--text-primary);
+  font-size: 14px;
+  outline: none;
+  padding: 12px 68px 12px 16px;
+  transition: all 0.2s;
+}
+
+.dashboard-ai-input:focus {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-primary) 12%, transparent);
+}
+
+.dashboard-ai-send-btn {
+  position: absolute;
+  top: 50%;
+  right: 4px;
+  transform: translateY(-50%);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 46px;
+  height: 46px;
+  border: 0;
+  border-radius: 10px;
+  background: linear-gradient(135deg, var(--tenant-gradient-start) 0%, var(--tenant-gradient-end) 100%);
+  color: #ffffff;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.dashboard-ai-send-btn svg {
+  width: 20px;
+  height: 20px;
+}
+
+.dashboard-ai-send-btn:hover:not(:disabled) {
+  transform: translateY(calc(-50% - 1px));
+  box-shadow: 0 4px 12px color-mix(in srgb, var(--color-primary) 30%, transparent);
+}
+
+.dashboard-ai-send-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.dashboard-new-dialog footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.dashboard-dialog-secondary,
+.dashboard-dialog-primary {
+  min-height: 34px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 800;
+  padding: 0 12px;
+}
+
+.dashboard-dialog-secondary {
+  border: 1px solid var(--border);
+  background: var(--bg-primary);
+  color: var(--text-primary);
+}
+
+.dashboard-dialog-primary {
+  border: 1px solid #3152ad;
+  background: linear-gradient(135deg, #6c8eee 0%, #3152ad 100%);
+  color: #ffffff;
+}
+
+.dashboard-dialog-primary:hover:not(:disabled) {
+  background: linear-gradient(135deg, #6c8eee 0%, #3152ad 100%);
+  border-color: #3152ad;
+  box-shadow: 0 0 18px rgba(108, 142, 238, 0.28);
+}
+
+.dashboard-dialog-primary:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+  box-shadow: none;
+}

@@ -1,0 +1,116 @@
+.dashboard-date-time-picker {
+  position: relative;
+  display: inline-flex;
+  align-items: stretch;
+  width: 100%;
+  min-width: 220px;
+  max-width: 390px;
+  height: 38px;
+  border: 1px solid #efefef;
+  border-radius: 0;
+  background: #fff;
+  color: #333;
+  font-family: "Open Sans", Arial, sans-serif;
+  font-size: 14px;
+  line-height: 20px;
+}
+
+.dashboard-date-time-picker:hover,
+.dashboard-date-time-picker.is-open,
+.dashboard-date-time-picker:focus-within {
+  border-color: #cfcfcf;
+  box-shadow: inset 0 1px 1px rgb(0 0 0 / 7.5%);
+}
+
+.dashboard-date-time-input {
+  box-sizing: border-box;
+  align-self: stretch;
+  min-width: 0;
+  min-height: 0 !important;
+  flex: 1 1 auto;
+  border: 0 !important;
+  background: transparent;
+  color: inherit;
+  cursor: text;
+  font: inherit;
+  height: 36px !important;
+  outline: none;
+  padding: 6px 8px;
+}
+
+.dashboard-date-time-icon {
+  box-sizing: border-box;
+  align-self: stretch;
+  display: inline-grid;
+  flex: 0 0 34px;
+  place-items: center;
+  width: 34px;
+  height: auto;
+  border: 0;
+  border-left: 1px solid #ddd;
+  border-radius: 0;
+  background: transparent;
+  color: #444;
+  cursor: pointer;
+  padding: 0;
+}
+
+.dashboard-date-time-icon:last-of-type {
+  border-right: 0;
+}
+
+.dashboard-date-time-icon:hover,
+.dashboard-date-time-icon:focus-visible {
+  background: #f5f5f5;
+  border-color: #ddd;
+  outline: none;
+}
+
+.dashboard-date-time-icon svg {
+  width: 17px;
+  height: 17px;
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.9;
+}
+
+.dashboard-date-time-popover {
+  position: fixed;
+  z-index: 6001;
+  overflow: hidden;
+  border: 1px solid #ebebeb;
+  border-radius: 0;
+  background: #fff;
+  box-shadow: 0 3px 8px rgb(0 0 0 / 18%);
+  color: #444;
+  font-family: "Open Sans", Arial, sans-serif;
+  font-size: 14px;
+  line-height: 20px;
+}
+
+.dashboard-date-time-popover--time {
+  max-height: 240px;
+  overflow-y: auto;
+}
+
+.dashboard-date-time-option {
+  display: block;
+  width: 100%;
+  min-height: 30px;
+  border: 0;
+  background: #fff;
+  color: #444;
+  cursor: pointer;
+  font: inherit;
+  padding: 5px 10px;
+  text-align: left;
+}
+
+.dashboard-date-time-option:hover,
+.dashboard-date-time-option:focus-visible,
+.dashboard-date-time-option.is-selected {
+  background: #ebebeb;
+  outline: none;
+}

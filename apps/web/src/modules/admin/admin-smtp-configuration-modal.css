@@ -1,0 +1,133 @@
+.smtp-modal-overlay {
+  align-items: center;
+  background: rgba(15, 23, 42, 0.5);
+  display: flex;
+  inset: 0;
+  justify-content: center;
+  padding: 1rem;
+  position: fixed;
+  z-index: 80;
+}
+
+.smtp-modal {
+  background: var(--surface);
+  color: var(--text-primary);
+  border-radius: 8px;
+  box-shadow: 0 24px 80px rgba(15, 23, 42, 0.22);
+  max-height: min(90vh, 860px);
+  max-width: 520px;
+  overflow: auto;
+  width: 100%;
+}
+
+.smtp-modal.large {
+  max-width: 680px;
+}
+
+.smtp-modal-header,
+.smtp-modal-footer {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+}
+
+.smtp-modal-header {
+  border-bottom: 1px solid var(--border);
+  padding: 1rem 1.5rem;
+}
+
+.smtp-modal-header h2 {
+  color: var(--text-primary);
+  font-size: 1.125rem;
+  font-weight: 700;
+  margin: 0;
+}
+
+.smtp-modal-header button {
+  background: transparent;
+  border: 0;
+  color: var(--text-secondary);
+  cursor: pointer;
+  font-size: 22px;
+}
+
+.smtp-modal-body {
+  display: grid;
+  gap: 1.5rem;
+  padding: 1.5rem;
+}
+
+.smtp-modal-body fieldset {
+  border: 0;
+  border-top: 1px solid var(--border);
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin: 0;
+  padding: 1rem 0 0;
+}
+
+.smtp-modal-body legend {
+  color: var(--text-primary);
+  font-weight: 700;
+  padding-right: 12px;
+}
+
+.smtp-modal-body label {
+  color: var(--text-primary);
+  display: grid;
+  font-size: 14px;
+  font-weight: 700;
+  gap: 6px;
+}
+
+.smtp-modal-body input {
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  font-size: 14px;
+  min-height: 38px;
+  padding: 8px 10px;
+}
+
+.smtp-modal-body input:focus {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-primary) 18%, transparent);
+  outline: none;
+}
+
+.smtp-checkbox {
+  align-items: center;
+  display: flex !important;
+  flex-direction: row;
+  font-weight: 500 !important;
+  grid-column: 1 / -1;
+}
+
+.smtp-checkbox input {
+  min-height: auto;
+}
+
+.smtp-modal-footer {
+  border-top: 1px solid var(--border);
+  gap: 0.75rem;
+  justify-content: flex-end;
+  padding-top: 1rem;
+}
+
+.smtp-test-details {
+  background: var(--bg-secondary);
+  border-radius: 8px;
+  color: var(--text-secondary);
+  display: grid;
+  font-size: 14px;
+  gap: 4px;
+  padding: 1rem;
+}
+
+@media (max-width: 760px) {
+  .smtp-modal-body fieldset {
+    grid-template-columns: 1fr;
+  }
+}
