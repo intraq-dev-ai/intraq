@@ -95,7 +95,10 @@ export function useDashboardUtilityActions(
         margin: 0.5,
         filename: `${dashboard.name.replace(/\s+/g, '_')}.pdf`,
         image: { type: 'jpeg' as const, quality: 0.98 },
-        html2canvas: { scale: 2 },
+        html2canvas: {
+          scale: 2,
+          onclone: (clonedDocument: Document) => sanitizeDashboardPdfClone(clonedDocument)
+        },
         jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' as const }
       };
       html2pdf().set(opt).from(dashboardContent).save();
@@ -207,4 +210,66 @@ function downloadFileName(response: Response, dashboardName: string, format: Das
   if (fromHeader) return fromHeader;
   const extension = format === 'excel' ? 'xls' : format;
   return `${dashboardName.replace(/\s+/g, '_')}.${extension}`;
+}
+
+const PDF_COLOR_PROPERTIES = [
+  'background-color',
+  'border-bottom-color',
+  'border-left-color',
+  'border-right-color',
+  'border-top-color',
+  'box-shadow',
+  'color',
+  'fill',
+  'outline-color',
+  'stroke',
+  'text-decoration-color',
+  'text-shadow'
+] as const;
+
+function sanitizeDashboardPdfClone(clonedDocument: Document): void {
+  const clonedWindow = clonedDocument.defaultView;
+  if (!clonedWindow) return;
+  clonedDocument.querySelectorAll<HTMLElement | SVGElement>('*').forEach(element => {
+    const computed = clonedWindow.getComputedStyle(element);
+    PDF_COLOR_PROPERTIES.forEach(property => {
+      const value = computed.getPropertyValue(property);
+      if (!hasUnsupportedCanvasColor(value)) return;
+      element.style.setProperty(property, normalizeCanvasColorValue(value));
+    });
+  });
+}
+
+function hasUnsupportedCanvasColor(value: string): boolean {
+  return /\b(?:color|oklch|lab|lch|hwb)\(/i.test(value);
+}
+
+function normalizeCanvasColorValue(value: string): string {
+  return value
+    .replace(/color\(\s*(?:srgb|display-p3)\s+([+-]?(?:\d+\.?\d*|\.\d+)%?)\s+([+-]?(?:\d+\.?\d*|\.\d+)%?)\s+([+-]?(?:\d+\.?\d*|\.\d+)%?)(?:\s*\/\s*([^)]+?))?\s*\)/gi,
+      (_match, red: string, green: string, blue: string, alpha: string | undefined) => {
+        const channels = [red, green, blue].map(normalizeColorChannel);
+        const normalizedAlpha = normalizeAlphaChannel(alpha);
+        return normalizedAlpha === '1'
+          ? `rgb(${channels.join(', ')})`
+          : `rgba(${channels.join(', ')}, ${normalizedAlpha})`;
+      })
+    .replace(/\b(?:oklch|lab|lch|hwb)\([^)]*\)/gi, 'rgba(0, 0, 0, 1)');
+}
+
+function normalizeColorChannel(value: string): number {
+  const trimmed = value.trim();
+  const numeric = Number.parseFloat(trimmed);
+  if (!Number.isFinite(numeric)) return 0;
+  const scaled = trimmed.endsWith('%') ? numeric * 2.55 : numeric <= 1 ? numeric * 255 : numeric;
+  return Math.max(0, Math.min(255, Math.round(scaled)));
+}
+
+function normalizeAlphaChannel(value: string | undefined): string {
+  if (!value) return '1';
+  const trimmed = value.trim();
+  const numeric = Number.parseFloat(trimmed);
+  if (!Number.isFinite(numeric)) return '1';
+  const scaled = trimmed.endsWith('%') ? numeric / 100 : numeric;
+  return String(Math.max(0, Math.min(1, scaled)));
 }
