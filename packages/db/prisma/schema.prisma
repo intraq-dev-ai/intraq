@@ -430,7 +430,6 @@ model User {
   passwordResets       PasswordReset[]
   notifications        Notification[]        @relation("UserNotifications")
   outboundEmails       OutboundEmail[]       @relation("OutboundEmailUser")
-  auditLogs            AuditLog[]
   createdDashboardCategories DashboardCategory[] @relation("DashboardCategoryCreator")
   mcpAccessTokens      McpAccessToken[] @relation("UserMcpAccessTokens")
 
@@ -615,23 +614,6 @@ model OutboundEmail {
   @@index([tenantId])
   @@index([userId])
   @@map("outbound_emails")
-}
-
-model AuditLog {
-  id          String   @id @default(cuid())
-  action      String
-  resource    String
-  resourceId  String?  @map("resource_id")
-  userId      String?  @map("user_id")
-  tenantId    String?  @map("tenant_id")
-  ipAddress   String?  @map("ip_address")
-  userAgent   String?  @map("user_agent")
-  metadata    Json?
-  createdAt   DateTime @default(now()) @map("created_at")
-
-  user User? @relation(fields: [userId], references: [id], onDelete: SetNull)
-
-  @@map("audit_logs")
 }
 
 model SampleDataset {

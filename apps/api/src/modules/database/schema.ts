@@ -31,7 +31,6 @@ export const BASE_PRODUCT_TABLES: ProductTable[] = [
   table('SmtpConfiguration', 'smtp_configurations', 'communications'),
   table('Notification', 'notifications', 'communications'),
   table('OutboundEmail', 'outbound_emails', 'communications'),
-  table('AuditLog', 'audit_logs', 'audit'),
   table('SampleDataset', 'sample_datasets', 'sample-data'),
   table('SampleTable', 'sample_tables', 'sample-data'),
   table('SampleDataRow', 'sample_data_rows', 'sample-data'),
@@ -41,7 +40,7 @@ export const BASE_PRODUCT_TABLES: ProductTable[] = [
   table('EmailTemplate', 'email_templates', 'dashboard-email'),
   table('DashboardVersion', 'dashboard_versions', 'dashboards'),
   table('McpAccessToken', 'mcp_access_tokens', 'mcp'),
-  table('ActivityLog', 'activity_logs', 'audit')
+  table('ActivityLog', 'activity_logs', 'activity')
 ];
 
 export function databaseCoverage(): Record<string, unknown> {

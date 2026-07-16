@@ -491,21 +491,6 @@ CREATE TABLE "outbound_emails" (
     CONSTRAINT "outbound_emails_pkey" PRIMARY KEY ("id")
 );
 
-CREATE TABLE "audit_logs" (
-    "id" TEXT NOT NULL,
-    "action" TEXT NOT NULL,
-    "resource" TEXT NOT NULL,
-    "resource_id" TEXT,
-    "user_id" TEXT,
-    "tenant_id" TEXT,
-    "ip_address" TEXT,
-    "user_agent" TEXT,
-    "metadata" JSONB,
-    "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-
-    CONSTRAINT "audit_logs_pkey" PRIMARY KEY ("id")
-);
-
 -- CreateTable
 CREATE TABLE "sample_datasets" (
     "id" TEXT NOT NULL,
@@ -931,8 +916,6 @@ ALTER TABLE "outbound_emails" ADD CONSTRAINT "outbound_emails_user_id_fkey" FORE
 
 -- AddForeignKey
 ALTER TABLE "outbound_emails" ADD CONSTRAINT "outbound_emails_tenant_id_fkey" FOREIGN KEY ("tenant_id") REFERENCES "tenants"("id") ON DELETE CASCADE ON UPDATE CASCADE;
-
-ALTER TABLE "audit_logs" ADD CONSTRAINT "audit_logs_user_id_fkey" FOREIGN KEY ("user_id") REFERENCES "users"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "sample_tables" ADD CONSTRAINT "sample_tables_dataset_id_fkey" FOREIGN KEY ("dataset_id") REFERENCES "sample_datasets"("id") ON DELETE CASCADE ON UPDATE CASCADE;
