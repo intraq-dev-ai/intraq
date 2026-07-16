@@ -92,6 +92,10 @@ AI behavior is bring-your-own-provider. Without a configured provider, core app
 setup still works, but Analyzer, Dashboard Builder, and SQL assistant AI paths
 may use fallback/refusal behavior instead of model-generated answers.
 
+The recommended setup path for self-hosted operators is the admin UI:
+**Admin → AI & MCP → AI API Key Management**. See
+[AI provider setup](AI_PROVIDER_SETUP.md) for screenshots and the full workflow.
+
 For local/manual contributor testing in this repository workspace, use Codex
 OAuth only. Do not put OpenAI API keys in local contributor `.env` files.
 

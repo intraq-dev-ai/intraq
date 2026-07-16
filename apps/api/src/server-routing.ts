@@ -4,6 +4,7 @@ import type { ApiConfig } from './config.js';
 import { sendNotFound, sendOk } from './http.js';
 import type { AdminIntegrationsFoundationRoutes } from './modules/admin-integrations/foundation-routes.js';
 import type { AgentThreadRoutes } from './modules/agent-thread/routes.js';
+import type { AiProviderSettingsRoutes } from './modules/ai-provider-settings/routes.js';
 import type { AdminFoundationRoutes } from './modules/admin/foundation-routes.js';
 import type { AnalyzerCompatRoutes } from './modules/analyzer/compat-routes.js';
 import type { AnalyzerHistoryFoundationRoutes } from './modules/analyzer/history-foundation-routes.js';
@@ -27,6 +28,7 @@ import { attachOptionalApiRequestContext, authorizeApiRequest } from './security
 export interface ApiRouteContext {
   adminFoundationRoutes: AdminFoundationRoutes;
   adminIntegrationsFoundationRoutes: AdminIntegrationsFoundationRoutes;
+  aiProviderSettingsRoutes: AiProviderSettingsRoutes;
   agentRoutes: ProductAgentRoutes;
   agentThreadRoutes: AgentThreadRoutes;
   analyzerCompatRoutes: AnalyzerCompatRoutes;
@@ -86,6 +88,7 @@ export async function routeApi(
   if (await routes.analyzerHistoryFoundationRoutes.handle(req, res, url)) return true;
   if (await routes.agentThreadRoutes.handle(req, res, url)) return true;
   if (await routes.authSetupFoundationRoutes.handle(req, res, url)) return true;
+  if (await routes.aiProviderSettingsRoutes.handle(req, res, url)) return true;
   if (await routes.adminFoundationRoutes.handle(req, res, url)) return true;
   if (await routes.adminIntegrationsFoundationRoutes.handle(req, res, url)) return true;
   if (await routes.dashboardFoundationRoutes.handle(req, res, url)) return true;

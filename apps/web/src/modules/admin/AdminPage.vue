@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { computed } from 'vue';
 import { useRoute } from 'vue-router';
+import AdminAiProviderSettingsPage from '../admin-ai-provider-settings/AdminAiProviderSettingsPage.vue';
 import AdminDashboardCategoriesPage from '../admin-dashboard-categories/AdminDashboardCategoriesPage.vue';
 import AdminDashboardManagementPage from '../admin-dashboard-management/AdminDashboardManagementPage.vue';
 import AdminBaseProductResourceSurface from './components/AdminBaseProductResourceSurface.vue';
@@ -23,6 +24,7 @@ const surface = computed(() => {
 });
 
 const isDashboardManagement = computed(() => surface.value.id === 'dashboards');
+const isAiProviderSettings = computed(() => surface.value.id === 'ai-provider-settings');
 const isDashboardCategories = computed(() => surface.value.id === 'dashboard-categories');
 const isCustomDataSources = computed(() => surface.value.id === 'custom-data-sources');
 const isSmtpConfiguration = computed(() => surface.value.id === 'smtp-configuration');
@@ -36,6 +38,10 @@ const isBaseProductResource = computed(() => [
 <template>
   <AdminDashboardManagementPage
     v-if="surface.kind === 'resource' && isDashboardManagement"
+    :key="surface.id"
+  />
+  <AdminAiProviderSettingsPage
+    v-else-if="isAiProviderSettings"
     :key="surface.id"
   />
   <AdminDashboardCategoriesPage

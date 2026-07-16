@@ -15,6 +15,8 @@ const surfaceAliases: Record<string, string> = {
   'data-dictionary': 'data-dictionary',
   'custom-data-sources': 'custom-data-sources',
   'sql-query-editor': 'sql-query-editor',
+  'ai-api-key-management': 'ai-provider-settings',
+  'ai-provider-settings': 'ai-provider-settings',
   'smtp-configuration': 'smtp-configuration',
   settings: 'settings'
 };
