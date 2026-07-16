@@ -18,6 +18,12 @@ Only the app is published to the host on port `4100`. PostgreSQL is kept inside
 the Compose network so it does not conflict with a local database on port
 `5432`.
 
+If port `4100` is already in use, choose another host port:
+
+```bash
+INTRAQ_PORT=4110 docker compose up --build
+```
+
 Seeded local login:
 
 | Email | Password |

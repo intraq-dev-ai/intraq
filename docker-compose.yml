@@ -31,7 +31,7 @@ services:
     command: >
       sh -c "npm run db:migrate && node packages/db/dist/seed/run.js && npm start"
     ports:
-      - "4100:4100"
+      - "${INTRAQ_PORT:-4100}:4100"
 
 volumes:
   intraq-postgres-data:
