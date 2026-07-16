@@ -14,6 +14,10 @@ Open `http://localhost:4100`.
 The Compose setup starts PostgreSQL, runs migrations, seeds the local demo data,
 and serves the built web app from the API container.
 
+Only the app is published to the host on port `4100`. PostgreSQL is kept inside
+the Compose network so it does not conflict with a local database on port
+`5432`.
+
 Seeded local login:
 
 | Email | Password |
