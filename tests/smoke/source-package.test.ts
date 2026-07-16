@@ -7,7 +7,7 @@ import {
 } from '../../packages/db/src/seed/baseline-data.js';
 
 describe('source package', () => {
-  it('ships generic sample data without client-specific names', () => {
+  it('ships generic sample data without non-public names', () => {
     const serialized = JSON.stringify({
       baselineDataSources,
       baselineTenants,
@@ -16,8 +16,8 @@ describe('source package', () => {
 
     expect(serialized).toContain('sample sales');
     expect(serialized).toContain('sample_sales_model');
-    expect(serialized).not.toContain('customer-specific');
-    expect(serialized).not.toContain('private deployment');
+    expect(serialized).not.toContain('non-public source name');
+    expect(serialized).not.toContain('private source package');
   });
 
   it('exposes the core product routes', () => {

@@ -14,7 +14,7 @@ This repository is the generalized intraQ public source tree.
 ## Excluded
 
 - credentials, provider keys, database passwords, or private env files;
-- client-specific data, documents, screenshots, exports, or acceptance evidence;
+- sensitive data, documents, screenshots, exports, or acceptance evidence;
 - private operational and go-to-market material;
 - paid AI Studio logic;
 - proprietary domain intelligence packs;
@@ -25,5 +25,5 @@ This repository is the generalized intraQ public source tree.
 ## Contribution boundary
 
 Contributions should improve the generalized product. If a change is only useful
-for one customer, one private deployment, or one paid managed-service workflow,
-keep it outside this repository.
+for one non-public environment or one paid managed-service workflow, keep it
+outside this repository.

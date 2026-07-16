@@ -7,7 +7,7 @@ body:
   - type: markdown
     attributes:
       value: |
-        Thanks for reporting a problem. Please keep reports free of credentials, private customer data, and client-specific exports.
+        Thanks for reporting a problem. Please keep reports free of credentials, sensitive data, and non-public exports.
   - type: textarea
     id: summary
     attributes:
@@ -49,5 +49,5 @@ body:
     id: logs
     attributes:
       label: Relevant logs
-      description: Paste only sanitized logs. Do not include tokens, passwords, private data, or customer names.
+      description: Paste only sanitized logs. Do not include tokens, passwords, private data, or real names.
       render: shell

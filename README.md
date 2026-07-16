@@ -31,7 +31,7 @@ See [LICENSE.md](LICENSE.md) and [COMMERCIAL.md](COMMERCIAL.md).
 ## Public Source Scope
 
 This repository is the generalized public source package. It excludes
-client-specific material, private operational docs, paid AI Studio, proprietary
+non-public material, private operational docs, paid AI Studio, proprietary
 domain packs, feedback learning loops, eval pipelines, multi-tenant governance,
 billing, and managed-service code.
 
