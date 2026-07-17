@@ -5,7 +5,7 @@
   border-bottom: 1px solid var(--border);
   border-radius: 0;
   background: var(--dashboard-header-bg);
-  padding: 10px 24px 12px;
+  padding: 10px 16px 12px;
 }
 
 .dashboard-filter-chip {

@@ -11,6 +11,14 @@ export const ADMIN_SUMMARY_SURFACES: Record<string, AdminSummarySurface> = {
     description: 'Inspect available data sources before executing SQL through the dedicated SQL module.',
     requests: [{ id: 'sources', title: 'Queryable Sources', path: '/api/data-sources' }]
   },
+  'ai-provider-settings': {
+    id: 'ai-provider-settings',
+    kind: 'summary',
+    eyebrow: 'AI Configuration',
+    title: 'AI API Key Management',
+    description: 'Configure local OpenAI, Gemini, and Codex provider settings for this intraQ instance.',
+    requests: [{ id: 'settings', title: 'AI Provider Settings', path: '/api/ai-provider-settings' }]
+  },
   settings: {
     id: 'settings',
     kind: 'summary',

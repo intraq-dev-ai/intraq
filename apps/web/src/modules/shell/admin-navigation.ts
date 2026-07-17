@@ -33,6 +33,7 @@ export const adminSections: ShellNavSection[] = [
   {
     title: 'AI & MCP',
     links: [
+      { path: '/admin/ai-api-key-management', label: 'AI API Key Management', roles: ownerRoles },
       { path: '/admin/mcp-access', label: 'MCP Access', roles: ownerRoles }
     ]
   },

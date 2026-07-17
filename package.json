@@ -30,6 +30,8 @@
     "db:migrate": "npm run db:migrate --workspace @intraq/db",
     "db:seed": "npm run db:seed --workspace @intraq/db",
     "db:validate": "npm run db:validate --workspace @intraq/db",
+    "demo:capture": "node scripts/capture-demo-assets.mjs",
+    "demo:capture:ai": "node scripts/capture-dashboard-ai-demo.mjs",
     "prebuild": "npm run require:node24 && npm run db:generate",
     "build": "npm run build:packages && npm run build --workspace @intraq/api && npm run build --workspace @intraq/web",
     "build:packages": "npm run build --workspace @intraq/contracts && npm run build --workspace @intraq/agent-core && npm run build --workspace @intraq/db",

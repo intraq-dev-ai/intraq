@@ -21,7 +21,7 @@ export function loadApiConfig(env: NodeJS.ProcessEnv = process.env): ApiConfig {
   validateRuntimeSecrets(env);
   return {
     acceptAuthCookie: parseBoolean(env.API_ACCEPT_AUTH_COOKIE) ?? false,
-    dashboardPersistence: env.DASHBOARD_PERSISTENCE === 'memory' ? 'memory' : 'prisma',
+    dashboardPersistence: env.DASHBOARD_PERSISTENCE === 'memory' || !env.DATABASE_URL?.trim() ? 'memory' : 'prisma',
     enableRuntimeDiagnostics: parseBoolean(env.ENABLE_RUNTIME_DIAGNOSTICS) ?? false,
     enforceApiAuth: parseBoolean(env.API_ENFORCE_AUTH) ?? env.NODE_ENV === 'production',
     host: env.API_HOST?.trim() || '127.0.0.1',

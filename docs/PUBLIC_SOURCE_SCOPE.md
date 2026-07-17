@@ -9,7 +9,7 @@ This repository is the generalized intraQ public source tree.
 - Analyzer and SQL assistant workflows grounded in local metadata and models;
 - generic data-source management;
 - MCP access features suitable for local/self-hosted use;
-- generic sample data and seed metadata.
+- generic sample data, seed metadata, and starter dashboards.
 
 ## Excluded
 

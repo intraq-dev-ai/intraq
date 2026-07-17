@@ -64,6 +64,7 @@ AUTH_TOKEN_SECRET=replace-with-at-least-32-random-characters
 ```
 
 Full environment-variable reference: [docs/CONFIGURATION.md](docs/CONFIGURATION.md).
+Demo walkthrough: [docs/DEMO_GUIDE.md](docs/DEMO_GUIDE.md).
 
 Prepare the database:
 
@@ -96,6 +97,18 @@ AI is bring-your-own-provider. For local/manual AI behavior testing in this
 workspace, use Codex OAuth. Do not put OpenAI API keys in local developer env
 files.
 
+After signing in, open **Admin → AI & MCP → AI API Key Management** to configure
+Codex OAuth, OpenAI, or Gemini for Analyzer, Dashboard Builder, and SQL assistant
+workflows.
+
+For Codex OAuth browser login, set `OPENAI_OAUTH_CLIENT_ID` in the API
+environment first. Keep `OPENAI_OAUTH_REDIRECT_URI` aligned with the Codex
+callback URL, usually `http://localhost:1455/auth/callback`. Without a client
+ID, **Connect Codex** returns `OPENAI_OAUTH_CLIENT_ID is required to start Codex
+OAuth login.`
+
+Detailed setup with screenshots: [docs/AI_PROVIDER_SETUP.md](docs/AI_PROVIDER_SETUP.md).
+
 ## What is seeded
 
 The baseline seed creates:
@@ -104,4 +117,5 @@ The baseline seed creates:
 - one owner account;
 - one generic sample sales source;
 - one dashboard-ready `sample_sales_model` table with sample rows and
-  metadata.
+  metadata;
+- one published **Sample Sales Overview** starter dashboard.

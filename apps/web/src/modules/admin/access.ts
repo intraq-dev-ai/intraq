@@ -10,11 +10,13 @@ const availableAdminSections = new Set([
   'data-dictionary',
   'custom-data-sources',
   'sql-query-editor',
+  'ai-api-key-management',
+  'ai-provider-settings',
   'smtp-configuration',
   'mcp-access'
 ]);
 
-const ownerSections = new Set(['smtp-configuration', 'mcp-access']);
+const ownerSections = new Set(['ai-provider-settings', 'smtp-configuration', 'mcp-access']);
 
 const adminRoles = new Set(['SINGLE_TENANT_OWNER', 'SINGLE_TENANT_ADMIN']);
 const dataRoles = new Set([...adminRoles, 'SINGLE_TENANT_DEVELOPER']);
@@ -48,7 +50,8 @@ function routeSegments(value: unknown, path: string): string[] {
 }
 
 function adminSectionKey(segments: string[]): string {
-  return segments.at(-1) || segments[0] || 'dashboard';
+  const section = segments.at(-1) || segments[0] || 'dashboard';
+  return section === 'ai-api-key-management' ? 'ai-provider-settings' : section;
 }
 
 function readStoredRole(): string {

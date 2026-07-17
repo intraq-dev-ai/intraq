@@ -13,7 +13,7 @@
 
 .dashboard-canvas-elements {
   grid-template-columns: repeat(12, minmax(0, 1fr));
-  padding: 16px 20px 20px;
+  padding: 16px 16px 20px;
 }
 
 .dashboard-canvas-item {
@@ -27,7 +27,7 @@
   position: relative;
   display: block;
   min-height: 360px;
-  padding: 0 !important;
+  padding: 16px !important;
 }
 
 .dashboard-canvas-panel--edit {

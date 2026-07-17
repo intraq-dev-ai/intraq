@@ -14,6 +14,8 @@ intentionally excludes the paid AI Studio, proprietary domain intelligence,
 control plane, paid release tooling, private operational docs, generated
 artifacts, credentials, and private operational material.
 
+![intraQ dashboard builder with AI sidebar](docs/assets/demo/00-readme-hero-ai-sidebar.png)
+
 ## License
 
 intraQ is source-available under the IntraQ Sustainable Use License.
@@ -97,3 +99,11 @@ material.
 
 More setup detail is in [QUICKSTART.md](QUICKSTART.md). Environment variables
 are documented in [docs/CONFIGURATION.md](docs/CONFIGURATION.md).
+
+AI provider setup for Codex OAuth, OpenAI, and Gemini is documented in
+[docs/AI_PROVIDER_SETUP.md](docs/AI_PROVIDER_SETUP.md).
+For Codex OAuth browser login, set `OPENAI_OAUTH_CLIENT_ID` in the API
+environment; otherwise the admin page cannot start the Codex login flow.
+
+The seeded product demo and suggested walkthrough videos are documented in
+[docs/DEMO_GUIDE.md](docs/DEMO_GUIDE.md).

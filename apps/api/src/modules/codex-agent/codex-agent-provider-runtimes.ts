@@ -7,7 +7,8 @@ import type {
   CodexAgentInvocation,
   CodexAgentResult,
   CodexAgentRuntime,
-  CodexResponseRequester
+  CodexResponseRequester,
+  RuntimeProviderConfigResolver
 } from './codex-agent-runtime.js';
 import {
   fallback,
@@ -21,11 +22,14 @@ import {
   resultFromResponse,
   safeErrorMessage
 } from './codex-agent-runtime-utils.js';
+import { GeminiResponsesClient } from './gemini-responses-client.js';
+import { OpenAIResponsesClient } from './openai-responses-client.js';
 
 export class OpenAIAgentRuntime implements CodexAgentRuntime {
   constructor(
     private readonly options: {
       client: CodexResponseRequester;
+      configResolver?: RuntimeProviderConfigResolver;
       disabled: boolean;
       env: NodeJS.ProcessEnv;
     }
@@ -101,6 +105,18 @@ export class OpenAIAgentRuntime implements CodexAgentRuntime {
     model: string;
   }> {
     const requestedModel = modelOverride?.trim();
+    const stored = await this.options.configResolver?.().catch(() => null);
+    if (stored?.apiKey?.trim()) {
+      return {
+        client: new OpenAIResponsesClient({
+          apiKey: stored.apiKey,
+          env: this.options.env,
+          ...(stored.baseUrl ? { baseUrl: stored.baseUrl } : {})
+        }),
+        hasKey: true,
+        model: requestedModel || stored.model?.trim() || resolveOpenAIModel(this.options.env)
+      };
+    }
     return {
       client: this.options.client,
       hasKey: hasOpenAIKey(this.options.env),
@@ -113,6 +129,7 @@ export class GeminiAgentRuntime implements CodexAgentRuntime {
   constructor(
     private readonly options: {
       client: CodexResponseRequester;
+      configResolver?: RuntimeProviderConfigResolver;
       disabled: boolean;
       env: NodeJS.ProcessEnv;
     }
@@ -183,6 +200,18 @@ export class GeminiAgentRuntime implements CodexAgentRuntime {
     model: string;
   }> {
     const requestedModel = modelOverride?.trim();
+    const stored = await this.options.configResolver?.().catch(() => null);
+    if (stored?.apiKey?.trim()) {
+      return {
+        client: new GeminiResponsesClient({
+          apiKey: stored.apiKey,
+          env: this.options.env,
+          ...(stored.baseUrl ? { baseUrl: stored.baseUrl } : {})
+        }),
+        hasKey: true,
+        model: requestedModel || stored.model?.trim() || resolveGeminiModel(undefined, this.options.env)
+      };
+    }
     return {
       client: this.options.client,
       hasKey: hasGeminiKey(this.options.env),

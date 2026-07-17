@@ -86,6 +86,13 @@ export interface RuntimeTenantOptions {
 
 export type CodexModelResolver = (options?: RuntimeTenantOptions) => Promise<string | null>;
 export type RuntimeProvider = CodexAgentResult['provider'];
+export interface RuntimeProviderConfig {
+  apiKey: string;
+  baseUrl?: string;
+  model?: string;
+}
+export type RuntimeProviderResolver = (options?: RuntimeTenantOptions) => Promise<RuntimeProvider | null>;
+export type RuntimeProviderConfigResolver = (options?: RuntimeTenantOptions) => Promise<RuntimeProviderConfig | null>;
 
 export interface CodexResponseRequester {
   createResponse(credentials: CodexResponseCredentials, request: CodexResponsesRequest): Promise<CodexResponsesOutput>;
@@ -97,15 +104,18 @@ export function createCodexAgentRuntime(
     disabled?: boolean;
     env?: NodeJS.ProcessEnv;
     codexModelResolver?: CodexModelResolver;
+    geminiConfigResolver?: RuntimeProviderConfigResolver;
     provider?: RuntimeProvider;
+    providerResolver?: RuntimeProviderResolver;
+    openAIConfigResolver?: RuntimeProviderConfigResolver;
   } = {}
 ): CodexAgentRuntime {
   const env = options.env ?? process.env;
-  const explicitProvider = options.provider ?? resolveExplicitAgentProvider(env);
   const openAIRuntime = new OpenAIAgentRuntime({
     client: options.client ?? new OpenAIResponsesClient({ env }),
     disabled: options.disabled ?? defaultDisabled('openai', env),
-    env
+    env,
+    ...(options.openAIConfigResolver ? { configResolver: options.openAIConfigResolver } : {})
   });
   const codexRuntime = new DefaultCodexAgentRuntime({
     client: options.client ?? new CodexResponsesClient(),
@@ -116,17 +126,54 @@ export function createCodexAgentRuntime(
   const geminiRuntime = new GeminiAgentRuntime({
     client: options.client ?? new GeminiResponsesClient({ env }),
     disabled: options.disabled ?? defaultDisabled('gemini', env),
-    env
+    env,
+    ...(options.geminiConfigResolver ? { configResolver: options.geminiConfigResolver } : {})
   });
-  if (explicitProvider === 'gemini') {
-    return new GeminiPreferredAgentRuntime(
-      codexRuntime,
-      geminiRuntime
-    );
+  return new ProviderResolvingAgentRuntime({
+    codexRuntime,
+    env,
+    geminiRuntime,
+    openAIRuntime,
+    ...(options.provider ? { provider: options.provider } : {}),
+    ...(options.providerResolver ? { providerResolver: options.providerResolver } : {})
+  });
+}
+
+class ProviderResolvingAgentRuntime implements CodexAgentRuntime {
+  constructor(
+    private readonly options: {
+      codexRuntime: CodexAgentRuntime;
+      env: NodeJS.ProcessEnv;
+      geminiRuntime: CodexAgentRuntime;
+      openAIRuntime: CodexAgentRuntime;
+      provider?: RuntimeProvider;
+      providerResolver?: RuntimeProviderResolver;
+    }
+  ) {}
+
+  async invoke(invocation: CodexAgentInvocation): Promise<CodexAgentResult> {
+    return await (await this.runtimeFor(invocation.tenantId)).invoke(invocation);
   }
-  if (explicitProvider === 'codex') return codexRuntime;
-  if (explicitProvider === 'openai') return openAIRuntime;
-  return codexRuntime;
+
+  async runToolLoop<TFallback>(
+    invocation: CodexAgentToolLoopInvocation<TFallback>
+  ): Promise<CodexAgentToolLoopResult<TFallback>> {
+    return await (await this.runtimeFor(invocation.tenantId)).runToolLoop(invocation);
+  }
+
+  private async runtimeFor(tenantId?: string | null): Promise<CodexAgentRuntime> {
+    const provider = await this.resolveProvider(tenantId);
+    if (provider === 'openai') return this.options.openAIRuntime;
+    if (provider === 'gemini') return this.options.geminiRuntime;
+    return this.options.codexRuntime;
+  }
+
+  private async resolveProvider(tenantId?: string | null): Promise<RuntimeProvider> {
+    if (this.options.provider) return this.options.provider;
+    const modelOptions = tenantId === undefined ? undefined : { tenantId };
+    const configured = await this.options.providerResolver?.(modelOptions).catch(() => null);
+    return configured ?? resolveExplicitAgentProvider(this.options.env) ?? 'codex';
+  }
 }
 
 class DefaultCodexAgentRuntime implements CodexAgentRuntime {

@@ -7,6 +7,12 @@ import {
   createAdminIntegrationsFoundationRoutes,
   type AdminIntegrationsFoundationRoutes
 } from './modules/admin-integrations/foundation-routes.js';
+import { createAiProviderSettingsRoutes, type AiProviderSettingsRoutes } from './modules/ai-provider-settings/routes.js';
+import {
+  resolveAiProviderSetting,
+  resolveGeminiProviderConfig,
+  resolveOpenAIProviderConfig
+} from './modules/ai-provider-settings/settings.js';
 import { createEmailDeliveryService } from './modules/admin-integrations/email-service.js';
 import { createAgentThreadRoutes, type AgentThreadRoutes } from './modules/agent-thread/routes.js';
 import { createAdminFoundationRoutes } from './modules/admin/foundation-routes.js';
@@ -66,7 +72,11 @@ export function createApiServer(config: ApiConfig & {
     });
   }
   const dataSourceRuntimeSync = prismaClient ? new PrismaDataSourceRuntimeSync(prismaClient) : null;
-  const codexAgentRuntime = config.codexAgentRuntime ?? createCodexAgentRuntime();
+  const codexAgentRuntime = config.codexAgentRuntime ?? createCodexAgentRuntime({
+    geminiConfigResolver: () => resolveGeminiProviderConfig(prismaClient),
+    openAIConfigResolver: () => resolveOpenAIProviderConfig(prismaClient),
+    providerResolver: () => resolveAiProviderSetting(prismaClient)
+  });
   const ensureDataSourcesLoaded: EnsureDataSourcesLoaded = dataSourceRuntimeSync
     ? options => dataSourceRuntimeSync.ensureLoaded(options)
     : noopEnsureDataSourcesLoaded;
@@ -85,6 +95,7 @@ export function createApiServer(config: ApiConfig & {
   const authSetupFoundationRoutes = createAuthSetupFoundationRoutes(authStore, {
     acceptAuthCookie: config.acceptAuthCookie === true
   });
+  const aiProviderSettingsRoutes = createAiProviderSettingsRoutes(prismaClient);
   const adminFoundationRoutes = createAdminFoundationRoutes(prismaClient);
   const adminIntegrationsFoundationRoutes = createAdminIntegrationsFoundationRoutes(prismaClient, emailService);
   const mcpTokenService = prismaClient && authStore
@@ -201,6 +212,7 @@ export function createApiServer(config: ApiConfig & {
           {
             adminFoundationRoutes,
             adminIntegrationsFoundationRoutes,
+            aiProviderSettingsRoutes,
             agentRoutes,
             agentThreadRoutes,
             analyzerCompatRoutes,

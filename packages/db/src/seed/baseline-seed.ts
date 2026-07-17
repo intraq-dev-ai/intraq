@@ -19,6 +19,10 @@ interface UpsertDelegate {
 }
 
 interface BaselineSeedClient {
+  dashboard: UpsertDelegate;
+  dashboardCategory: UpsertDelegate;
+  dashboardElement: UpsertDelegate;
+  dashboardFilter: UpsertDelegate;
   dataSource: UpsertDelegate;
   dataSourceTable: UpsertDelegate;
   sampleDataRow: UpsertDelegate;
@@ -35,6 +39,11 @@ export interface BaselineSeedOptions {
 interface SeedIndex {
   tenantsByDomain: Map<string, string>;
   usersByEmail: Map<string, string>;
+}
+
+interface DashboardElementSeed extends Record<string, unknown> {
+  id: string;
+  layout: Record<string, unknown>;
 }
 
 export interface BaselineSeedResult {
@@ -64,14 +73,15 @@ export async function seedBaseline(client: BaselineSeedClient, options: Baseline
   await seedUsers(client, idFactory, index);
   await seedSettings(client, idFactory);
   const dataSourceCounts = await seedDataSources(client);
+  const dashboardCounts = await seedDashboards(client, index);
 
   return {
     tenants: baselineTenants.length,
     users: baselineUsers.length,
-    dashboardCategories: 0,
-    dashboardElements: 0,
-    dashboardFilters: 0,
-    dashboards: 0,
+    dashboardCategories: dashboardCounts.dashboardCategories,
+    dashboardElements: dashboardCounts.dashboardElements,
+    dashboardFilters: dashboardCounts.dashboardFilters,
+    dashboards: dashboardCounts.dashboards,
     dataSources: dataSourceCounts.dataSources,
     dataSourceTables: dataSourceCounts.dataSourceTables,
     metadataDocuments: 0,
@@ -79,6 +89,349 @@ export async function seedBaseline(client: BaselineSeedClient, options: Baseline
     settings: baselineSettings.length,
     systemSettings: baselineSystemSettings.length,
     aiModels: 0
+  };
+}
+
+async function seedDashboards(client: BaselineSeedClient, index: SeedIndex): Promise<{
+  dashboardCategories: number;
+  dashboardElements: number;
+  dashboardFilters: number;
+  dashboards: number;
+}> {
+  const tenantId = requiredIndex(index.tenantsByDomain, 'local.intraq.test');
+  const createdBy = requiredIndex(index.usersByEmail, 'admin@local.intraq.test');
+  const categoryId = createStableUuidV7('dashboard-category:Sample Analytics');
+  const dashboardId = createStableUuidV7('dashboard:Sample Sales Overview');
+  const dataSourceId = createStableUuidV7('data-source:Sample Sales');
+  const tableId = createStableUuidV7('data-source-table:Sample Sales:sample_sales_model');
+  const tableName = 'sample_sales_model';
+  const fields = ['sale_date', 'location', 'category', 'channel', 'orders', 'customers', 'revenue', 'discounts', 'gross_margin', 'avg_order_value'];
+  const fieldRoles = {
+    sale_date: 'time',
+    location: 'dimension',
+    category: 'dimension',
+    channel: 'dimension',
+    orders: 'measure',
+    customers: 'measure',
+    revenue: 'measure',
+    discounts: 'measure',
+    gross_margin: 'measure',
+    avg_order_value: 'measure'
+  };
+  const fieldFormats = {
+    sale_date: 'date',
+    orders: 'number',
+    customers: 'number',
+    revenue: 'currency',
+    discounts: 'currency',
+    gross_margin: 'currency',
+    avg_order_value: 'currency'
+  };
+
+  await client.dashboardCategory.upsert({
+    where: { id: categoryId },
+    create: {
+      id: categoryId,
+      name: 'Sample Analytics',
+      description: 'Starter dashboards for the bundled sample data.',
+      color: '#3152ad',
+      icon: 'BarChart3',
+      sortOrder: 0,
+      isActive: true,
+      tenantId,
+      createdBy
+    },
+    update: {
+      name: 'Sample Analytics',
+      description: 'Starter dashboards for the bundled sample data.',
+      color: '#3152ad',
+      icon: 'BarChart3',
+      sortOrder: 0,
+      isActive: true,
+      tenantId,
+      createdBy
+    }
+  });
+
+  const elementSeeds = [
+    dashboardElement({
+      dashboardId,
+      dataSourceId,
+      fieldFormats,
+      fieldRoles,
+      fields,
+      id: 'sample-sales-kpi-revenue',
+      layout: { x: 0, y: 0, w: 2, h: 2 },
+      name: 'Total Revenue',
+      order: 0,
+      tableId,
+      tableName,
+      type: 'card',
+      config: {
+        valueField: 'revenue',
+        aggregationType: 'sum',
+        supportingField: 'orders',
+        supportingAggregation: 'sum',
+        supportingLabel: 'Orders',
+        layoutMode: 'two-row',
+        topRowContent: ['title'],
+        bottomRowContent: ['value'],
+        rowHeightRatio: '0.85fr 1.15fr',
+        showTrend: false,
+        showIndicator: false,
+        valueFontSize: '24px'
+      }
+    }),
+    dashboardElement({
+      dashboardId,
+      dataSourceId,
+      fieldFormats,
+      fieldRoles,
+      fields,
+      id: 'sample-sales-kpi-orders',
+      layout: { x: 2, y: 0, w: 2, h: 2 },
+      name: 'Total Orders',
+      order: 1,
+      tableId,
+      tableName,
+      type: 'card',
+      config: {
+        valueField: 'orders',
+        aggregationType: 'sum',
+        supportingField: 'customers',
+        supportingAggregation: 'sum',
+        supportingLabel: 'Customers',
+        layoutMode: 'two-row',
+        topRowContent: ['title'],
+        bottomRowContent: ['value'],
+        rowHeightRatio: '0.85fr 1.15fr',
+        showTrend: false,
+        showIndicator: false,
+        valueFontSize: '24px'
+      }
+    }),
+    dashboardElement({
+      dashboardId,
+      dataSourceId,
+      fieldFormats,
+      fieldRoles,
+      fields,
+      id: 'sample-sales-kpi-margin',
+      layout: { x: 0, y: 2, w: 2, h: 2 },
+      name: 'Gross Margin',
+      order: 2,
+      tableId,
+      tableName,
+      type: 'card',
+      config: {
+        valueField: 'gross_margin',
+        aggregationType: 'sum',
+        supportingField: 'discounts',
+        supportingAggregation: 'sum',
+        supportingLabel: 'Discounts',
+        layoutMode: 'two-row',
+        topRowContent: ['title'],
+        bottomRowContent: ['value'],
+        rowHeightRatio: '0.85fr 1.15fr',
+        showTrend: false,
+        showIndicator: false,
+        valueFontSize: '24px'
+      }
+    }),
+    dashboardElement({
+      dashboardId,
+      dataSourceId,
+      fieldFormats,
+      fieldRoles,
+      fields,
+      id: 'sample-sales-kpi-average-sale',
+      layout: { x: 2, y: 2, w: 2, h: 2 },
+      name: 'Average Sale Value',
+      order: 3,
+      tableId,
+      tableName,
+      type: 'card',
+      config: {
+        valueField: 'avg_order_value',
+        aggregationType: 'avg',
+        supportingField: 'revenue',
+        supportingAggregation: 'sum',
+        supportingLabel: 'Revenue',
+        layoutMode: 'two-row',
+        topRowContent: ['title'],
+        bottomRowContent: ['value'],
+        rowHeightRatio: '0.85fr 1.15fr',
+        showTrend: false,
+        showIndicator: false,
+        valueFontSize: '24px'
+      }
+    }),
+    dashboardElement({
+      chartType: 'line',
+      dashboardId,
+      dataSourceId,
+      fieldFormats,
+      fieldRoles,
+      fields,
+      id: 'sample-sales-revenue-trend',
+      layout: { x: 4, y: 0, w: 8, h: 4 },
+      name: 'Revenue Trend',
+      order: 4,
+      tableId,
+      tableName,
+      type: 'chart',
+      config: {
+        xField: 'sale_date',
+        ySeries: ['revenue', 'gross_margin'],
+        ySeriesSummarize: { revenue: 'sum', gross_margin: 'sum' }
+      }
+    }),
+    dashboardElement({
+      chartType: 'bar',
+      dashboardId,
+      dataSourceId,
+      fieldFormats,
+      fieldRoles,
+      fields,
+      id: 'sample-sales-channel-revenue',
+      layout: { x: 0, y: 4, w: 4, h: 15 },
+      name: 'Revenue by Channel',
+      order: 5,
+      tableId,
+      tableName,
+      type: 'chart',
+      config: {
+        xField: 'channel',
+        ySeries: ['revenue'],
+        ySeriesSummarize: { revenue: 'sum' },
+        showLegend: false
+      }
+    }),
+    dashboardElement({
+      dashboardId,
+      dataSourceId,
+      fieldFormats,
+      fieldRoles,
+      fields,
+      id: 'sample-sales-table',
+      layout: { x: 4, y: 4, w: 8, h: 15 },
+      name: 'Sales by Location and Category',
+      order: 6,
+      tableId,
+      tableName,
+      type: 'table',
+      config: {
+        columns: [
+          { field: 'location', label: 'Location' },
+          { field: 'category', label: 'Category' },
+          { field: 'channel', label: 'Channel' },
+          { field: 'orders', label: 'Orders', aggregation: 'sum', format: 'number' },
+          { field: 'revenue', label: 'Revenue', aggregation: 'sum', format: 'currency' },
+          { field: 'gross_margin', label: 'Gross Margin', aggregation: 'sum', format: 'currency' }
+        ],
+        rowLimit: 25
+      }
+    })
+  ];
+  const filterSeeds = [{
+    id: createStableUuidV7('dashboard-filter:Sample Sales Overview:location'),
+    dashboardId,
+    name: 'Location',
+    field: 'location',
+    operator: 'in',
+    value: [],
+    config: {
+      dataSourceId,
+      dataSourceTableId: tableId,
+      tableName,
+      label: 'Location',
+      sourceField: 'location',
+      displayMode: 'multi-select',
+      placement: 'bar'
+    },
+    type: 'interactive',
+    isActive: true,
+    order: 0
+  }];
+  const draftLayout = elementSeeds.map(element => ({ id: element.id, ...element.layout }));
+
+  await client.dashboard.upsert({
+    where: { id: dashboardId },
+    create: {
+      id: dashboardId,
+      name: 'Sample Sales Overview',
+      description: 'Starter dashboard showing revenue, margin, channel mix, and sample sales detail.',
+      config: {},
+      settings: {
+        currencySymbol: '$',
+        dataCachePolicy: '15m',
+        isFavorite: true,
+        menuVisible: true,
+        dashboard: { visible: true, starter: true },
+        menu: { visible: true },
+        navigation: { visible: true }
+      },
+      isPublic: false,
+      isGlobal: false,
+      isSample: true,
+      section: 'Sample Analytics',
+      tenantId,
+      createdBy,
+      status: 'published',
+      draftLayout,
+      draftFilters: filterSeeds,
+      publishedAt: new Date('2026-06-30T00:00:00.000Z'),
+      publishedBy: createdBy,
+      categoryId
+    },
+    update: {
+      name: 'Sample Sales Overview',
+      description: 'Starter dashboard showing revenue, margin, channel mix, and sample sales detail.',
+      config: {},
+      settings: {
+        currencySymbol: '$',
+        dataCachePolicy: '15m',
+        isFavorite: true,
+        menuVisible: true,
+        dashboard: { visible: true, starter: true },
+        menu: { visible: true },
+        navigation: { visible: true }
+      },
+      isPublic: false,
+      isGlobal: false,
+      isSample: true,
+      section: 'Sample Analytics',
+      tenantId,
+      createdBy,
+      status: 'published',
+      draftLayout,
+      draftFilters: filterSeeds,
+      publishedAt: new Date('2026-06-30T00:00:00.000Z'),
+      publishedBy: createdBy,
+      categoryId
+    }
+  });
+
+  for (const element of elementSeeds) {
+    await client.dashboardElement.upsert({
+      where: { id: element.id },
+      create: element,
+      update: element
+    });
+  }
+  for (const filter of filterSeeds) {
+    await client.dashboardFilter.upsert({
+      where: { id: filter.id },
+      create: filter,
+      update: filter
+    });
+  }
+
+  return {
+    dashboardCategories: 1,
+    dashboardElements: elementSeeds.length,
+    dashboardFilters: filterSeeds.length,
+    dashboards: 1
   };
 }
 
@@ -252,4 +605,48 @@ function requiredIndex(index: Map<string, string>, key: string): string {
   const value = index.get(key);
   if (!value) throw new Error(`Missing seed dependency: ${key}`);
   return value;
+}
+
+function dashboardElement(input: {
+  chartType?: string;
+  config: Record<string, unknown>;
+  dashboardId: string;
+  dataSourceId: string;
+  fieldFormats: Record<string, string>;
+  fieldRoles: Record<string, string>;
+  fields: string[];
+  id: string;
+  layout: Record<string, unknown>;
+  name: string;
+  order: number;
+  tableId: string;
+  tableName: string;
+  type: string;
+}): DashboardElementSeed {
+  const id = createStableUuidV7(`dashboard-element:Sample Sales Overview:${input.id}`);
+  const config = {
+    title: input.name,
+    dataSourceId: input.dataSourceId,
+    dataSourceName: 'Sample Sales',
+    dataSourceTableId: input.tableId,
+    tableName: input.tableName,
+    dataModelName: 'Sales',
+    fields: input.fields,
+    fieldRoles: input.fieldRoles,
+    fieldFormats: input.fieldFormats,
+    ...input.config
+  };
+  return {
+    id,
+    dashboardId: input.dashboardId,
+    dataSourceId: input.dataSourceId,
+    name: input.name,
+    type: input.type,
+    ...(input.chartType ? { chartType: input.chartType } : {}),
+    layout: { i: id, ...input.layout },
+    config,
+    query: null,
+    isVisible: true,
+    order: input.order
+  };
 }
