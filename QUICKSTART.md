@@ -101,6 +101,12 @@ After signing in, open **Admin → AI & MCP → AI API Key Management** to confi
 Codex OAuth, OpenAI, or Gemini for Analyzer, Dashboard Builder, and SQL assistant
 workflows.
 
+For Codex OAuth browser login, set `OPENAI_OAUTH_CLIENT_ID` in the API
+environment first. Keep `OPENAI_OAUTH_REDIRECT_URI` aligned with the Codex
+callback URL, usually `http://localhost:1455/auth/callback`. Without a client
+ID, **Connect Codex** returns `OPENAI_OAUTH_CLIENT_ID is required to start Codex
+OAuth login.`
+
 Detailed setup with screenshots: [docs/AI_PROVIDER_SETUP.md](docs/AI_PROVIDER_SETUP.md).
 
 ## What is seeded

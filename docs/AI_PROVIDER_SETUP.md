@@ -43,6 +43,27 @@ Use this when:
 - you do not want local OpenAI or Gemini API keys;
 - you already have Codex authenticated on the machine running intraQ.
 
+Before clicking **Connect Codex**, the API environment must include a Codex OAuth
+client ID:
+
+```env
+OPENAI_OAUTH_CLIENT_ID=your-codex-oauth-client-id
+OPENAI_OAUTH_REDIRECT_URI=http://localhost:1455/auth/callback
+```
+
+`CODEX_OAUTH_CLIENT_ID` is also accepted as an alias for
+`OPENAI_OAUTH_CLIENT_ID`. If neither client ID is set, the Codex connect action
+will fail with:
+
+```text
+OPENAI_OAUTH_CLIENT_ID is required to start Codex OAuth login.
+```
+
+The default Codex OAuth endpoints are
+`https://auth.openai.com/oauth/authorize` and
+`https://auth.openai.com/oauth/token`. Only set `OPENAI_OAUTH_AUTH_URL` or
+`OPENAI_OAUTH_TOKEN_URL` when you intentionally need to override those defaults.
+
 ### OpenAI
 
 Use OpenAI when you operate a self-hosted intraQ deployment and want Analyzer,
@@ -97,6 +118,10 @@ variables can also provide defaults:
 | `AI_AGENT_PROVIDER` | Active provider: `codex`, `openai`, or `gemini`. |
 | `CODEX_HOME` / `CODEX_AUTH_PATH` | Codex OAuth location. |
 | `CODEX_MODEL` | Codex model override. |
+| `OPENAI_OAUTH_CLIENT_ID` / `CODEX_OAUTH_CLIENT_ID` | Required to start Codex OAuth browser login. |
+| `OPENAI_OAUTH_REDIRECT_URI` | Codex OAuth callback URL; defaults to `http://localhost:1455/auth/callback`. |
+| `OPENAI_OAUTH_AUTH_URL` | Optional Codex OAuth authorization URL override. |
+| `OPENAI_OAUTH_TOKEN_URL` | Optional Codex OAuth token URL override. |
 | `OPENAI_API_KEY` | OpenAI API key. |
 | `OPENAI_API_ENDPOINT` | OpenAI-compatible base URL. |
 | `OPENAI_MODEL` | OpenAI model. |

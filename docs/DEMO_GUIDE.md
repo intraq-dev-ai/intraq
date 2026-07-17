@@ -146,5 +146,12 @@ INTRAQ_DEMO_BASE_URL=http://127.0.0.1:4110 npm run demo:capture
 INTRAQ_DEMO_OUTPUT_DIR=/tmp/intraq-demo-assets npm run demo:capture
 ```
 
+To regenerate the README hero with a Dashboard AI conversation and AI-created
+dashboard, run:
+
+```bash
+INTRAQ_DEMO_BASE_URL=http://127.0.0.1:4110 npm run demo:capture:ai
+```
+
 The script writes screenshots to `docs/assets/demo` by default. Review every
 generated image before deciding whether to commit it or upload it to the website.

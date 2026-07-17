@@ -360,19 +360,40 @@ function toAgentDataModel(table: TableDefinition): AgentDataModel {
 
 function builderAssistantContent(response: BuilderAgentResponse): string {
   const details = [
-    response.title,
-    response.summary,
     modelLineFromSummary(response.summary),
-    createdLineFromResponse(response),
     ...('suggestedActions' in response ? response.suggestedActions.slice(0, 3) : []),
     ...('visualizations' in response
       ? response.visualizations.slice(0, 1).flatMap(visualization => [
         `Visualization: ${visualization.kind}`,
-        ...visualization.encodings.map(visualizationEncodingSummary)
+        ...visualizationEncodingSummaries(visualization.encodings)
       ])
       : [])
   ].filter(Boolean);
-  return details.join('\n');
+  return [
+    dashboardBuilderOutcomeLine(response),
+    ...(details.length > 0 ? ['', ...details.map(detail => `- ${detail}`)] : [])
+  ].join('\n');
+}
+
+function dashboardBuilderOutcomeLine(response: BuilderAgentResponse): string {
+  if (!('visualizations' in response) || response.visualizations.length === 0) {
+    return response.summary || response.title || 'Dashboard AI completed the request.';
+  }
+  const visualization = response.visualizations[0];
+  if (!visualization) return response.summary || response.title || 'Dashboard AI completed the request.';
+  const measures = visualization.encodings
+    .filter(encoding => ['measure', 'metric', 'value'].includes(encoding.role.toLowerCase()))
+    .map(encodingLabel);
+  const dimensions = visualization.encodings
+    .filter(encoding => ['dimension', 'time', 'category'].includes(encoding.role.toLowerCase()))
+    .map(encodingLabel);
+  const object = dashboardVisualizationLabel(visualization.kind);
+  const measureText = readableList(measures);
+  const dimensionText = readableList(dimensions);
+  if (measureText && dimensionText) return `Added a ${object} using ${measureText} by ${dimensionText}.`;
+  if (measureText) return `Added a ${object} using ${measureText}.`;
+  if (dimensionText) return `Added a ${object} grouped by ${dimensionText}.`;
+  return `Added a ${object} to this dashboard.`;
 }
 
 function modelLineFromSummary(summary: string): string {
@@ -381,17 +402,38 @@ function modelLineFromSummary(summary: string): string {
   return modelName ? `Model: #${modelName}` : '';
 }
 
-function createdLineFromResponse(response: BuilderAgentResponse): string {
-  if (!('visualizations' in response) || response.visualizations.length === 0 || !response.title.trim()) return '';
-  return `I created "${response.title}".`;
+function visualizationEncodingSummaries(encodings: Array<{ field: string; label?: string; role: string }>): string[] {
+  const measures = encodings
+    .filter(encoding => ['measure', 'metric', 'value'].includes(encoding.role.toLowerCase()))
+    .map(encodingLabel);
+  const dimensions = encodings
+    .filter(encoding => ['dimension', 'time', 'category'].includes(encoding.role.toLowerCase()))
+    .map(encodingLabel);
+  return [
+    dimensions.length > 0 ? `Dimensions: ${readableList(dimensions)}` : '',
+    measures.length > 0 ? `Measures: ${readableList(measures)}` : ''
+  ].filter(Boolean);
 }
 
-function visualizationEncodingSummary(encoding: { field: string; label?: string; role: string }): string {
-  const label = encoding.label || encoding.field;
-  const role = encoding.role.toLowerCase();
-  if (role === 'measure' || role === 'metric' || role === 'value') return `Measures: ${label}`;
-  if (role === 'dimension' || role === 'time' || role === 'category') return `Dimensions: ${label}`;
-  return `${encoding.role}: ${label}`;
+function dashboardVisualizationLabel(kind: string): string {
+  const normalized = kind.trim().toLowerCase();
+  if (normalized === 'card') return 'KPI card';
+  if (normalized === 'line') return 'line chart';
+  if (normalized === 'bar') return 'bar chart';
+  if (normalized === 'table') return 'table';
+  if (normalized === 'matrix') return 'matrix';
+  return `${normalized || 'component'} component`;
+}
+
+function encodingLabel(encoding: { field: string; label?: string }): string {
+  return encoding.label?.trim() || encoding.field;
+}
+
+function readableList(values: string[]): string {
+  const cleanValues = Array.from(new Set(values.map(value => value.trim()).filter(Boolean)));
+  if (cleanValues.length <= 1) return cleanValues[0] ?? '';
+  if (cleanValues.length === 2) return `${cleanValues[0]} and ${cleanValues[1]}`;
+  return `${cleanValues.slice(0, -1).join(', ')}, and ${cleanValues.at(-1)}`;
 }
 
 function builderConversationContext(input: {

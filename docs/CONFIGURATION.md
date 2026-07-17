@@ -109,6 +109,11 @@ Common provider variables:
 | `CODEX_AUTH_PATH` | Explicit path to Codex `auth.json`. |
 | `CODEX_MODEL` | Codex model override. |
 | `CODEX_AGENT_TIMEOUT_MS` | Codex request timeout. |
+| `OPENAI_OAUTH_CLIENT_ID` / `CODEX_OAUTH_CLIENT_ID` | Required to start Codex OAuth browser login from the admin AI provider page. |
+| `OPENAI_OAUTH_REDIRECT_URI` | Codex OAuth callback URL. Defaults to `http://localhost:1455/auth/callback`. |
+| `OPENAI_OAUTH_AUTH_URL` | Optional Codex OAuth authorization URL override. Defaults to `https://auth.openai.com/oauth/authorize`. |
+| `OPENAI_OAUTH_TOKEN_URL` | Optional Codex OAuth token URL override. Defaults to `https://auth.openai.com/oauth/token`. |
+| `OPENAI_OAUTH_SCOPE` | Optional Codex OAuth scope override. |
 | `OPENAI_AGENT_ENABLED` / `OPENAI_AGENT_DISABLED` | Enable or disable OpenAI API-key provider. |
 | `OPENAI_API_KEY` | OpenAI API key for self-hosted deployments. |
 | `OPENAI_MODEL` | OpenAI model override. |

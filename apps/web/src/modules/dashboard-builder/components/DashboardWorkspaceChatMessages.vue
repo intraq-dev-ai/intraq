@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { computed, nextTick, onMounted, onUpdated, ref, watch } from 'vue';
+import { renderAiMessageMarkdown } from '../../shared/ai-message-markdown';
 import { dashboardAgentMessagesForSelection } from '../workspace/dashboard-agent-conversation-state';
 import type { DashboardAgentMessage, DashboardElement } from '../types';
 
@@ -81,7 +82,12 @@ onUpdated(() => {
             v-if="message.title"
             :class="{ 'thinking-label': message.kind === 'loading' }"
           >{{ message.title }}</strong>
-          <span v-if="message.body">{{ message.body }}</span>
+          <div
+            v-if="message.body && message.role === 'assistant'"
+            class="ai-message-markdown"
+            v-html="renderAiMessageMarkdown(message.body)"
+          ></div>
+          <span v-else-if="message.body">{{ message.body }}</span>
           <ul v-if="message.details?.length" class="message-detail-list">
             <li v-for="detail in message.details" :key="detail">{{ detail }}</li>
           </ul>

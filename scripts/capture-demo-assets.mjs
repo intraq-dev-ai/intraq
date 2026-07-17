@@ -66,7 +66,7 @@ async function starterDashboardId(page) {
 
 async function openStarterDashboard(page, dashboardId) {
   await page.goto(`${baseUrl}/dashboard/${encodeURIComponent(dashboardId)}`, { waitUntil: 'networkidle' });
-  await page.getByRole('heading', { name: 'Total Revenue' }).waitFor({ timeout: 30000 });
+  await page.getByText('Total Revenue', { exact: true }).waitFor({ timeout: 30000 });
   await page.getByRole('heading', { name: 'Revenue Trend' }).waitFor({ timeout: 30000 });
 }
 
