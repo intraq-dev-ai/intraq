@@ -96,8 +96,9 @@ The recommended setup path for self-hosted operators is the admin UI:
 **Admin → AI & MCP → AI API Key Management**. See
 [AI provider setup](AI_PROVIDER_SETUP.md) for screenshots and the full workflow.
 
-For local/manual contributor testing in this repository workspace, use Codex
-OAuth only. Do not put OpenAI API keys in local contributor `.env` files.
+Self-hosted operators can configure Codex OAuth, OpenAI, or Gemini. Contributors
+working on public-source changes should avoid placing provider keys in shared
+env files, screenshots, issues, or pull requests.
 
 Common provider variables:
 

@@ -4,10 +4,11 @@ intraQ is bring-your-own-provider for AI. The app can use Codex OAuth, OpenAI,
 or Gemini for Analyzer, Dashboard Builder, and SQL assistant workflows. It does
 not require an intraQ-hosted AI service.
 
-For local/manual contributor testing in this repository workspace, use Codex
-OAuth only. Do not put OpenAI or Gemini API keys in local contributor `.env`
-files. OpenAI and Gemini keys are intended for self-hosted deployments where the
-operator controls the environment and database.
+Self-hosted operators can use Codex OAuth, OpenAI, or Gemini. Contributors
+working on public-source changes should avoid placing provider keys in shared
+env files, screenshots, issues, or pull requests. OpenAI and Gemini keys are
+intended for deployments where the operator controls the runtime environment
+and database.
 
 ## Open the AI API key page
 

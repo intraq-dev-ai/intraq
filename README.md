@@ -107,3 +107,10 @@ environment; otherwise the admin page cannot start the Codex login flow.
 
 The seeded product demo and suggested walkthrough videos are documented in
 [docs/DEMO_GUIDE.md](docs/DEMO_GUIDE.md).
+
+Focused workflow docs:
+
+- [MCP tools](docs/MCP.md)
+- [AI Analyzer](docs/AI_ANALYZER.md)
+- [Dashboard Builder](docs/DASHBOARD_BUILDER.md)
+- [SQL Editor](docs/SQL_EDITOR.md)

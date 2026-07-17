@@ -93,9 +93,10 @@ npm run build
 
 ## AI provider setup
 
-AI is bring-your-own-provider. For local/manual AI behavior testing in this
-workspace, use Codex OAuth. Do not put OpenAI API keys in local developer env
-files.
+AI is bring-your-own-provider. Self-hosted operators can configure Codex OAuth,
+OpenAI, or Gemini from the admin UI or environment variables. Contributors
+should avoid putting provider keys in shared env files, screenshots, issues, or
+pull requests.
 
 After signing in, open **Admin → AI & MCP → AI API Key Management** to configure
 Codex OAuth, OpenAI, or Gemini for Analyzer, Dashboard Builder, and SQL assistant
