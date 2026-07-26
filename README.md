@@ -1,4 +1,4 @@
-# intraQ
+# IntraQ – Self-hosted AI Dashboard Builder & Natural Language SQL
 
 [![CI](https://github.com/intraq-dev-ai/intraq/actions/workflows/ci.yml/badge.svg)](https://github.com/intraq-dev-ai/intraq/actions/workflows/ci.yml)
 [![License](https://img.shields.io/badge/license-IntraQ%20Sustainable%20Use-blue)](LICENSE.md)
@@ -7,9 +7,9 @@
 
 [Website](https://intraq.dev) · [Docs](docs/DEMO_GUIDE.md) · [Quickstart](QUICKSTART.md) · [Configuration](docs/CONFIGURATION.md) · [Contributing](CONTRIBUTING.md)
 
-**intraQ is a source-available operational BI platform for SQL-backed data. Ask questions in plain English, generate trusted SQL, and build live dashboards without Power BI, spreadsheet exports, or manual reporting queues.**
+**IntraQ is a source-available AI business intelligence platform that lets teams query SQL-backed operational data using natural language, generate trusted SQL, and build interactive dashboards without traditional BI complexity.**
 
-It combines AI analytics, natural language SQL, text-to-SQL workflows, a dashboard builder, embedded analytics foundations, MCP tools, and a semantic layer built from local metadata, data dictionary entries, SQL models, relationships, dashboard context, and safe result summaries.
+It combines AI analytics, natural language SQL, text-to-SQL workflows, an AI dashboard builder, embedded analytics foundations, MCP tools, RAG-style context retrieval, and a semantic layer built from local metadata, data dictionary entries, SQL models, relationships, dashboard context, and safe result summaries.
 
 ![intraQ dashboard builder with AI sidebar](docs/assets/demo/00-readme-hero-ai-sidebar.png)
 
@@ -17,9 +17,10 @@ It combines AI analytics, natural language SQL, text-to-SQL workflows, a dashboa
 
 - **AI business intelligence** — ask operational questions in plain English.
 - **Trusted SQL generation** — inspect SQL and evidence before publishing results.
-- **Dashboard builder** — turn answers into reusable dashboards.
+- **AI dashboard builder** — turn answers into reusable dashboards.
 - **Self-hosted BI** — run with Docker Compose against your own database.
 - **Semantic layer** — define tables, fields, joins, metrics, and business meaning.
+- **LLM-ready context** — ground answers in local metadata and RAG-style knowledge retrieval.
 - **Embedded analytics foundation** — use intraQ as a reporting layer for product and internal workflows.
 - **Provider-flexible AI** — configure Codex OAuth, OpenAI, or Gemini from the admin UI.
 
@@ -171,4 +172,6 @@ See [LICENSE.md](LICENSE.md), [COMMERCIAL.md](COMMERCIAL.md), [docs/PUBLIC_SOURC
 
 Recommended repository topics:
 
-`ai-analytics`, `ai-bi`, `llm`, `semantic-model`, `business-intelligence`, `analytics-platform`, `ai-dashboard`, `text-to-sql`, `dashboard-builder`, `self-hosted`, `postgres`, `sql`, `embedded-analytics`, `reporting`, `natural-language-sql`, `operational-analytics`
+`ai-analytics`, `ai-bi`, `llm`, `rag`, `semantic-model`, `semantic-layer`, `business-intelligence`, `analytics-platform`, `ai-dashboard`, `ai-dashboard-builder`, `text-to-sql`, `dashboard-builder`, `self-hosted`, `postgres`, `sql`, `embedded-analytics`, `reporting`, `natural-language-sql`, `natural-language-query`, `operational-analytics`
+
+Use `agentic-ai` only if you want the repository positioned around autonomous multi-step AI planning. If the public source is presented mainly as governed AI reporting and dashboard generation, the topics above are more precise.
