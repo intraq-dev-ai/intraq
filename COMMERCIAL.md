@@ -9,6 +9,9 @@ implementation/operations, or use in a competing commercial analytics, BI,
 dashboard, SQL-assistant, or AI-reporting service requires an IntraQ commercial
 agreement.
 
+For commercial licensing, contact the maintainers through the commercial channel
+published for the project or through `hello@intraq.dev`.
+
 ## Included
 
 - Dashboards, Dashboard Builder, Analyzer, SQL Editor, data sources, data
