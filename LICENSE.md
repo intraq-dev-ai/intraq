@@ -13,10 +13,41 @@ fork, modify, and self-host IntraQ for permitted uses while reserving commercial
 managed-service, resale, white-label, OEM, and competing-service rights for
 IntraQ.
 
+## Acceptance
+
+By using, copying, modifying, distributing, making available, or running this
+software, you agree to the terms of this license.
+
+If you do not agree to these terms, you may not use, copy, modify, distribute,
+make available, or run this software.
+
+## Definitions
+
+"Licensor" means the copyright holder or entity offering this software under
+this license.
+
+"Software" means the IntraQ source code and related files made available in this
+repository, except third-party components or files that expressly state a
+different license.
+
+"You" means the individual or legal entity exercising permissions under this
+license.
+
+"Your company" means any legal entity, sole proprietorship, or organization that
+you work for, plus any entity that controls, is controlled by, or is under common
+control with that entity.
+
+"Competing service" means a commercial product or service whose primary purpose
+is to provide analytics, business intelligence, dashboards, AI reporting, SQL
+assistant, data assistant, embedded analytics, or managed analytics
+functionality to third parties.
+
 ## Grant
 
-Subject to this license, you may use, copy, modify, fork, and run this software
-for:
+Subject to this license, the Licensor grants you a non-exclusive, royalty-free,
+worldwide, non-sublicensable, non-transferable license to use, copy, modify,
+fork, run, distribute, make available, and prepare derivative works of the
+Software only for:
 
 - internal business use;
 - personal use;
@@ -46,6 +77,14 @@ Without a separate written commercial agreement with IntraQ, you may not:
 - use IntraQ names, logos, or trademarks except to identify the original
   project and preserve notices.
 
+## Notices
+
+You must ensure that anyone who receives a copy of any part of the Software from
+you also receives this license.
+
+You may not alter, remove, or obscure any copyright, trademark, license, or
+attribution notices in the Software.
+
 ## Contributions And Modifications
 
 You may create and use modifications under this license. If you distribute
@@ -55,11 +94,41 @@ has been modified.
 Unless a separate written contributor agreement says otherwise, contributions
 submitted to this repository are provided under this same license.
 
+## Patents
+
+The Licensor grants you a license under any patent claims the Licensor can
+license, or later becomes able to license, to make, have made, use, sell, offer
+for sale, import, and have imported the Software, in each case only as permitted
+by this license.
+
+This patent license does not cover patent claims that you or your company cause
+to be infringed by modifications, additions, or combinations you make to the
+Software.
+
+If you or your company make a written claim that the Software infringes or
+contributes to infringement of any patent, your patent license under this
+license ends immediately.
+
 ## Third-Party Software
 
 This repository may depend on third-party software with separate licenses. Those
 licenses apply to the relevant third-party packages and are not changed by this
 license.
+
+## Termination
+
+If you use the Software in violation of this license, that use is not licensed
+and your license automatically terminates.
+
+If the Licensor notifies you of a violation and you stop all violation within 30
+days after receiving notice, your license is reinstated retroactively. If you
+violate this license again after reinstatement, your license terminates
+automatically and permanently.
+
+## No Other Rights
+
+This license does not grant any rights other than those expressly stated in this
+license. All rights not expressly granted are reserved by the Licensor.
 
 ## No Warranty
 

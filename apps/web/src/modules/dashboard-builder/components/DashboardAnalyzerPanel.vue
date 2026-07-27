@@ -2,40 +2,34 @@
 import { computed, nextTick, onBeforeUnmount, ref, watch } from 'vue';
 import {
   appendMessage,
-  createAnalyzerPlan,
-  orchestrateAnalyzer,
-  resolveAnalyzerFollowup
+  askAnalyzer
 } from '../../analyzer/api';
 import { sanitizeAnalyzerAnswerText } from '../../analyzer/answer-sanitizer';
-import { completeAnalyzerPlan } from '../../analyzer/analyzer-runner';
 import { localAnalyzerFailureMessage, persistedOrLocalAnalyzerFailureMessage } from '../../analyzer/failure-message';
-import AnalyzerResultBlock from '../../analyzer/AnalyzerResultBlock.vue';
-import { readLatestPlanTitle } from '../../analyzer/intent';
 import { readError } from '../../analyzer/page-helpers';
 import { renderAiMessageMarkdown } from '../../shared/ai-message-markdown';
+import { dashboardDataCachePolicyFromSettings } from '../dashboard-data-cache-policy';
+import { loadVisualizationData } from '../visualization/data';
+import { visualizationSpecFromElement } from '../visualization/spec';
 import DashboardAnalyzerScopeControl from './DashboardAnalyzerScopeControl.vue';
 import {
   dashboardAnalyzerComponents,
   dashboardAnalyzerContextSummary,
   dashboardAnalyzerDataSources,
-  dashboardAnalyzerPlanContext,
-  dashboardAnalyzerPlanModelContext,
   dashboardAnalyzerQuestionPlaceholder,
   dashboardAnalyzerQuickQuestions,
   dashboardAnalyzerScopeMetadata,
   preferredDashboardDataSourceId,
   type DashboardAnalyzerScope
 } from './dashboard-analyzer-scope';
-import { createDashboardAnalyzerTableDataLoader, fetchDashboardAnalyzerTableData } from './dashboardAnalyzerData';
 import { useDashboardAnalyzerConversation } from './use-dashboard-analyzer-conversation';
 import type {
   AnalyzerAnswer,
+  AnalyzerColumn,
   AnalyzerExecution,
-  AnalyzerOrchestration,
-  AnalyzerPlan,
   DataSourceSummary
 } from '../../analyzer/types';
-import type { Dashboard } from '../types';
+import type { Dashboard, DashboardElement, VisualizationData } from '../types';
 
 const props = defineProps<{
   dashboard: Dashboard;
@@ -51,13 +45,13 @@ const question = ref('');
 const status = ref('Analyzer ready');
 const isAsking = ref(false);
 const latestAnswer = ref<AnalyzerAnswer | null>(null);
-const latestPlan = ref<AnalyzerPlan | null>(null);
-const latestExecution = ref<AnalyzerExecution | null>(null);
-const latestOrchestration = ref<AnalyzerOrchestration | null>(null);
 const activeRequestController = ref<AbortController | null>(null);
 const questionInput = ref<HTMLTextAreaElement | null>(null);
 const thread = ref<HTMLElement | null>(null);
 const IDLE_WORKING_STATUSES = new Set(['Analyzer ready', 'New dashboard analyzer conversation ready']);
+const DASHBOARD_QA_ROW_LIMIT = 5;
+const DASHBOARD_QA_ELEMENT_LIMIT = 8;
+const DATA_ELEMENT_TYPES = new Set(['area', 'bar', 'card', 'chart', 'column', 'line', 'matrix', 'pie', 'stacked', 'table']);
 
 const availableDataSources = computed(() => dashboardAnalyzerDataSources(props.dashboard, props.dataSources));
 const selectedDataSource = computed(() =>
@@ -70,7 +64,6 @@ const analyzerComponents = computed(() => {
 const selectedComponent = computed(() =>
   analyzerComponents.value.find(component => component.id === selectedComponentId.value) ?? null
 );
-const latestPlanTitle = computed(() => latestPlan.value ? readLatestPlanTitle(latestPlan.value) : 'Analyzer Result');
 const suggestedFollowUps = computed(() => latestAnswer.value?.suggestedFollowUps ?? []);
 const quickQuestions = computed(() => dashboardAnalyzerQuickQuestions(questionScope.value));
 const workingStatus = computed(() => {
@@ -92,11 +85,6 @@ const {
 });
 const isQuestionDisabled = computed(() =>
   isAsking.value || isConversationLoading.value);
-const loadMoreDashboardAnalyzerTableData = createDashboardAnalyzerTableDataLoader({
-  activeController: () => activeRequestController.value,
-  dashboard: () => props.dashboard,
-  latestPlan: () => latestPlan.value
-});
 watch(availableDataSources, sources => {
   if (selectedDataSourceId.value && sources.some(source => source.id === selectedDataSourceId.value)) return;
   selectedDataSourceId.value = preferredDashboardDataSourceId(props.dashboard, sources);
@@ -114,7 +102,7 @@ watch(analyzerComponents, components => {
 onBeforeUnmount(() => activeRequestController.value?.abort());
 
 watch(
-  [() => messages.value.length, () => Boolean(latestExecution.value), isAsking],
+  [() => messages.value.length, isAsking],
   () => void nextTick(() => thread.value?.scrollTo({ top: thread.value.scrollHeight, behavior: 'smooth' }))
 );
 async function submitQuestion(): Promise<void> {
@@ -155,48 +143,42 @@ async function submitQuestion(): Promise<void> {
     messages.value = [...messages.value, userMessage];
     question.value = '';
 
-    status.value = 'Resolving dashboard context';
-    latestOrchestration.value = await orchestrateAnalyzer({
-      dataSourceId: selectedDataSourceId.value,
-      question: prompt,
-      conversationId
-    }, { signal: controller.signal });
-    const followup = latestOrchestration.value.followup ??
-      await resolveAnalyzerFollowup({ question: prompt, conversationId }, { signal: controller.signal });
-
-    status.value = 'Planning analyzer result';
-    const questionForPlan = followup.questionForPlan || prompt;
-    const dashboardContext = dashboardAnalyzerPlanContext({
-      component: selectedComponent.value,
-      dataSourceId: selectedDataSourceId.value,
+    status.value = 'Reading visible dashboard data';
+    const execution = await dashboardQuestionEvidenceExecution({
       dashboard: props.dashboard,
-      scope: questionScope.value
-    });
-    latestPlan.value = await createAnalyzerPlan({
       dataSourceId: selectedDataSourceId.value,
-      question: questionForPlan,
+      scope: questionScope.value,
+      selectedComponentId: selectedComponentId.value,
+      signal: controller.signal
+    });
+    if (execution.rowCount === 0) {
+      throw new Error('This dashboard does not have enough visible data to answer that question.');
+    }
+
+    status.value = 'Answering from this dashboard';
+    latestAnswer.value = await askAnalyzer({
       conversationId,
-      dashboardContext,
-      ...dashboardAnalyzerPlanModelContext(questionScope.value, selectedComponent.value)
+      dataSourceId: selectedDataSourceId.value,
+      execution,
+      plan: dashboardQuestionAnswerPlan(prompt, execution),
+      question: dashboardQuestionPrompt(prompt, props.dashboard.name, questionScope.value)
     }, { signal: controller.signal });
-    const completion = await completeAnalyzerPlan({
-      conversationId,
-      dataSourceId: selectedDataSourceId.value,
-      latestPlanTitle: latestPlanTitle.value,
-      onStatus: nextStatus => { status.value = nextStatus; },
-      orchestration: latestOrchestration.value,
-      plan: latestPlan.value,
-      prompt,
-      signal: controller.signal,
-      tableDataLoader: input => fetchDashboardAnalyzerTableData({
-        ...input,
-        dashboard: props.dashboard
-      })
-    });
-    latestAnswer.value = completion.answer;
-    latestExecution.value = completion.execution;
-    messages.value = [...messages.value, completion.assistantMessage];
-    status.value = completion.needsClarification ? 'Analyzer needs clarification' : 'Analyzer ready';
+
+    status.value = 'Saving dashboard answer';
+    const assistantMessage = await appendMessage(conversationId, {
+      role: 'assistant',
+      content: latestAnswer.value.answer,
+      metadata: {
+        dashboardAnswerOnly: true,
+        dashboardId: props.dashboard.id,
+        dashboardName: props.dashboard.name,
+        evidenceComponentCount: dashboardEvidenceComponentCount(execution),
+        suggestedFollowUps: latestAnswer.value.suggestedFollowUps,
+        knowledgeReferences: latestAnswer.value.knowledgeReferences
+      }
+    }, { signal: controller.signal });
+    messages.value = [...messages.value, assistantMessage];
+    status.value = 'Analyzer ready';
   } catch (caught) {
     if (controller.signal.aborted || isAbortError(caught)) {
       status.value = 'Analyzer stopped. Ask another question when ready.';
@@ -231,9 +213,6 @@ function stopAnalyzer(): void {
 
 function resetAnalyzerState(): void {
   latestAnswer.value = null;
-  latestPlan.value = null;
-  latestExecution.value = null;
-  latestOrchestration.value = null;
 }
 
 function resetPanel(): void {
@@ -274,6 +253,221 @@ function closePanel(): void {
 
 function isAbortError(value: unknown): boolean {
   return value instanceof DOMException && value.name === 'AbortError';
+}
+
+async function dashboardQuestionEvidenceExecution(input: {
+  dashboard: Dashboard;
+  dataSourceId: string;
+  scope: DashboardAnalyzerScope;
+  selectedComponentId: string;
+  signal: AbortSignal;
+}): Promise<AnalyzerExecution> {
+  const elements = dashboardQuestionEvidenceElements(input);
+  const values = await Promise.all(elements.map(element => dashboardQuestionEvidenceRows({
+    dashboard: input.dashboard,
+    element,
+    signal: input.signal
+  })));
+  const rows = values.flat();
+  const columns = analyzerColumnsFromRows(rows);
+  return {
+    columns,
+    dataSourceId: input.dataSourceId,
+    fetchedRows: rows.length,
+    message: rows.length
+      ? 'Dashboard Q&A evidence from visible dashboard components.'
+      : 'No dashboard evidence was available.',
+    rowCount: rows.length,
+    rows,
+    tableName: 'dashboard_visible_data',
+    title: 'Dashboard evidence',
+    totalRows: rows.length
+  };
+}
+
+function dashboardQuestionEvidenceElements(input: {
+  dashboard: Dashboard;
+  dataSourceId: string;
+  scope: DashboardAnalyzerScope;
+  selectedComponentId: string;
+}): DashboardElement[] {
+  const selectedIds = input.scope === 'component' && input.selectedComponentId
+    ? new Set([input.selectedComponentId])
+    : null;
+  return input.dashboard.elements
+    .filter(element =>
+      element.isVisible !== false
+      && DATA_ELEMENT_TYPES.has(element.type.trim().toLowerCase())
+      && (!selectedIds || selectedIds.has(element.id))
+      && elementDataSourceId(element) === input.dataSourceId
+    )
+    .sort((left, right) => elementEvidencePriority(left) - elementEvidencePriority(right) || left.order - right.order)
+    .slice(0, DASHBOARD_QA_ELEMENT_LIMIT);
+}
+
+async function dashboardQuestionEvidenceRows(input: {
+  dashboard: Dashboard;
+  element: DashboardElement;
+  signal: AbortSignal;
+}): Promise<Array<Record<string, boolean | null | number | string>>> {
+  try {
+    const data = await loadVisualizationData(
+      input.element,
+      visualizationSpecFromElement(input.element),
+      input.dashboard.filters,
+      {
+        cachePolicy: dashboardDataCachePolicyFromSettings(input.dashboard.settings),
+        peerElements: input.dashboard.elements,
+        rowLimit: DASHBOARD_QA_ROW_LIMIT,
+        signal: input.signal
+      }
+    );
+    return visualizationEvidenceRows(input.element, data);
+  } catch (caught) {
+    if (isAbortError(caught)) throw caught;
+    return [];
+  }
+}
+
+function visualizationEvidenceRows(
+  element: DashboardElement,
+  data: VisualizationData
+): Array<Record<string, boolean | null | number | string>> {
+  const preferred = elementEvidenceFields(element);
+  const rawRows = (data.rawData ?? [])
+    .slice(0, DASHBOARD_QA_ROW_LIMIT)
+    .map(row => ({
+      component: element.name,
+      componentType: element.type,
+      ...scalarFields(row, preferred)
+    }))
+    .filter(row => Object.keys(row).length > 2);
+  if (rawRows.length > 0) return rawRows;
+
+  return data.labels.slice(0, DASHBOARD_QA_ROW_LIMIT).map((label, index) => ({
+    component: element.name,
+    componentType: element.type,
+    label: String(label),
+    ...Object.fromEntries(data.datasets.flatMap(dataset => {
+      const value = dataset.data[index];
+      return typeof value === 'number' && Number.isFinite(value)
+        ? [[dataset.label || 'value', value]]
+        : [];
+    }))
+  })).filter(row => Object.keys(row).length > 3);
+}
+
+function dashboardQuestionPrompt(question: string, dashboardName: string, scope: DashboardAnalyzerScope): string {
+  return [
+    `Dashboard: ${dashboardName}.`,
+    `Scope: ${scope}.`,
+    'Answer the user using only the supplied dashboard_visible_data execution rows.',
+    'Do not create tables, SQL, charts, dashboard actions, or queues.',
+    'If the dashboard evidence does not contain enough information, say that this dashboard does not show enough data to answer.',
+    `User question: ${question}`
+  ].join('\n');
+}
+
+function dashboardQuestionAnswerPlan(question: string, execution: AnalyzerExecution) {
+  return {
+    message: 'Answer using only data already visible on this dashboard.',
+    actions: [{
+      action: 'answer_conversation',
+      params: {
+        question,
+        reason: 'Dashboard Ask AI is limited to plain answers over visible dashboard evidence.'
+      }
+    }],
+    intentDetails: {
+      question,
+      knowledgeReferences: [],
+      selectedModel: null,
+      selectedModels: [],
+      sql: '',
+      insightGuidance: [
+        `Use only ${execution.rowCount} dashboard evidence row${execution.rowCount === 1 ? '' : 's'}.`,
+        'Do not introduce data that is not already represented by dashboard components.'
+      ]
+    }
+  };
+}
+
+function dashboardEvidenceComponentCount(execution: AnalyzerExecution): number {
+  const components = new Set((execution.rows ?? []).flatMap(row => readString(row.component) ?? []));
+  return components.size;
+}
+
+function analyzerColumnsFromRows(rows: Array<Record<string, unknown>>): AnalyzerColumn[] {
+  const fields = [...new Set(rows.flatMap(row => Object.keys(row)))];
+  return fields.map(field => ({
+    field,
+    label: labelFor(field),
+    type: rows.some(row => typeof row[field] === 'number') ? 'number' : 'string'
+  }));
+}
+
+function scalarFields(
+  row: Record<string, unknown>,
+  preferredFields: string[]
+): Record<string, boolean | null | number | string> {
+  const fields = preferredFields.length > 0 ? preferredFields : Object.keys(row).slice(0, 12);
+  return Object.fromEntries(fields.flatMap(field => {
+    const value = row[field];
+    if (value === null || typeof value === 'boolean') return [[field, value]];
+    if (typeof value === 'number' && Number.isFinite(value)) return [[field, value]];
+    if (typeof value === 'string' && value.trim()) return [[field, value.trim().slice(0, 240)]];
+    return [];
+  }));
+}
+
+function elementEvidenceFields(element: DashboardElement): string[] {
+  const config = element.config ?? {};
+  return unique([
+    readString(config.valueField),
+    readString(config.field),
+    readString(config.xField),
+    ...readStringArray(config.ySeries ?? config.yFields),
+    ...readStringArray(config.columns),
+    ...readStringArray(config.rowFields),
+    ...readStringArray(config.columnFields),
+    ...readStringArray(config.valueFields)
+  ].filter((value): value is string => Boolean(value)));
+}
+
+function elementDataSourceId(element: DashboardElement): string | undefined {
+  const visualization = readRecord(element.config?.visualization);
+  const dataRef = readRecord(visualization?.dataRef);
+  return readString(element.dataSourceId)
+    ?? readString(element.config?.dataSourceId)
+    ?? readString(dataRef?.sourceId);
+}
+
+function elementEvidencePriority(element: DashboardElement): number {
+  if (element.type === 'card') return 0;
+  if (element.type === 'table' || element.type === 'matrix') return 2;
+  return 1;
+}
+
+function readString(value: unknown): string | undefined {
+  return typeof value === 'string' && value.trim() ? value.trim() : undefined;
+}
+
+function readStringArray(value: unknown): string[] {
+  return Array.isArray(value) ? value.flatMap(item => typeof item === 'string' && item.trim() ? [item.trim()] : []) : [];
+}
+
+function readRecord(value: unknown): Record<string, unknown> | undefined {
+  return typeof value === 'object' && value !== null && !Array.isArray(value)
+    ? value as Record<string, unknown>
+    : undefined;
+}
+
+function labelFor(field: string): string {
+  return field.split('_').map(part => `${part.charAt(0).toUpperCase()}${part.slice(1)}`).join(' ');
+}
+
+function unique(values: string[]): string[] {
+  return [...new Set(values)];
 }
 </script>
 
@@ -332,14 +526,6 @@ function isAbortError(value: unknown): boolean {
           <p role="status">{{ workingStatus }}</p>
         </li>
       </ol>
-
-      <AnalyzerResultBlock
-        v-if="latestExecution"
-        :execution="latestExecution"
-        :message-id="conversation?.id ?? 'dashboard-analyzer-result'"
-        :plan="latestPlan"
-        :table-data-loader="loadMoreDashboardAnalyzerTableData"
-      />
 
       <section v-if="suggestedFollowUps.length" class="dashboard-analyzer-followups" aria-label="Dashboard analyzer follow-ups">
         <h3>Follow-up questions</h3>
