@@ -8,6 +8,8 @@ import { visualizationSpecFromElement } from '../../visualization/spec';
 
 export type DashboardComponentDownloadFormat = 'csv' | 'excel';
 
+export const DASHBOARD_COMPONENT_DOWNLOAD_ROW_LIMIT = 100_000;
+
 export interface DashboardComponentDownloadTarget {
   downloadSourceId: string;
   sourceId: string;
@@ -68,7 +70,7 @@ export function buildDashboardComponentDownloadPayload(
     dashboardFilters,
     dataSource: target.downloadSourceId,
     format,
-    limit: 1_000_000,
+    limit: DASHBOARD_COMPONENT_DOWNLOAD_ROW_LIMIT,
     offset: 0,
     ...(parameterValues && Object.keys(parameterValues).length > 0 ? { parameterValues } : {})
   };

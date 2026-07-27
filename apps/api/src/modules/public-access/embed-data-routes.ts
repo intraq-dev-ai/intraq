@@ -41,6 +41,8 @@ import {
 } from './embed-common.js';
 import type { EmbedTokenService } from './embed-token-service.js';
 
+export const EMBED_DATA_SOURCE_DOWNLOAD_ROW_LIMIT = 100_000;
+
 export class EmbedDataRoutes {
   constructor(
     private readonly tokenService: EmbedTokenService,
@@ -318,7 +320,7 @@ export class EmbedDataRoutes {
     const rows = accessFilters.denyAll
       ? []
       : filterRowsByEmbedScope(rowsForTable(lookup.source.id, lookup.table.name), [...scopeFilters, ...accessFilters.filters]);
-    const limit = readDownloadInteger(body.limit, rows.length || 1, 1, 1_000_000);
+    const limit = readDownloadInteger(body.limit, rows.length || 1, 1, EMBED_DATA_SOURCE_DOWNLOAD_ROW_LIMIT);
     const offset = readDownloadInteger(body.offset, 0, 0, rows.length);
     const selectedRows = rows.slice(offset, offset + limit);
     const format = (readOptionalString(body.format) ?? 'csv').toLowerCase();

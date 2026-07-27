@@ -7,7 +7,7 @@ export interface AnalyzerPlanTableDataRequest {
 }
 
 const ANALYZER_CHART_DATA_ROW_LIMIT = 100;
-const ANALYZER_CHART_DATA_EXPORT_ROW_LIMIT = 250_000;
+const ANALYZER_CHART_DATA_EXPORT_ROW_LIMIT = 100_000;
 const DATE_PARAMETER_FIELDS = new Set([
   'from',
   'to',
