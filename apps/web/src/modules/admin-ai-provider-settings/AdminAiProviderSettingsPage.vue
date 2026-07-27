@@ -2,6 +2,7 @@
 import { computed, onMounted, ref } from 'vue';
 import {
   CODEX_MODEL_OPTIONS,
+  DEFAULT_CODEX_MODEL,
   DEFAULT_SETTINGS,
   deleteProviderConfig,
   disconnectCodex,
@@ -30,7 +31,7 @@ const loading = ref(false);
 const saving = ref(false);
 const redirectUrl = ref('');
 const showRedirectPanel = ref(false);
-const codexModel = ref(CODEX_MODEL_OPTIONS[0]);
+const codexModel = ref<string>(DEFAULT_CODEX_MODEL);
 const openaiForm = ref({ apiKey: '', baseUrl: DEFAULT_SETTINGS.openai.baseUrl, model: DEFAULT_SETTINGS.openai.model });
 const geminiForm = ref({ apiKey: '', baseUrl: DEFAULT_SETTINGS.gemini.baseUrl, model: DEFAULT_SETTINGS.gemini.model });
 
@@ -69,7 +70,7 @@ async function loadPage(): Promise<void> {
     ]);
     settings.value = nextSettings;
     codexStatus.value = nextCodex;
-    codexModel.value = nextCodex.model || CODEX_MODEL_OPTIONS[0];
+    codexModel.value = nextCodex.model || DEFAULT_CODEX_MODEL;
     openaiForm.value = { apiKey: '', baseUrl: nextSettings.openai.baseUrl, model: nextSettings.openai.model };
     geminiForm.value = { apiKey: '', baseUrl: nextSettings.gemini.baseUrl, model: nextSettings.gemini.model };
     status.value = 'AI provider settings loaded';
