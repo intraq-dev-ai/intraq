@@ -97,7 +97,11 @@ export function scopedDataSourceForRead(
   policy: DataSourceAccessPolicy
 ): DataSourceRecord | null {
   if (!canReadDataSource(source, policy)) return null;
-  return source;
+  if (!policy.allowedTableIds) return source;
+  return {
+    ...source,
+    tables: source.tables.filter(table => canReadDataSourceTable(source, table, policy))
+  };
 }
 
 export function scopedDataSourcesForRead(
