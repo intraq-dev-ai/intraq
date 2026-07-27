@@ -7,6 +7,7 @@ They are public-safe product examples, not proprietary domain packs. Use them to
 ## Example sets
 
 - [Hospitality](hospitality/README.md)
+- [Postgres operational dashboard](postgres-operational-dashboard/README.md)
 - [Energy retail](energy-retail/README.md)
 - [Ecommerce](ecommerce/README.md)
 - [SaaS embedded analytics](saas/README.md)
