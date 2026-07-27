@@ -5,7 +5,7 @@
 [![Docker](https://img.shields.io/badge/docker-compose-2496ED?logo=docker&logoColor=white)](docker-compose.yml)
 [![Node](https://img.shields.io/badge/node-24.x-339933?logo=node.js&logoColor=white)](.nvmrc)
 
-[Website](https://intraq.dev) · [Docs](docs/DEMO_GUIDE.md) · [Quickstart](QUICKSTART.md) · [Configuration](docs/CONFIGURATION.md) · [Contributing](CONTRIBUTING.md)
+[Website](https://intraq.dev) · [Docs](docs/DEMO_GUIDE.md) · [Quickstart](QUICKSTART.md) · [Configuration](docs/CONFIGURATION.md) · [Comparisons](docs/comparisons/README.md) · [Discussions](https://github.com/intraq-dev-ai/intraq/discussions) · [Contributing](CONTRIBUTING.md)
 
 **IntraQ is a source-available AI business intelligence platform that lets teams query SQL-backed operational data using natural language, generate trusted SQL, and build interactive dashboards without traditional BI complexity.**
 
@@ -92,6 +92,13 @@ Explore practical question sets in [`examples/`](examples/README.md).
 
 intraQ is not trying to replace every enterprise reporting suite. It is focused on operational BI workflows where teams want AI-assisted SQL, local control, and dashboards from governed data models.
 
+Detailed comparison pages:
+
+- [IntraQ vs Metabase](docs/comparisons/intraq-vs-metabase.md)
+- [IntraQ vs Wren AI](docs/comparisons/intraq-vs-wren-ai.md)
+- [IntraQ vs Power BI](docs/comparisons/intraq-vs-power-bi.md)
+- [IntraQ vs Lightdash](docs/comparisons/intraq-vs-lightdash.md)
+
 ### intraQ vs Power BI
 
 Power BI is a broad reporting suite. intraQ focuses on natural language SQL, evidence-backed AI answers, and turning operational questions into live dashboard components from SQL-backed models.
@@ -168,6 +175,7 @@ Focused workflow docs:
 - [SQL Editor](docs/SQL_EDITOR.md)
 - [MCP tools](docs/MCP.md)
 - [AI provider setup](docs/AI_PROVIDER_SETUP.md)
+- [Comparisons](docs/comparisons/README.md)
 - [Publication checklist](docs/PUBLICATION_CHECKLIST.md)
 
 ## License and public source scope

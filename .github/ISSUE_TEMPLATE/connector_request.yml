@@ -1,0 +1,61 @@
+name: Connector request
+description: Request or help implement a data-source connector.
+title: "[Connector]: "
+labels:
+  - enhancement
+  - type:connector
+  - area:data-sources
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this for public-source data-source connectors only. Do not include credentials, private endpoint URLs, customer exports, or non-public schemas.
+  - type: input
+    id: connector
+    attributes:
+      label: Connector
+      description: Which database, warehouse, file store, or API should IntraQ support?
+      placeholder: DuckDB, BigQuery, Snowflake, Athena, Trino, GCS, etc.
+    validations:
+      required: true
+  - type: dropdown
+    id: connector_type
+    attributes:
+      label: Connector type
+      options:
+        - SQL database / warehouse
+        - Object storage / files
+        - API / HTTP
+        - Other
+    validations:
+      required: true
+  - type: textarea
+    id: use_case
+    attributes:
+      label: Use case
+      description: What kind of reporting or dashboard workflow should this unlock?
+    validations:
+      required: true
+  - type: textarea
+    id: config
+    attributes:
+      label: Expected configuration
+      description: List only non-secret field names, not real values.
+      placeholder: |
+        host
+        port
+        database
+        schema
+        auth method
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Acceptance criteria
+      description: What should work when this connector is complete?
+      placeholder: |
+        - Connection test
+        - Schema discovery
+        - SQL Editor query preview
+        - Analyzer
+        - Dashboard Builder
+
