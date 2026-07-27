@@ -4,7 +4,7 @@ import type { ClientConfig } from 'pg';
 import type { DataSourceRecord } from './foundation-store.js';
 
 export const DEFAULT_LIMIT = 100;
-export const MAX_LIMIT = 1000;
+export const MAX_LIMIT = 100_000;
 export const DEFAULT_QUERY_TIMEOUT_MS = 15_000;
 export const MAX_QUERY_TIMEOUT_MS = 300_000;
 export const MIN_QUERY_TIMEOUT_MS = 1_000;

@@ -12,6 +12,9 @@ import type {
   SqlEditorMetadataTable
 } from './types';
 
+export const SQL_EDITOR_PREVIEW_ROW_LIMIT = 1_000;
+export const SQL_EDITOR_EXPORT_ROW_LIMIT = 100_000;
+
 export async function fetchSqlEditorSources(): Promise<SqlEditorSource[]> {
   const payload = await requestApi<{ dataSources: SqlEditorSource[] }>('/api/sql-editor/data-sources');
   return payload.dataSources;
@@ -29,12 +32,13 @@ export async function fetchSqlEditorSchema(dataSourceId: string): Promise<SqlEdi
 export async function executeSqlEditorQuery(
   dataSourceId: string,
   query: string,
-  parameterValues: Record<string, string> = {}
+  parameterValues: Record<string, string> = {},
+  options: { defaultLimit?: number; maxLimit?: number } = {}
 ): Promise<SqlEditorQueryResult> {
   return requestApi<SqlEditorQueryResult>('/api/sql-editor/execute', {
     method: 'POST',
     headers: { 'content-type': 'application/json' },
-    body: JSON.stringify({ dataSourceId, parameterValues, query })
+    body: JSON.stringify({ dataSourceId, parameterValues, query, ...options })
   });
 }
 
