@@ -1,4 +1,4 @@
-# IntraQ – Self-hosted AI Dashboard Builder & Natural Language SQL
+# intraQ — Self-hosted AI BI with a Knowledge Layer
 
 [![CI](https://github.com/intraq-dev-ai/intraq/actions/workflows/ci.yml/badge.svg)](https://github.com/intraq-dev-ai/intraq/actions/workflows/ci.yml)
 [![License](https://img.shields.io/badge/license-IntraQ%20Sustainable%20Use-blue)](LICENSE.md)
@@ -7,20 +7,20 @@
 
 [Website](https://intraq.dev) · [Docs](docs/DEMO_GUIDE.md) · [Quickstart](QUICKSTART.md) · [Configuration](docs/CONFIGURATION.md) · [Comparisons](docs/comparisons/README.md) · [Discussions](https://github.com/intraq-dev-ai/intraq/discussions) · [Contributing](CONTRIBUTING.md)
 
-**IntraQ is a source-available AI business intelligence platform that lets teams query SQL-backed operational data using natural language, generate trusted SQL, and build interactive dashboards without traditional BI complexity.**
+**intraQ is a source-available AI business intelligence platform that lets teams query SQL-backed operational data using natural language, generate trusted SQL, and build interactive dashboards without traditional BI complexity.**
 
 It combines AI analytics, natural language SQL, text-to-SQL workflows, an AI dashboard builder, embedded analytics foundations, MCP tools, RAG-style context retrieval, and a semantic layer built from local metadata, data dictionary entries, SQL models, relationships, dashboard context, and safe result summaries.
 
 ![intraQ dashboard builder with AI sidebar](docs/assets/demo/00-readme-hero-ai-sidebar.png)
 
-## Why IntraQ?
+## Why intraQ?
 
-Most AI reporting tools stop at “generate a chart” or “write a query.” IntraQ is built around verified operational BI:
+Most AI reporting tools stop at “generate a chart” or “write a query.” intraQ is built around verified operational BI:
 
 - **Answers stay tied to evidence** — SQL, selected data source, result rows, and assumptions remain inspectable.
 - **Dashboards come from real queries** — AI-created components are saved as live dashboard elements, not static screenshots.
 - **Business context is explicit** — dictionaries, SQL models, relationships, metrics, and dashboard context guide the AI before it answers.
-- **Unsafe gaps are visible** — when data, filters, or model context are missing, IntraQ should say what is missing instead of inventing an answer.
+- **Unsafe gaps are visible** — when data, filters, or model context are missing, intraQ says what is missing instead of inventing an answer.
 - **Operational use cases come first** — revenue health, product mix, wastage signals, account risk, billing exceptions, and embedded customer reporting.
 
 The goal is not just natural language SQL. The goal is AI BI that a team can inspect, reuse, and improve.
@@ -94,10 +94,10 @@ intraQ is not trying to replace every enterprise reporting suite. It is focused 
 
 Detailed comparison pages:
 
-- [IntraQ vs Metabase](docs/comparisons/intraq-vs-metabase.md)
-- [IntraQ vs Wren AI](docs/comparisons/intraq-vs-wren-ai.md)
-- [IntraQ vs Power BI](docs/comparisons/intraq-vs-power-bi.md)
-- [IntraQ vs Lightdash](docs/comparisons/intraq-vs-lightdash.md)
+- [intraQ vs Metabase](docs/comparisons/intraq-vs-metabase.md)
+- [intraQ vs Wren AI](docs/comparisons/intraq-vs-wren-ai.md)
+- [intraQ vs Power BI](docs/comparisons/intraq-vs-power-bi.md)
+- [intraQ vs Lightdash](docs/comparisons/intraq-vs-lightdash.md)
 
 ### intraQ vs Power BI
 
