@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed, onMounted, ref, watch } from 'vue';
 import type { BuilderDataSource, BuilderDataTable } from '../types';
-import { parseDashboardImportText, type DashboardImportType } from '../dashboard-import-api';
+import { parseDashboardImportText, type DashboardImportRequest, type DashboardImportType } from '../dashboard-import-api';
 
 const fiveMegabytes = 5 * 1024 * 1024;
 
@@ -13,7 +13,7 @@ const props = defineProps<{
 
 const emit = defineEmits<{
   close: [];
-  import: [payload: { content: string; dataSourceId?: string; fileName?: string; tableId?: string; type: DashboardImportType }];
+  import: [payload: DashboardImportRequest];
 }>();
 
 const dialogEl = ref<HTMLElement | null>(null);
