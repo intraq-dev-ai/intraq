@@ -18,7 +18,7 @@ import {
 } from './live-sql-query-engine.js';
 import { quoteSqlIdentifierForType } from './sql-dialect.js';
 import type { SqlQueryCell, SqlQueryEngineResult, SqlQueryResult } from './sql-query-types.js';
-import type { DataSourceAccessPolicy } from './source-access.js';
+import { canReadDataSourceTable, type DataSourceAccessPolicy } from './source-access.js';
 import {
   type ApiRuntimeStateOptions,
   isApiDataSource,
@@ -53,12 +53,14 @@ export async function readDataSourceTableRows(
   const source = findDataSource(dataSourceId);
   const table = findTableInDataSource(dataSourceId, tableIdOrName)?.table;
   if (!source || !table) return { ok: false, statusCode: 404, error: 'Table not found in data source' };
+  if (options.access && !canReadDataSourceTable(source, table, options.access)) {
+    return { ok: false, statusCode: 403, error: 'Data source table access is denied' };
+  }
 
   const pagination = normalizeTablePagination(options, 1000);
   const readMaxLimit = Math.max(options.maxLimit ?? pagination.readLimit, pagination.readLimit);
   const selectedFields = selectedTableFields(table, options.selectFields);
   const query = `select ${selectClauseForFields(selectedFields, source.type)} from ${quoteSqlIdentifierForType(table.name, source.type)}`;
-  void options.access;
   if (isSqlModelTable(table) && isLiveSqlDataSource(source)) {
     const result = await executeSqlModelTableQuery({
       source,
