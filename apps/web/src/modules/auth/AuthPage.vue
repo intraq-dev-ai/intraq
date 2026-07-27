@@ -156,7 +156,6 @@ async function signIn(): Promise<void> {
 }
 
 async function goToLogin(): Promise<void> {
-  clearSetupRedirectTimer();
   await router.push('/login');
 }
 
