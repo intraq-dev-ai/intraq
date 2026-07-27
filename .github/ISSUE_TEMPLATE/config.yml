@@ -1,1 +1,5 @@
 blank_issues_enabled: false
+contact_links:
+  - name: Questions and usage help
+    url: https://github.com/intraq-dev-ai/intraq/discussions
+    about: Ask setup, usage, and roadmap questions in GitHub Discussions.
