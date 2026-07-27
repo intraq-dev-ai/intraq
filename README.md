@@ -13,6 +13,18 @@ It combines AI analytics, natural language SQL, text-to-SQL workflows, an AI das
 
 ![intraQ dashboard builder with AI sidebar](docs/assets/demo/00-readme-hero-ai-sidebar.png)
 
+## Why IntraQ?
+
+Most AI reporting tools stop at “generate a chart” or “write a query.” IntraQ is built around verified operational BI:
+
+- **Answers stay tied to evidence** — SQL, selected data source, result rows, and assumptions remain inspectable.
+- **Dashboards come from real queries** — AI-created components are saved as live dashboard elements, not static screenshots.
+- **Business context is explicit** — dictionaries, SQL models, relationships, metrics, and dashboard context guide the AI before it answers.
+- **Unsafe gaps are visible** — when data, filters, or model context are missing, IntraQ should say what is missing instead of inventing an answer.
+- **Operational use cases come first** — revenue health, product mix, wastage signals, account risk, billing exceptions, and embedded customer reporting.
+
+The goal is not just natural language SQL. The goal is AI BI that a team can inspect, reuse, and improve.
+
 ## Why teams use intraQ
 
 - **AI business intelligence** — ask operational questions in plain English.
