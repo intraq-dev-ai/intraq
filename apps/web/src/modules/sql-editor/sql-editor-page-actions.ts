@@ -1,4 +1,5 @@
 import { normalizePivotConfig, resolvePivotSelection } from './pivot';
+import { executeSqlEditorQuery, SQL_EDITOR_EXPORT_ROW_LIMIT } from './api';
 import { clearSqlEditorQueryHistory, saveSqlEditorQueryHistory, saveSqlEditorTabs } from './storage';
 import {
   csvFileNameForBaseName,
@@ -18,6 +19,7 @@ import {
   csvFromResult,
   defaultDateTokenForParameter,
   defaultQuery,
+  replaceParameters,
   syncSqlParameters
 } from './workflow';
 
@@ -212,11 +214,27 @@ export function createSqlEditorPageActions(state: SqlEditorPageState) {
     setQuery(next, false);
   }
 
-  function prepareCsv(): void {
+  async function prepareCsv(): Promise<void> {
     if (!result.value) return;
     const baseName = selectedCustomSource.value?.name ?? selectedSource.value?.name ?? 'sql-results';
-    downloadCsvFile(csvFromResult(result.value), csvFileNameForBaseName(baseName));
-    status.value = 'CSV downloaded';
+    status.value = `Preparing CSV export, capped at ${SQL_EDITOR_EXPORT_ROW_LIMIT.toLocaleString()} rows`;
+    try {
+      const exportQuery = result.value.query || replaceParameters(query.value, parameterValues.value);
+      const exportResult = await executeSqlEditorQuery(
+        selectedDataSourceId.value,
+        exportQuery,
+        parameterValues.value,
+        {
+          defaultLimit: SQL_EDITOR_EXPORT_ROW_LIMIT,
+          maxLimit: SQL_EDITOR_EXPORT_ROW_LIMIT
+        }
+      );
+      downloadCsvFile(csvFromResult(exportResult), csvFileNameForBaseName(baseName));
+      status.value = `CSV downloaded with ${exportResult.rowCount.toLocaleString()} row${exportResult.rowCount === 1 ? '' : 's'}`;
+    } catch (caught) {
+      error.value = caught instanceof Error ? caught.message : 'CSV export failed.';
+      status.value = 'CSV export failed';
+    }
   }
 
   function previousPage(): void {

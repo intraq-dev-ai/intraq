@@ -1,6 +1,7 @@
 import { computed, nextTick, onMounted, watch } from 'vue';
 import {
   executeSqlEditorQuery,
+  SQL_EDITOR_PREVIEW_ROW_LIMIT,
   fetchSqlEditorSchema,
   fetchSqlEditorSources,
   fetchSqlEditorSuggestions,
@@ -160,7 +161,15 @@ export function useSqlEditorPage() {
     page.currentPage.value = 1;
     try {
       const executableQuery = replaceParameters(page.query.value, page.parameterValues.value);
-      page.result.value = await executeSqlEditorQuery(page.selectedDataSourceId.value, executableQuery, page.parameterValues.value);
+      page.result.value = await executeSqlEditorQuery(
+        page.selectedDataSourceId.value,
+        executableQuery,
+        page.parameterValues.value,
+        {
+          defaultLimit: SQL_EDITOR_PREVIEW_ROW_LIMIT,
+          maxLimit: SQL_EDITOR_PREVIEW_ROW_LIMIT
+        }
+      );
       actions.syncPivotSelection();
       page.lastSuccessfulRunSignature.value = page.currentRunSignature.value;
       actions.pushHistory(page.query.value);

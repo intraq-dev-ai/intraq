@@ -18,7 +18,7 @@ import type {
 } from './sql-query-types.js';
 
 const DEFAULT_LIMIT = 100;
-const MAX_LIMIT = 1000;
+const MAX_LIMIT = 100_000;
 
 export type {
   SqlQueryCell,

@@ -18,6 +18,17 @@ Use SQL Editor against databases you control or are authorized to query. Keep
 connection strings and database passwords in `.env` or deployment secrets, never
 in screenshots, examples, issues, or committed files.
 
+## Row limits and export
+
+SQL Editor keeps interactive query previews bounded so the browser is not asked
+to render very large result sets.
+
+- Query preview is capped at 1,000 rows.
+- CSV export reruns the last successful query and is capped at 100,000 rows.
+- If the SQL itself contains a smaller `LIMIT`, that query limit still applies.
+- If the SQL contains a larger `LIMIT`, the app caps it to the relevant preview
+  or export maximum.
+
 ## Demo path
 
 1. Run the seeded app.
