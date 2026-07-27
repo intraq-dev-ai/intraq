@@ -50,7 +50,9 @@ export const CODEX_MODEL_OPTIONS = [
   'gpt-5.4-mini',
   'gpt-5.3-codex',
   'gpt-5.2'
-];
+] as const satisfies readonly [string, ...string[]];
+
+export const DEFAULT_CODEX_MODEL = CODEX_MODEL_OPTIONS[0];
 
 export async function fetchAiProviderSettings(): Promise<AiProviderSettings> {
   return normalizeSettings(await requestAdmin<unknown>('/api/ai-provider-settings'));
@@ -151,7 +153,7 @@ function normalizeCodexStatus(payload: unknown): CodexConnectionStatus {
     connected: record.connected === true,
     keyType: record.keyType === 'oauth' ? 'oauth' : null,
     updatedAt: readString(record.updatedAt) || null,
-    model: readString(record.model) || CODEX_MODEL_OPTIONS[0],
+    model: readString(record.model) || DEFAULT_CODEX_MODEL,
     purposes: Array.isArray(record.purposes) ? record.purposes.filter((item): item is string => typeof item === 'string') : [],
     clientIdConfigured: record.clientIdConfigured !== false
   };
