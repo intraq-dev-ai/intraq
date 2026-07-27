@@ -1,5 +1,15 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import { executeDataSourceSqlQuery } from '../../apps/api/src/modules/data-source/sql-query-engine.js';
+import { EMBED_DATA_SOURCE_DOWNLOAD_ROW_LIMIT } from '../../apps/api/src/modules/public-access/embed-data-routes.js';
+import {
+  DEFAULT_EXPORT_LIMIT,
+  MAX_EXPORT_LIMIT
+} from '../../apps/api/src/modules/sql-chart/foundation-route-types.js';
+import {
+  buildDashboardComponentDownloadPayload,
+  DASHBOARD_COMPONENT_DOWNLOAD_ROW_LIMIT
+} from '../../apps/web/src/modules/dashboard-builder/components/canvas/component-download.js';
+import type { DashboardElement } from '../../apps/web/src/modules/dashboard-builder/types.js';
 import {
   executeSqlEditorQuery,
   SQL_EDITOR_EXPORT_ROW_LIMIT,
@@ -87,5 +97,35 @@ describe('SQL Editor row limits', () => {
     if (!result.ok) return;
     expect(result.data.rowCount).toBe(1_250);
     expect(result.data.rows).toHaveLength(1_250);
+  });
+
+  it('keeps dashboard and embed export caps aligned to the public export limit', () => {
+    expect(DEFAULT_EXPORT_LIMIT).toBe(SQL_EDITOR_EXPORT_ROW_LIMIT);
+    expect(MAX_EXPORT_LIMIT).toBe(SQL_EDITOR_EXPORT_ROW_LIMIT);
+    expect(DASHBOARD_COMPONENT_DOWNLOAD_ROW_LIMIT).toBe(SQL_EDITOR_EXPORT_ROW_LIMIT);
+    expect(EMBED_DATA_SOURCE_DOWNLOAD_ROW_LIMIT).toBe(SQL_EDITOR_EXPORT_ROW_LIMIT);
+
+    const payload = buildDashboardComponentDownloadPayload(
+      {
+        id: 'component-1',
+        dashboardId: 'dashboard-1',
+        isVisible: true,
+        name: 'Sales table',
+        order: 1,
+        type: 'table',
+        config: { dataSourceId: 'source-1', dataSourceTableId: 'sales_table' }
+      } satisfies DashboardElement,
+      [],
+      'csv',
+      {
+        downloadSourceId: 'sales_table',
+        sourceId: 'source-1',
+        sourceName: 'Sales',
+        tableId: 'sales_table',
+        tableName: 'sales_table'
+      }
+    );
+
+    expect(payload.limit).toBe(SQL_EDITOR_EXPORT_ROW_LIMIT);
   });
 });

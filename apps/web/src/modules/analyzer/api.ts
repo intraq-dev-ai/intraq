@@ -18,7 +18,7 @@ import {
 } from './plan-table-data-request';
 import { ANALYZER_RESULT_PAGE_SIZE } from './result-data';
 
-const ANALYZER_EXPORT_ROW_LIMIT = 250_000;
+const ANALYZER_EXPORT_ROW_LIMIT = 100_000;
 
 interface ApiEnvelope<TData> {
   success: boolean;
