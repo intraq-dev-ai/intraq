@@ -18,6 +18,12 @@ After running the database seed, intraQ creates:
 
 ![Dashboard builder with AI sidebar](assets/demo/00-readme-hero-ai-sidebar.png)
 
+The README workflow GIF can be regenerated from the public-safe demo screenshot:
+
+```bash
+npm run demo:gif
+```
+
 ![Sample Sales Overview dashboard](assets/demo/02-sample-sales-overview.png)
 
 ![Sample Sales data source](assets/demo/03-data-sources.png)

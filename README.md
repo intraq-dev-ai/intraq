@@ -11,6 +11,8 @@
 
 It combines AI analytics, natural language SQL, text-to-SQL workflows, an AI dashboard builder, embedded analytics foundations, MCP tools, RAG-style context retrieval, and a semantic layer built from local metadata, data dictionary entries, SQL models, relationships, dashboard context, and safe result summaries.
 
+![IntraQ AI dashboard builder workflow](docs/assets/demo/00-readme-ai-dashboard-flow.gif)
+
 ![intraQ dashboard builder with AI sidebar](docs/assets/demo/00-readme-hero-ai-sidebar.png)
 
 ## Why intraQ?
