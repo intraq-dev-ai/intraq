@@ -36,6 +36,18 @@ The goal is not just natural language SQL. The goal is AI BI that a team can ins
 - **Embedded analytics foundation** — use intraQ as a reporting layer for product and internal workflows.
 - **Provider-flexible AI** — configure Codex OAuth, OpenAI, or Gemini from the admin UI.
 
+## Who is this for?
+
+intraQ is built for teams that want answers from operational data without a dedicated BI function:
+
+- **Hospitality operators** — restaurants, cafes, bars, hotels, and multi-venue groups analysing POS and PMS data (net sales, covers, food cost, labour, menu mix, occupancy, ADR).
+- **Energy retailers** — billing, arrears, credit exposure, and payment analytics.
+- **POS / PMS / platform vendors** — embed white-label AI analytics for your own customers instead of building it in-house.
+- **SaaS & product teams** — customer-facing embedded reporting over product data.
+- **Internal BI & operations** — self-service analytics grounded in governed definitions.
+
+If your operational data lives in a SQL database and you want plain-English answers with the SQL visible, intraQ is for you.
+
 ## Demo flow
 
 ```text
@@ -91,6 +103,16 @@ Explore practical question sets in [`examples/`](examples/README.md).
 ## Comparisons
 
 intraQ is not trying to replace every enterprise reporting suite. It is focused on operational BI workflows where teams want AI-assisted SQL, local control, and dashboards from governed data models.
+
+| Capability | intraQ | Power BI | Metabase | Lightdash |
+|---|:---:|:---:|:---:|:---:|
+| Plain-English → SQL | ✅ | Partial | Partial | Partial |
+| AI-built dashboards | ✅ | Partial | ❌ | ❌ |
+| Semantic / knowledge layer | ✅ | Partial | Limited | ✅ (dbt) |
+| Evidence & SQL shown for every answer | ✅ | ❌ | Partial | Partial |
+| Self-hosted | ✅ | ❌ | ✅ | ✅ |
+| Embeddable / white-label | ✅ | Limited | Limited | Limited |
+| No data team required | ✅ | ❌ | Partial | ❌ |
 
 Detailed comparison pages:
 
