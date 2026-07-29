@@ -36,6 +36,20 @@ The goal is not just natural language SQL. The goal is AI BI that a team can ins
 - **Embedded analytics foundation** — use intraQ as a reporting layer for product and internal workflows.
 - **Provider-flexible AI** — configure Codex OAuth, OpenAI, or Gemini from the admin UI.
 
+## Who is this for?
+
+intraQ works with **any industry** — if your operational data lives in a SQL database, intraQ adapts to it. There is no vertical lock-in; you define what your data means and intraQ grounds its answers in those definitions.
+
+It's built for teams that want answers from operational data without a dedicated BI function:
+
+- **Operations & business teams** — ask questions in plain English and get trustworthy answers, no SQL or analyst required.
+- **Platform & SaaS vendors** — embed white-label AI analytics for your own customers instead of building it in-house.
+- **Internal BI & data teams** — self-service analytics grounded in governed, inspectable definitions.
+
+Connect any Postgres, MySQL, or MSSQL database and start asking questions.
+
+> Want a tailored, pre-built knowledge base and hands-on support for your domain? That's available commercially — see [intraq.dev](https://intraq.dev).
+
 ## Demo flow
 
 ```text
@@ -77,20 +91,30 @@ The public source includes local dashboards, Analyzer, SQL models, MCP, data-sou
 
 It intentionally excludes paid AI Studio, proprietary domain intelligence, control plane, paid release tooling, private operational docs, generated artifacts, credentials, and private operational material.
 
-## Use cases and knowledge bases
+## Use cases
 
-intraQ is built for operational reporting where users need more than static charts:
+intraQ is built for operational reporting where users need more than static charts — across any industry with SQL-backed data:
 
-- **Hospitality analytics** — revenue health, covers, product mix, wastage signals, outlet performance, PMS and POS reporting.
-- **Energy retail reporting** — accounts, billing cycles, arrears, credit exposure, payments, exceptions, and customer risk.
-- **SaaS embedded analytics** — customer-facing dashboards over product data.
-- **Ecommerce analytics** — revenue, orders, products, channels, margins, and customer behavior.
+- **Revenue & sales analytics** — trends, margins, channels, products, and location performance.
+- **Operational & performance reporting** — throughput, exceptions, and period-over-period comparisons.
+- **Embedded customer-facing analytics** — dashboards over product data inside your own application.
+- **Financial & risk reporting** — accounts, balances, aging, exposure, and payment behaviour.
 
-Explore practical question sets in [`examples/`](examples/README.md).
+You define the metrics and relationships for your domain; intraQ grounds its answers in them. Explore practical question sets in [`examples/`](examples/README.md).
 
 ## Comparisons
 
 intraQ is not trying to replace every enterprise reporting suite. It is focused on operational BI workflows where teams want AI-assisted SQL, local control, and dashboards from governed data models.
+
+| Capability | intraQ | Power BI | Metabase | Lightdash |
+|---|:---:|:---:|:---:|:---:|
+| Plain-English → SQL | ✅ | Partial | Partial | Partial |
+| AI-built dashboards | ✅ | Partial | ❌ | ❌ |
+| Semantic / knowledge layer | ✅ | Partial | Limited | ✅ (dbt) |
+| Evidence & SQL shown for every answer | ✅ | ❌ | Partial | Partial |
+| Self-hosted | ✅ | ❌ | ✅ | ✅ |
+| Embeddable / white-label | ✅ | Limited | Limited | Limited |
+| No data team required | ✅ | ❌ | Partial | ❌ |
 
 Detailed comparison pages:
 
