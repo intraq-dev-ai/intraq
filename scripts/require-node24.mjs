@@ -1,4 +1,4 @@
 #!/usr/bin/env node
-import { assertNode24Lts } from './node-24-runtime.mjs';
+import { ensureNode24Lts } from './node-24-runtime.mjs';
 
-assertNode24Lts();
+ensureNode24Lts();
