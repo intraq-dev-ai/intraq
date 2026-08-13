@@ -50,6 +50,15 @@ function codeMirrorFrameTheme(dark: boolean) {
     '&.cm-focused': {
       outline: 'none'
     },
+    '.cm-selectionBackground': {
+      backgroundColor: dark ? '#264f78' : '#add6ff'
+    },
+    '&.cm-focused .cm-selectionBackground': {
+      backgroundColor: dark ? '#264f78' : '#add6ff'
+    },
+    '.cm-content ::selection': {
+      backgroundColor: dark ? '#264f78' : '#add6ff'
+    },
     '.cm-scroller': {
       fontFamily: '"SFMono-Regular", Consolas, "Liberation Mono", monospace',
       fontSize: '14px',
