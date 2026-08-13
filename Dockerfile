@@ -22,7 +22,7 @@ RUN npm run build
 RUN npm prune --omit=dev
 
 ENV NODE_ENV=production
-ENV API_PORT=4100
+ENV API_HOST=0.0.0.0
 ENV SERVE_WEB_FROM_API=true
 ENV WEB_DIST_DIR=/app/apps/web/dist
 
